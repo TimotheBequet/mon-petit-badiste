@@ -1,0 +1,31 @@
+<div class="register-page">
+  <div class="register-page-container">
+    <form class="register-page-form" [formGroup]="frmSignup" (ngSubmit)="onSubmit()">
+
+      <div class="register-page-form-input">
+        <label for="pseudo">Pseudo</label>
+        <input id="pseudo" type="text" formControlName="pseudo">
+        <p class="register-page-form-input-error" *ngIf="frmSignup.controls['pseudo'].hasError('minlength')">4 caractères minimum !</p>
+        <p class="register-page-form-input-error" *ngIf="frmSignup.controls['pseudo'].hasError('required')">Pseudo obligatoire !</p>
+      </div>
+
+      <div class="register-page-form-input">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" required email>
+        <p *ngIf="frmSignup.controls['email'].hasError('email')">Enter a valid email address!</p>
+      </div>
+
+      <div class="register-page-form-input">
+        <label for="pwd">Mot de passe</label>
+        <input id="pwd" type="password" formControlName="password" required minlength="8">
+      </div>
+
+      <div class="register-page-form-input">
+        <label for="confPwd">Confirmation du mot de passe</label>
+        <input id="confPwd" type="password" formControlName="confirmPassword" required minlength="8">
+      </div>
+
+      <button type="submit" [disabled]="!frmSignup.valid">S'inscrire</button>
+    </form>
+  </div>
+</div>

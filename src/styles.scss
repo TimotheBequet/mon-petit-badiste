@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+html, body, app-root {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  background-image: url("./assets/images/badminton-cover.jpg");
+  background-size: cover;
+}
+
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
+}

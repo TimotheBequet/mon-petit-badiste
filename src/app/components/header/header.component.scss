@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant&family=Pacifico&display=swap');
+
+.header {
+  &-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #577e54;
+    height: 5rem;
+
+    .header-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      margin: 10px 0;
+
+      & a {
+        text-decoration: none;
+        color: #282936;
+      }
+    }
+  }
+}
