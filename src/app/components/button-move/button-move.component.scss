@@ -73,15 +73,20 @@ button.learn-more .button-text {
   text-transform: uppercase;
 }
 
-button:hover .circle {
+button:not(.disabled):hover .circle {
   width: 100%;
 }
 
-button:hover .circle .icon.arrow {
+button:not(.disabled):hover .circle .icon.arrow {
   background: #fff;
   transform: translate(1rem, 0);
 }
 
-button:hover .button-text {
+button:not(.disabled):hover .button-text {
   color: #fff;
+}
+
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }

@@ -9,6 +9,8 @@ import {CustomValidator} from "../../custom-validator";
 })
 export class RegisterPageComponent {
 
+  caption: string = 'S\'inscrire';
+  submit: string = 'submit';
   constructor(private fb: FormBuilder) {}
   /*registerForm = this.fb.group({
     pseudo: ['', Validators.required],
@@ -32,7 +34,7 @@ export class RegisterPageComponent {
         CustomValidator.patternValidator(/\d/, {hasNumber: true}),
         CustomValidator.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
         CustomValidator.patternValidator(/[a-z]/, {hasSmallCase: true}),
-        CustomValidator.patternValidator(/^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/, { hasSpecialCharacters: true }),
+        CustomValidator.patternValidator(/[!.*+?^${}()|[\]\\]/, {hasSpecialCharacters: true}),
         Validators.minLength(8)
       ])],
       confirmPassword: [null, Validators.compose([Validators.required])]

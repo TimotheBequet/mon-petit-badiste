@@ -1,31 +1,82 @@
 <div class="register-page">
   <div class="register-page-container">
+    <h1 class="register-page-title">Inscription</h1>
     <form class="register-page-form" [formGroup]="frmSignup" (ngSubmit)="onSubmit()">
+      <div class="register-page-form-inputs">
+        <section class="left register-page-form-section">
+          <div class="register-page-form-input">
+            <label for="pseudo">Pseudo</label>
+            <input id="pseudo" type="text" formControlName="pseudo">
+            <div class="inputs-error">
+              <div class="inputs-error-item">
+                <i class="material-icons" [ngClass]="frmSignup.controls['pseudo'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{frmSignup.controls['pseudo'].hasError('required') ? 'close' : 'done'}}</i>
+                <p [ngClass]="frmSignup.controls['pseudo'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Pseudo obligatoire !</p>
+              </div>
+              <div class="inputs-error-item">
+                <i class="material-icons" [ngClass]="(frmSignup.controls['pseudo'].hasError('minlength') || frmSignup.controls['pseudo'].hasError('required')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{frmSignup.controls['pseudo'].hasError('required') ? 'close' : 'done'}}</i>
+                <p [ngClass]="(frmSignup.controls['pseudo'].hasError('minlength') || frmSignup.controls['pseudo'].hasError('required')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">4 caractères minimum !</p>
+              </div>
+            </div>
+          </div>
 
-      <div class="register-page-form-input">
-        <label for="pseudo">Pseudo</label>
-        <input id="pseudo" type="text" formControlName="pseudo">
-        <p class="register-page-form-input-error" *ngIf="frmSignup.controls['pseudo'].hasError('minlength')">4 caractères minimum !</p>
-        <p class="register-page-form-input-error" *ngIf="frmSignup.controls['pseudo'].hasError('required')">Pseudo obligatoire !</p>
+          <div class="register-page-form-input">
+            <label for="email">Email</label>
+            <input id="email" type="email" formControlName="email" required email>
+            <div class="inputs-error-item">
+              <i class="material-icons" [ngClass]="frmSignup.controls['email'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{frmSignup.controls['email'].hasError('required') ? 'close' : 'done'}}</i>
+              <p [ngClass]="frmSignup.controls['email'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Email obligatoire !</p>
+            </div>
+            <div class="inputs-error-item">
+              <i class="material-icons" [ngClass]="(frmSignup.controls['email'].hasError('email') || frmSignup.controls['email'].hasError('required')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['email'].hasError('email') || frmSignup.controls['email'].hasError('required')) ? 'close' : 'done'}}</i>
+              <p [ngClass]="(frmSignup.controls['email'].hasError('email') || frmSignup.controls['email'].hasError('required')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Saisissez une adresse email valide !</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="left register-page-form-section">
+          <div class="register-page-form-input">
+            <label for="pwd">Mot de passe</label>
+            <input id="pwd" type="password" formControlName="password" required minlength="8">
+            <div class="inputs-error-item">
+              <i class="material-icons" [ngClass]="frmSignup.controls['password'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{frmSignup.controls['password'].hasError('required') ? 'close' : 'done'}}</i>
+              <p [ngClass]="frmSignup.controls['password'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Mot de passe obligatoire !</p>
+            </div>
+            <div class="inputs-error-item">
+              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('minlength')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('minlength')) ? 'close' : 'done'}}</i>
+              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('minlength')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">8 caractères minimum !</p>
+            </div>
+            <div class="inputs-error-item">
+              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasNumber')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasNumber')) ? 'close' : 'done'}}</i>
+              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasNumber')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Le mot de passe doit contenir au moins 1 chiffre !</p>
+            </div>
+            <div class="inputs-error-item">
+              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSmallCase')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSmallCase')) ? 'close' : 'done'}}</i>
+              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSmallCase')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Le mot de passe doit contenir au moins 1 lettre minuscule !</p>
+            </div>
+            <div class="inputs-error-item">
+              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasCapitalCase')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasCapitalCase')) ? 'close' : 'done'}}</i>
+              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasCapitalCase')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Le mot de passe doit contenir au moins 1 lettre majuscule !</p>
+            </div>
+            <div class="inputs-error-item">
+              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSpecialCharacters')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSpecialCharacters')) ? 'close' : 'done'}}</i>
+              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSpecialCharacters')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Le mot de passe doit contenir au moins 1 caractère spécial !</p>
+            </div>
+          </div>
+
+          <div class="register-page-form-input">
+            <label for="confPwd">Confirmation du mot de passe</label>
+            <input id="confPwd" type="password" formControlName="confirmPassword" required minlength="8">
+            <div class="inputs-error-item">
+              <i class="material-icons" [ngClass]="(frmSignup.controls['confirmPassword'].hasError('required') || frmSignup.controls['confirmPassword'].hasError('NoPassswordMatch')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['confirmPassword'].hasError('required') || frmSignup.controls['confirmPassword'].hasError('NoPassswordMatch')) ? 'close' : 'done'}}</i>
+              <p [ngClass]="(frmSignup.controls['confirmPassword'].hasError('required') || frmSignup.controls['confirmPassword'].hasError('NoPassswordMatch')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Les mots de passe doivent correspondre !</p>
+            </div>
+          </div>
+        </section>
       </div>
 
-      <div class="register-page-form-input">
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email" required email>
-        <p *ngIf="frmSignup.controls['email'].hasError('email')">Enter a valid email address!</p>
+      <div class="register-page-form-inputs">
+        <app-button-move [type]="submit" [buttonCaption]="caption" class="home-card-content-button" [disabled]="!frmSignup.valid"></app-button-move>
       </div>
-
-      <div class="register-page-form-input">
-        <label for="pwd">Mot de passe</label>
-        <input id="pwd" type="password" formControlName="password" required minlength="8">
-      </div>
-
-      <div class="register-page-form-input">
-        <label for="confPwd">Confirmation du mot de passe</label>
-        <input id="confPwd" type="password" formControlName="confirmPassword" required minlength="8">
-      </div>
-
-      <button type="submit" [disabled]="!frmSignup.valid">S'inscrire</button>
     </form>
   </div>
 </div>

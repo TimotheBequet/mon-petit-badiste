@@ -7,6 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ButtonMoveComponent implements OnInit {
   @Input() buttonCaption: string = '';
+  @Input() disabled: boolean = false;
+  @Input() type: string = 'button';
 
   constructor() {}
 
