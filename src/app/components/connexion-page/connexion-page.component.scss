@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
-.register-page {
+.connexion-page {
   height: calc(100% - 8rem);
   display: flex;
   justify-content: center;
@@ -33,15 +33,11 @@
 
     &-inputs {
       display: flex;
+      flex-direction: column;
       width: 100%;
       justify-content: center;
-    }
-
-    &-section {
-      width: 45%;
-      display: flex;
-      flex-direction: column;
       align-items: center;
+      width: 50%;
     }
 
     &-input {
@@ -64,40 +60,6 @@
             margin-top: 0;
           }
         }
-      }
-
-      & .label-input {
-        margin-left: 1rem;
-        font-weight: bold;
-        margin-bottom: 5px;
-        font-size: 1.3rem;
-      }
-
-      & .input-input {
-        height: 2.2rem;
-        border: 1px solid #b9b9b9;
-        border-radius: 10px;
-        padding-left: 15px;
-        font-size: 1.2rem;
-
-        &:focus-visible {
-          border: 1px solid #00c4ff !important;
-          outline-style: none;
-        }
-      }
-
-      &-error, &-valid {
-        font-size: 0.8rem;
-        padding-left: 10px;
-        margin-bottom: 0;
-      }
-
-      &-error {
-        color: red;
-      }
-
-      &-valid {
-        color: green;
       }
     }
   }

@@ -1,0 +1,31 @@
+<div class="connexion-page">
+    <div class="connexion-page-container">
+      <h1 class="connexion-page-title">Connexion</h1>
+      <form class="connexion-page-form" [formGroup]="frmSignup" (ngSubmit)="onSubmit()">
+        <div class="connexion-page-form-inputs">
+            <!-- pseudo -->
+            <div class="connexion-page-form-input">
+              <mat-form-field>
+                <mat-label>Pseudo</mat-label>
+                <input type="text" matInput formControlName="pseudo" [errorStateMatcher]="matcher" placeholder="Ex : Jay Delachatt">
+                <mat-error *ngIf="frmSignup.hasError('required', 'pseudo')">La saisie du pseudo est <strong>obligatoire !</strong></mat-error>
+              </mat-form-field>
+            </div>
+  
+            <!-- mot de passe -->
+            <div class="connexion-page-form-input">
+              <mat-form-field>
+                <mat-label>Mot de Passe</mat-label>
+                <input type="password" matInput formControlName="password" [errorStateMatcher]="matcher" placeholder="Ton mot de passe super sécure">
+                <mat-error *ngIf="frmSignup.hasError('required', 'password')">La saisie du mot de passe est <strong>obligatoire !</strong></mat-error>
+              </mat-form-field>
+            </div>
+        </div>
+  
+        <div class="connexion-page-form-inputs">
+          <app-button-move [type]="submit" [buttonCaption]="caption" class="home-card-content-button" [disabled]="!frmSignup.valid"></app-button-move>
+        </div>
+      </form>
+    </div>
+  </div>
+  

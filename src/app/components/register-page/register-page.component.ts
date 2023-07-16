@@ -1,26 +1,32 @@
 import { Component } from '@angular/core';
-import {AbstractControlOptions, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControlOptions, FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm} from "@angular/forms";
 import {CustomValidator} from "../../custom-validator";
+import {ErrorStateMatcher} from '@angular/material/core';
+
+/**
+ * classe pour gérer les erreurs dans les inputs
+ */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+  styleUrls: ['./register-page.component.scss'],
 })
+
 export class RegisterPageComponent {
 
   caption: string = 'S\'inscrire';
   submit: string = 'submit';
   constructor(private fb: FormBuilder) {}
-  /*registerForm = this.fb.group({
-    pseudo: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
-  });*/
   public frmSignup: FormGroup = this.createSignupForm();
+  matcher = new MyErrorStateMatcher();
 
-  // , Validators.pattern("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
   onSubmit(): void {
     console.warn(this.frmSignup.value);
   }

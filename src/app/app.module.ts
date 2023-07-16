@@ -8,7 +8,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ButtonMoveComponent } from './components/button-move/button-move.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { AppRoutingModule } from './app-routing.module';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule, FormControl} from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { ConnexionPageComponent } from './components/connexion-page/connexion-page.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +21,16 @@ import {ReactiveFormsModule} from "@angular/forms";
     HeaderComponent,
     FooterComponent,
     ButtonMoveComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    ConnexionPageComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule
     ],
   providers: [],
   bootstrap: [AppComponent]

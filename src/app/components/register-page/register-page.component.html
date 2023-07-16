@@ -4,72 +4,46 @@
     <form class="register-page-form" [formGroup]="frmSignup" (ngSubmit)="onSubmit()">
       <div class="register-page-form-inputs">
         <section class="left register-page-form-section">
+          <!-- pseudo -->
           <div class="register-page-form-input">
-            <label for="pseudo">Pseudo</label>
-            <input id="pseudo" type="text" formControlName="pseudo">
-            <div class="inputs-error">
-              <div class="inputs-error-item">
-                <i class="material-icons" [ngClass]="frmSignup.controls['pseudo'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{frmSignup.controls['pseudo'].hasError('required') ? 'close' : 'done'}}</i>
-                <p [ngClass]="frmSignup.controls['pseudo'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Pseudo obligatoire !</p>
-              </div>
-              <div class="inputs-error-item">
-                <i class="material-icons" [ngClass]="(frmSignup.controls['pseudo'].hasError('minlength') || frmSignup.controls['pseudo'].hasError('required')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{frmSignup.controls['pseudo'].hasError('required') ? 'close' : 'done'}}</i>
-                <p [ngClass]="(frmSignup.controls['pseudo'].hasError('minlength') || frmSignup.controls['pseudo'].hasError('required')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">4 caractères minimum !</p>
-              </div>
-            </div>
+            <mat-form-field>
+              <mat-label>Pseudo</mat-label>
+              <input type="text" matInput formControlName="pseudo" [errorStateMatcher]="matcher" placeholder="Ex : Jay Delachatt">
+              <mat-error *ngIf="frmSignup.hasError('minlength', 'pseudo') && !frmSignup.hasError('required', 'pseudo')">Ton pseudo doit contenir <strong>au moins 4 caractères</strong></mat-error>
+              <mat-error *ngIf="frmSignup.hasError('required', 'pseudo')">La saisie du pseudo est <strong>obligatoire !</strong></mat-error>
+            </mat-form-field>
           </div>
-
+          <!-- email -->
           <div class="register-page-form-input">
-            <label for="email">Email</label>
-            <input id="email" type="email" formControlName="email" required email>
-            <div class="inputs-error-item">
-              <i class="material-icons" [ngClass]="frmSignup.controls['email'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{frmSignup.controls['email'].hasError('required') ? 'close' : 'done'}}</i>
-              <p [ngClass]="frmSignup.controls['email'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Email obligatoire !</p>
-            </div>
-            <div class="inputs-error-item">
-              <i class="material-icons" [ngClass]="(frmSignup.controls['email'].hasError('email') || frmSignup.controls['email'].hasError('required')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['email'].hasError('email') || frmSignup.controls['email'].hasError('required')) ? 'close' : 'done'}}</i>
-              <p [ngClass]="(frmSignup.controls['email'].hasError('email') || frmSignup.controls['email'].hasError('required')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Saisissez une adresse email valide !</p>
-            </div>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Ex : monemail@gmail.com">
+              <mat-error *ngIf="frmSignup.hasError('email', 'email') && !frmSignup.hasError('required', 'email')">Entre une adresse email valide</mat-error>
+              <mat-error *ngIf="frmSignup.hasError('required', 'email')">La saisie de l'email est <strong>obligatoire !</strong></mat-error>
+            </mat-form-field>
           </div>
         </section>
 
         <section class="left register-page-form-section">
+          <!-- mot de passe -->
           <div class="register-page-form-input">
-            <label for="pwd">Mot de passe</label>
-            <input id="pwd" type="password" formControlName="password" required minlength="8">
-            <div class="inputs-error-item">
-              <i class="material-icons" [ngClass]="frmSignup.controls['password'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{frmSignup.controls['password'].hasError('required') ? 'close' : 'done'}}</i>
-              <p [ngClass]="frmSignup.controls['password'].hasError('required') ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Mot de passe obligatoire !</p>
-            </div>
-            <div class="inputs-error-item">
-              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('minlength')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('minlength')) ? 'close' : 'done'}}</i>
-              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('minlength')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">8 caractères minimum !</p>
-            </div>
-            <div class="inputs-error-item">
-              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasNumber')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasNumber')) ? 'close' : 'done'}}</i>
-              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasNumber')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Le mot de passe doit contenir au moins 1 chiffre !</p>
-            </div>
-            <div class="inputs-error-item">
-              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSmallCase')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSmallCase')) ? 'close' : 'done'}}</i>
-              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSmallCase')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Le mot de passe doit contenir au moins 1 lettre minuscule !</p>
-            </div>
-            <div class="inputs-error-item">
-              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasCapitalCase')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasCapitalCase')) ? 'close' : 'done'}}</i>
-              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasCapitalCase')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Le mot de passe doit contenir au moins 1 lettre majuscule !</p>
-            </div>
-            <div class="inputs-error-item">
-              <i class="material-icons" [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSpecialCharacters')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSpecialCharacters')) ? 'close' : 'done'}}</i>
-              <p [ngClass]="(frmSignup.controls['password'].hasError('required') || frmSignup.controls['password'].hasError('hasSpecialCharacters')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Le mot de passe doit contenir au moins 1 caractère spécial !</p>
-            </div>
+            <mat-form-field>
+              <mat-label>Mot de Passe</mat-label>
+              <input type="password" matInput formControlName="password" [errorStateMatcher]="matcher" placeholder="Ton mot de passe super sécure">
+              <mat-error *ngIf="frmSignup.hasError('hasNumber', 'password') && !frmSignup.hasError('required', 'password')">Ton mot de passe doit contenir au moins <strong>1 chiffre</strong></mat-error>
+              <mat-error *ngIf="frmSignup.hasError('hasCapitalCase', 'password') && !frmSignup.hasError('required', 'password')">Ton mot de passe doit contenir au moins <strong>1 lettre majuscule</strong></mat-error>
+              <mat-error *ngIf="frmSignup.hasError('hasSmallCase', 'password') && !frmSignup.hasError('required', 'password')">Ton mot de passe doit contenir au moins <strong>1 lettre minuscule</strong></mat-error>
+              <mat-error *ngIf="frmSignup.hasError('hasSpecialCharacters', 'password') && !frmSignup.hasError('required', 'password')">Ton mot de passe doit contenir au moins <strong>1 caractère spécial</strong></mat-error>
+              <mat-error *ngIf="frmSignup.hasError('required', 'password')">La saisie du mot de passe est <strong>obligatoire !</strong></mat-error>
+            </mat-form-field>
           </div>
-
+          <!-- confirmation du mot de passe -->
           <div class="register-page-form-input">
-            <label for="confPwd">Confirmation du mot de passe</label>
-            <input id="confPwd" type="password" formControlName="confirmPassword" required minlength="8">
-            <div class="inputs-error-item">
-              <i class="material-icons" [ngClass]="(frmSignup.controls['confirmPassword'].hasError('required') || frmSignup.controls['confirmPassword'].hasError('NoPassswordMatch')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">{{(frmSignup.controls['confirmPassword'].hasError('required') || frmSignup.controls['confirmPassword'].hasError('NoPassswordMatch')) ? 'close' : 'done'}}</i>
-              <p [ngClass]="(frmSignup.controls['confirmPassword'].hasError('required') || frmSignup.controls['confirmPassword'].hasError('NoPassswordMatch')) ? 'register-page-form-input-error' : 'register-page-form-input-valid'">Les mots de passe doivent correspondre !</p>
-            </div>
+            <mat-form-field>
+              <mat-label>Confirmation du mot de passe</mat-label>
+              <input type="password" matInput formControlName="confirmPassword" [errorStateMatcher]="matcher" placeholder="Allez, transformes l'essai champion">
+              <mat-error *ngIf="frmSignup.hasError('NoPassswordMatch', 'confirmPassword') && !frmSignup.hasError('required', 'confirmPassword')">Les mots de passe doivent correspondre !</mat-error>
+            </mat-form-field>
           </div>
         </section>
       </div>
