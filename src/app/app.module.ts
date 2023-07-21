@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ConnexionPageComponent } from './components/connexion-page/connexion-page.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ConnexionPageComponent } from './components/connexion-page/connexion-pa
     FooterComponent,
     ButtonMoveComponent,
     RegisterPageComponent,
-    ConnexionPageComponent
+    ConnexionPageComponent,
+    MainPageComponent
   ],
     imports: [
         BrowserModule,

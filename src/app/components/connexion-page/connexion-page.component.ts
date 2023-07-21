@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {AbstractControlOptions, FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm} from "@angular/forms";
 import {CustomValidator} from "../../custom-validator";
 import {ErrorStateMatcher} from '@angular/material/core';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 /**
  * classe pour gérer les erreurs dans les inputs
@@ -22,12 +24,15 @@ export class ConnexionPageComponent {
 
   caption: string = 'Se connecter';
   submit: string = 'submit';
-  constructor(private fb: FormBuilder) {}
   public frmSignup: FormGroup = this.createSignupForm();
   matcher = new MyErrorStateMatcher();
 
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}
+
   onSubmit(): void {
     console.warn(this.frmSignup.value);
+    this.userService.login();
+    this.router.navigate(['/home']);
   }
 
   createSignupForm(): FormGroup {

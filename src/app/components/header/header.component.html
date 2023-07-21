@@ -2,4 +2,5 @@
   <nav class="header-nav">
     <h1 class="header-title"><a routerLink="/home">Mon Petit Badiste</a></h1>
   </nav>
+  <button *ngIf="isUserLogged" type="button" (click)="logout()" class="header-btn-logout">Déconnexion</button>
 </div>
