@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import {AbstractControlOptions, FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm} from "@angular/forms";
 import {CustomValidator} from "../../custom-validator";
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -20,14 +20,19 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './connexion-page.component.html',
   styleUrls: ['./connexion-page.component.scss']
 })
-export class ConnexionPageComponent {
+export class ConnexionPageComponent implements AfterViewInit {
 
   caption: string = 'Se connecter';
   submit: string = 'submit';
   public frmSignup: FormGroup = this.createSignupForm();
   matcher = new MyErrorStateMatcher();
+  @ViewChild('pseudo') inputPseudo!: ElementRef;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}
+
+  ngAfterViewInit(): void {
+    this.inputPseudo.nativeElement.focus();
+  }
 
   onSubmit(): void {
     console.warn(this.frmSignup.value);
