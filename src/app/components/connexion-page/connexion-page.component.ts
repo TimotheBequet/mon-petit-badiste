@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import {AbstractControlOptions, FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm} from "@angular/forms";
 import {CustomValidator} from "../../custom-validator";
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -20,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './connexion-page.component.html',
   styleUrls: ['./connexion-page.component.scss']
 })
-export class ConnexionPageComponent implements AfterViewInit {
+export class ConnexionPageComponent implements AfterViewInit, AfterViewChecked {
 
   caption: string = 'Se connecter';
   submit: string = 'submit';
@@ -28,10 +28,17 @@ export class ConnexionPageComponent implements AfterViewInit {
   matcher = new MyErrorStateMatcher();
   @ViewChild('pseudo') inputPseudo!: ElementRef;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}
+  constructor(private fb: FormBuilder, 
+    private userService: UserService, 
+    private router: Router,
+    private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
     this.inputPseudo.nativeElement.focus();
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   onSubmit(): void {
