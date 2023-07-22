@@ -9,7 +9,7 @@
             <mat-form-field>
               <mat-label>Pseudo</mat-label>
               <input type="text" matInput formControlName="pseudo" [errorStateMatcher]="matcher" placeholder="Ex : Jay Delachatt">
-              <mat-error *ngIf="frmSignup.hasError('minlength', 'pseudo') && !frmSignup.hasError('required', 'pseudo')">Ton pseudo doit contenir <strong>au moins 4 caractères</strong></mat-error>
+              <mat-error *ngIf="frmSignup.hasError('minlength', 'pseudo') && !frmSignup.hasError('required', 'pseudo')">Ton pseudo doit contenir <strong>au moins 3 caractères</strong></mat-error>
               <mat-error *ngIf="frmSignup.hasError('required', 'pseudo')">La saisie du pseudo est <strong>obligatoire !</strong></mat-error>
             </mat-form-field>
           </div>

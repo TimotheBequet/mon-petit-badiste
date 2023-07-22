@@ -4,6 +4,7 @@ import {CustomValidator} from "../../custom-validator";
 import {ErrorStateMatcher} from '@angular/material/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * classe pour gérer les erreurs dans les inputs
@@ -42,9 +43,22 @@ export class ConnexionPageComponent implements AfterViewInit, AfterViewChecked {
   }
 
   onSubmit(): void {
-    console.warn(this.frmSignup.value);
-    this.userService.login();
-    this.router.navigate(['/home']);
+    // on appelle laméthode login() et on souscrit à son retour dès qu'elle nous renvoie quelque chose
+    this.userService.login(this.frmSignup.value.pseudo, this.frmSignup.value.password).subscribe(
+      user => {
+        // si on a bien réccupéré un User et qu'on a bien son Id
+        if (user && user.id) {
+          // on renseigne comme quoi on est loggé
+          this.userService.userLogged$.next(true);
+          // on renseigne le user
+          this.userService.user$.next(user);
+          // on est redirigés vers la page Home
+          this.router.navigate(['/home']);
+        } else {
+          console.log('erreur');
+        }
+      }
+    );
   }
 
   createSignupForm(): FormGroup {

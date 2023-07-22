@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {AbstractControlOptions, FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm} from "@angular/forms";
 import {CustomValidator} from "../../custom-validator";
 import {ErrorStateMatcher} from '@angular/material/core';
+import { UserInterface } from 'src/app/interfaces/user.interface';
+import { UserService } from 'src/app/services/user.service';
 
 /**
  * classe pour gérer les erreurs dans les inputs
@@ -23,17 +25,26 @@ export class RegisterPageComponent {
 
   caption: string = 'S\'inscrire';
   submit: string = 'submit';
-  constructor(private fb: FormBuilder) {}
   public frmSignup: FormGroup = this.createSignupForm();
   matcher = new MyErrorStateMatcher();
 
+  constructor(private fb: FormBuilder, private userService: UserService) {}
+
   onSubmit(): void {
-    console.warn(this.frmSignup.value);
+    // on construit un User avec les infos du formulaire
+    const user: UserInterface = {
+      pseudo: this.frmSignup.value.pseudo,
+      email: this.frmSignup.value.email,
+      password: this.frmSignup.value.password
+    };
+    // on appelle la méthode register() avec le User en paramètre
+    // et on souscrit à son retour pour passer à la suite dès que la fonction nous renvoie quelque chose
+    this.userService.register(user).subscribe(retour => console.log('retour observable : ',retour));
   }
 
   createSignupForm(): FormGroup {
     return this.fb.group({
-      pseudo: [null, Validators.compose([Validators.minLength(4), Validators.required])],
+      pseudo: [null, Validators.compose([Validators.minLength(3), Validators.required])],
       email: [null, Validators.compose([Validators.email, Validators.required])],
       password: [null, Validators.compose([
         Validators.required,

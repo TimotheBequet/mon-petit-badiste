@@ -16,7 +16,7 @@ export class HomeComponent implements AfterViewInit, AfterViewChecked {
   }
 
   ngAfterViewInit(): void {
-    this.userService.userLogged.subscribe(isLogged => this.userLogged = isLogged);
+    this.userService.userLogged$.subscribe(isLogged => this.userLogged = isLogged);
   }
 
   ngAfterViewChecked(): void {
