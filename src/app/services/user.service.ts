@@ -10,7 +10,7 @@ import { query } from '@angular/animations';
 })
 export class UserService {
 
-  baseUrl: string = 'http://localhost:8090/api';
+  baseUrl: string = 'http://localhost:8090/mpb-api';
   public userLogged$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public user$: BehaviorSubject<UserInterface | null> = new BehaviorSubject<UserInterface | null>(null);
 
