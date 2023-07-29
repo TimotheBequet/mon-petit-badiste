@@ -1,0 +1,18 @@
+.btn-retour {
+    border: none;
+    background-color: transparent;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    font-size: 1.1rem;
+    font-family: 'Raleway', sans-serif;
+
+    &-link {
+      cursor: pointer;
+      text-decoration: none;
+      color: #282936;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }

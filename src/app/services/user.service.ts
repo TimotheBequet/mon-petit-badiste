@@ -11,7 +11,6 @@ import { query } from '@angular/animations';
 export class UserService {
 
   baseUrl: string = 'http://localhost:8090/mpb-api';
-  public userLogged$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public user$: BehaviorSubject<UserInterface | null> = new BehaviorSubject<UserInterface | null>(null);
 
   constructor(private http: HttpClient) { }
@@ -40,11 +39,18 @@ export class UserService {
       // si on arrive ici, pas d'erreur, on traite le retour de la requête
       map((result: any) => {
         // si on a bien récupéré un id, c'est que la requête est OK
-        if (result && result['data'] && result['data'][0]['id'] && result['data'][0]['id'] > 0) {
+        if (result 
+          && result['data'] 
+          && result['data'].length > 0
+          && result['data'][0]['id'] 
+          && result['data'][0]['id'] > 0) {
           // on retourne donc un UserInterface
-          return <UserInterface>{id: result['data'][0]['id'], pseudo: result['data'][0]['pseudo'], email: result['data'][0]['email']};
+          const user: UserInterface = <UserInterface>{id: result['data'][0]['id'], pseudo: result['data'][0]['pseudo'], email: result['data'][0]['email']};
+          localStorage.setItem('user', JSON.stringify(user));
+          return user;
         } else {
           // sinon on retourne rien
+          localStorage.removeItem('user');
           return undefined;
         }
       })
@@ -61,10 +67,33 @@ export class UserService {
   }
 
   logout() : void {
-    this.userLogged$.next(false);
+    //this.userLogged$.next(false);
+    localStorage.removeItem('user');
+    this.user$.next(null);
   }
 
   setUser(oneUser: UserInterface) {
     this.user$.next(oneUser);
+  }
+
+  isUserLogged(): boolean {
+    if (localStorage.getItem('user') === null)
+      return false;
+    else
+      return localStorage.getItem('user') !== '' ? true : false;
+  }
+
+  getUserName(): string {
+    if (localStorage.getItem('user') === null) {
+      return '';
+    } else {
+      const user: UserInterface = JSON.parse(localStorage.getItem('user')!);
+      return user.pseudo;
+    }
+  }
+
+  getUser(): UserInterface {
+    const user: UserInterface = JSON.parse(localStorage.getItem('user')!);
+    return user;
   }
 }

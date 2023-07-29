@@ -14,6 +14,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ConnexionPageComponent } from './components/connexion-page/connexion-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { ButtonRetourComponent } from './components/button-retour/button-retour.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
     ButtonMoveComponent,
     RegisterPageComponent,
     ConnexionPageComponent,
-    MainPageComponent
+    MainPageComponent,
+    ButtonRetourComponent,
   ],
     imports: [
         BrowserModule,
@@ -33,9 +37,11 @@ import { MainPageComponent } from './components/main-page/main-page.component';
         BrowserAnimationsModule,
         MatFormFieldModule,
         MatInputModule,
-        HttpClientModule
+        HttpClientModule,
+        MatSnackBarModule,
+        MatIconModule
     ],
-  providers: [],
+  providers: [MatSnackBarModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

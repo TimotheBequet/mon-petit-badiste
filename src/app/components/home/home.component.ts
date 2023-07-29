@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -6,20 +6,15 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements AfterViewInit, AfterViewChecked {
+export class HomeComponent implements OnInit {
   connexion = 'Connexion';
   inscription = 'Inscription';
-
   userLogged: boolean = false;
   
-  constructor(private userService: UserService, private readonly changeDetectorRef: ChangeDetectorRef) {
+  constructor(private userService: UserService) {
   }
 
-  ngAfterViewInit(): void {
-    this.userService.userLogged$.subscribe(isLogged => this.userLogged = isLogged);
-  }
-
-  ngAfterViewChecked(): void {
-    this.changeDetectorRef.detectChanges();
+  ngOnInit(): void {
+    this.userService.user$.subscribe(_ => this.userLogged = this.userService.isUserLogged());
   }
 }

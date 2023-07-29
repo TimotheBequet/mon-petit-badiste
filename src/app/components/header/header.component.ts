@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -6,11 +6,16 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements OnInit {
   isUserLogged: boolean = false;
+  userName: string = '';
   constructor(private userService: UserService){}
-  ngAfterViewInit(): void {
-    this.userService.userLogged$.subscribe(userLogged => this.isUserLogged = userLogged);
+
+  ngOnInit(): void {
+    this.userService.user$.subscribe(user => {
+      this.isUserLogged = this.userService.isUserLogged();
+      this.userName = this.userService.getUserName();
+    });
   }
 
   logout(): void {
