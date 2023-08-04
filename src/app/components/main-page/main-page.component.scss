@@ -9,14 +9,13 @@
     }
 
     &-unit {
-
+        border-radius: 20px;
+        border: 1px solid gray;
+        
         &-card {
             font-family: 'Raleway', sans-serif;
-            background-color: rgba(255, 255, 255, 0.3);
             padding: 1.5rem;
             text-align: center;
-            border-radius: 10px;
-            border: 1px solid gray;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -34,7 +33,7 @@
                 margin: auto;
 
                 .btn-league {
-                    padding: 0.7rem;
+                    padding: 0;
                     border: none;
                     height: 2.5rem;
                     background-color: #263e24;
@@ -53,6 +52,12 @@
 
                     &-icon {
                         margin-right: 10px;
+                    }
+
+                    a {
+                        padding: 0.7rem;
+                        text-decoration: none;
+                        color: white;
                     }
                 }
             }

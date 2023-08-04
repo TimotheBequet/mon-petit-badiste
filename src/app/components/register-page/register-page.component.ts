@@ -27,6 +27,7 @@ export class RegisterPageComponent {
   submit: string = 'submit';
   public frmSignup: FormGroup = this.createSignupForm();
   matcher = new MyErrorStateMatcher();
+  link: string = "/home";
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
 

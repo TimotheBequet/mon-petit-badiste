@@ -28,6 +28,7 @@ export class ConnexionPageComponent implements AfterViewInit {
   public frmSignup: FormGroup = this.createSignupForm();
   matcher = new MyErrorStateMatcher();
   @ViewChild('pseudo') inputPseudo!: ElementRef;
+  link: string = "/home";
 
   constructor(private fb: FormBuilder, 
     private userService: UserService, 

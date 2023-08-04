@@ -43,4 +43,13 @@ export class LeaguesService {
     }
     return throwError(() => new Error('Quelque chose s\'est mal passé, essayez plus tard'));
   }
+
+  createLeague(league: LeaguesInterface): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/createLeague.php`, league).pipe(
+      catchError(this.handleError),
+      map((response: any) => {
+        return response['data'];
+      })
+    );
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button-retour',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./button-retour.component.scss']
 })
 export class ButtonRetourComponent {
-
+  @Input('link') link = '';
 }

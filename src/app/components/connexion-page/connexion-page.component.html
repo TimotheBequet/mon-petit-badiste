@@ -1,6 +1,6 @@
 <div class="connexion-page">
-    <div class="connexion-page-container">
-      <app-button-retour></app-button-retour>
+    <div class="connexion-page-container blur-background">
+      <app-button-retour [link]="link"></app-button-retour>
       <h1 class="connexion-page-title">Connexion</h1>
       <form class="connexion-page-form" [formGroup]="frmSignup" (ngSubmit)="onSubmit()">
         <div class="connexion-page-form-inputs">
