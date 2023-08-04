@@ -3,21 +3,20 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { UserInterface } from '../interfaces/user.interface';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators'
-import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  baseUrl: string = 'http://localhost:8090/mpb-api';
+  baseUrl: string = 'http://mpb-api.timothe-bequet.fr';
   public user$: BehaviorSubject<UserInterface | null> = new BehaviorSubject<UserInterface | null>(null);
 
   constructor(private http: HttpClient) { }
 
   register(user: UserInterface): Observable<any> {
     // on fait un post avec le User passé en paramètre, 
-    return this.http.post<any>(`${this.baseUrl}/register`, user).pipe(
+    return this.http.post<any>(`${this.baseUrl}/register.php`, user).pipe(
       // on tente de traiter les erreurs s'il y en a
       catchError(this.handleError),
       // si pas d'erreur, on traite le retour de la requête
@@ -33,7 +32,7 @@ export class UserService {
     queryParams = queryParams.append('pseudo', pseudo);
     queryParams = queryParams.append('pwd', pwd);
     // on fait la requête, qui devrait nous retourner un UserInterface si tout se passe bien
-    return this.http.get<UserInterface>(`${this.baseUrl}/login`, {params: queryParams}).pipe(
+    return this.http.get<UserInterface>(`${this.baseUrl}/login.php`, {params: queryParams}).pipe(
       // on tente d'abord d'attraper les éventuelles erreurs
       catchError(this.handleError),
       // si on arrive ici, pas d'erreur, on traite le retour de la requête

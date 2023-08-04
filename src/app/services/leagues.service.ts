@@ -8,14 +8,14 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 })
 export class LeaguesService {
 
-  baseUrl: string = 'http://localhost:8090/mpb-api';
+  baseUrl: string = 'http://mpb-api.timothe-bequet.fr';
   public leagues$: BehaviorSubject<LeaguesInterface | null> = new BehaviorSubject<LeaguesInterface | null>(null);
 
   constructor(private http: HttpClient) { }
 
   getMyLeagues(id: number): Observable<LeaguesInterface | undefined> {
     let queryParams = new HttpParams().append('id', id);
-    return this.http.get<LeaguesInterface>(`${this.baseUrl}/myLeagues`, {params: queryParams}).pipe(
+    return this.http.get<LeaguesInterface>(`${this.baseUrl}/myLeagues.php`, {params: queryParams}).pipe(
       catchError(this.handleError),
       map((result: any) => {
         if (result['data']
