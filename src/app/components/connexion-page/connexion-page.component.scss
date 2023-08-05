@@ -43,22 +43,6 @@
       flex-direction: column;
       width: 80%;
       margin-bottom: 1.5rem;
-
-      .inputs-error {
-        display: flex;
-        flex-direction: column;
-
-        &-item {
-          display: flex;
-          align-items: center;
-          vertical-align: center;
-          margin-top: 5px;
-
-          & p {
-            margin-top: 0;
-          }
-        }
-      }
     }
   }
 }

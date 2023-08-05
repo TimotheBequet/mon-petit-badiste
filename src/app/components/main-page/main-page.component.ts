@@ -16,7 +16,7 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.leagueService.getMyLeagues(this.userService.getUser().id!).subscribe(
       leagues => {
-        console.log(leagues);
+        console.log('ligues : ', leagues);
         if (leagues) {
           this.myLeagues.push(leagues!);
         }

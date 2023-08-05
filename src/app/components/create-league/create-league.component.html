@@ -1,5 +1,29 @@
 <div class="create-league-page">
-    <div class="create-league-page-container blur-background">
-        <app-button-retour [link]="link"></app-button-retour>
-    </div>
+  <div class="create-league-page-container blur-background">
+    <app-button-retour [link]="link"></app-button-retour>
+    <h1 class="create-league-page-title">Création d'une ligue</h1>
+    <form class="create-league-page-form" [formGroup]="frmCreateLeague" (ngSubmit)="onSubmit()">
+      <div class="create-league-page-form-inputs">
+        <div class="create-league-page-form-input">
+          <mat-form-field>
+            <mat-label>Nom de la ligue</mat-label>
+            <input #name type="text" matInput formControlName="name" [errorStateMatcher]="matcher" placeholder="Ex : Babinetone">
+            <mat-error *ngIf="frmCreateLeague.hasError('minlength', 'name') && !frmCreateLeague.hasError('required', 'name')">Le nom de ta ligue doit contenir <strong>au moins 4 caractères</strong></mat-error>
+            <mat-error *ngIf="frmCreateLeague.hasError('required', 'name')">La saisie du nom est <strong>obligatoire !</strong></mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nombre de joueurs</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option value="4">4</mat-option>
+              <mat-option value="5">5</mat-option>
+              <mat-option value="6">6</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="create-league-page-form-inputs">
+        <app-button-move [type]="submit" [buttonCaption]="caption" class="home-card-content-button" [disabled]="!frmCreateLeague.valid"></app-button-move>
+      </div>
+    </form>
+  </div>
 </div>

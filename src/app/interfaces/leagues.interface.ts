@@ -1,8 +1,8 @@
 export interface LeaguesInterface {
     id?: number;
     name: string;
-    id_owner: number;
+    id_owner?: number;
     code?: string;
-    pseudoOwner?: string;
-    nbPlayers: number;
+    pseudo_owner?: string;
+    nb_players: number;
 }

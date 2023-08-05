@@ -27,7 +27,8 @@ export class LeaguesService {
                                     code: result['data'][0]['code'], 
                                     id_owner: result['data'][0]['id_owner'],
                                     name: result['data'][0]['name'],
-                                    pseudoOwner: result['data'][0]['pseudoOwner']};
+                                    pseudo_owner: result['data'][0]['pseudoOwner'],
+                                    nb_players: result['data'][0]['nb_players']};
         } else {
           return undefined;
         }
@@ -39,7 +40,7 @@ export class LeaguesService {
     if (error.status === 0) {
       console.error('Une erreur est survenue : ', error.error);
     } else {
-      console.error(`Le backend a retourné une erreur ${error.status} : `, error.error);
+      console.error(`Le backend a retourné une erreur ${error.status} : `, error);
     }
     return throwError(() => new Error('Quelque chose s\'est mal passé, essayez plus tard'));
   }

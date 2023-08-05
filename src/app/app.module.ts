@@ -18,6 +18,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonRetourComponent } from './components/button-retour/button-retour.component';
 import { CreateLeagueComponent } from './components/create-league/create-league.component';
+import { MatSelectModule } from '@angular/material/select'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CreateLeagueComponent } from './components/create-league/create-league.
         MatInputModule,
         HttpClientModule,
         MatSnackBarModule,
-        MatIconModule
+        MatIconModule,
+        MatSelectModule
     ],
   providers: [MatSnackBarModule],
   bootstrap: [AppComponent]
