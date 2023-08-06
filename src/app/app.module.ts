@@ -18,7 +18,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonRetourComponent } from './components/button-retour/button-retour.component';
 import { CreateLeagueComponent } from './components/create-league/create-league.component';
-import { MatSelectModule } from '@angular/material/select'
+import { MatSelectModule } from '@angular/material/select';
+import { LeagueCardComponent } from './components/league-card/league-card.component'
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatSelectModule } from '@angular/material/select'
     ConnexionPageComponent,
     MainPageComponent,
     ButtonRetourComponent,
-    CreateLeagueComponent
+    CreateLeagueComponent,
+    LeagueCardComponent
   ],
     imports: [
         BrowserModule,

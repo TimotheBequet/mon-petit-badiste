@@ -9,9 +9,7 @@
                     <button class="btn-league"><a><mat-icon class="btn-league-icon">group_add</mat-icon>Rejoindre une ligue</a></button>
                 </div>
             </div>
-            <div *ngIf="myLeagues.length > 0" class="leagues-unit-card">
-
-            </div>
+            <app-league-card *ngFor="let league of myLeagues" [league]="league"></app-league-card>
         </div>
     </div>
 </div>

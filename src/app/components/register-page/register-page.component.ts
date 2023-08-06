@@ -4,6 +4,8 @@ import {CustomValidator} from "../../custom-validator";
 import {ErrorStateMatcher} from '@angular/material/core';
 import { UserInterface } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
  * classe pour gérer les erreurs dans les inputs
@@ -28,8 +30,12 @@ export class RegisterPageComponent {
   public frmSignup: FormGroup = this.createSignupForm();
   matcher = new MyErrorStateMatcher();
   link: string = "/home";
+  durationInSeconds: number = 5;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(private fb: FormBuilder, 
+    private userService: UserService,
+    private router: Router,
+    private _snackBar: MatSnackBar) {}
 
   onSubmit(): void {
     // on construit un User avec les infos du formulaire
@@ -40,7 +46,23 @@ export class RegisterPageComponent {
     };
     // on appelle la méthode register() avec le User en paramètre
     // et on souscrit à son retour pour passer à la suite dès que la fonction nous renvoie quelque chose
-    this.userService.register(user).subscribe(retour => console.log('retour observable : ',retour));
+    this.userService.register(user).subscribe(retour => {
+      // si le retour est un User, on affiche un message de succès
+      if (retour) {
+        this.router.navigate(['/connexion']);
+        this._snackBar.open('Inscription réussie ! Maintenant, connectes-toi.', 'Fermer', {
+          duration: this.durationInSeconds*1000,
+          verticalPosition: 'top'
+        });
+      }
+      // sinon, on affiche un message d'erreur
+      else {
+        this._snackBar.open('Une erreur est survenue lors de l\'inscription.', 'Fermer', {
+          duration: this.durationInSeconds*1000,
+          verticalPosition: 'top'
+        });
+      }
+    });
   }
 
   createSignupForm(): FormGroup {
