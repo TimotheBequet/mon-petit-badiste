@@ -1,6 +1,6 @@
 <div class="league-container">
     <h2 class="league-title">{{league.name}}</h2>
-    <p class="league-item"><strong><u>Propriétaire de la ligue</u> :</strong> {{league.pseudo_owner}}</p>
-    <p class="league-item"><strong><u>Nombre de joueurs</u> :</strong> {{league.nb_in_league}}/{{league.nb_players}}</p>
-    <p class="league-item"><strong><u>Code de la ligue</u> :</strong> {{league.code}}</p>
+    <p class="league-item"><mat-icon>person_outline</mat-icon><strong><u>Propriétaire de la ligue</u> :</strong> {{league.pseudo_owner}}</p>
+    <p class="league-item"><mat-icon>group</mat-icon><strong><u>Nombre de joueurs</u> :</strong> {{league.nb_in_league}}/{{league.nb_players}}</p>
+    <p class="league-item"><mat-icon>send</mat-icon><strong><u>Code de la ligue</u> :</strong> {{league.code}}<span class="copy-icon" matTooltip="Copier le code" (click)="copyCode()"><mat-icon>file_copy</mat-icon></span></p>
 </div>

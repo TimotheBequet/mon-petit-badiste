@@ -20,6 +20,7 @@ import { ButtonRetourComponent } from './components/button-retour/button-retour.
 import { CreateLeagueComponent } from './components/create-league/create-league.component';
 import { MatSelectModule } from '@angular/material/select';
 import { LeagueCardComponent } from './components/league-card/league-card.component'
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LeagueCardComponent } from './components/league-card/league-card.compon
         HttpClientModule,
         MatSnackBarModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTooltipModule
     ],
   providers: [MatSnackBarModule],
   bootstrap: [AppComponent]

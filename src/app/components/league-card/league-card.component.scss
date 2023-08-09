@@ -16,5 +16,18 @@
   .league-item {
     font-size: 1.1rem;
     text-align: start;
+
+    strong {
+      margin-left: 0.5rem;
+    }
+
+    .copy-icon {
+      margin-left: 0.5rem;
+
+      mat-icon {
+        font-size: 1rem;
+        padding-top: 0.1rem;
+      }
+    }
   }
 }

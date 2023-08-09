@@ -29,3 +29,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 100%;
   width: 100%;
 }
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: none;
+}
+
+.success {
+  background-color: rgb(62, 116, 62) !important;
+  color: white;
+  border-radius: 5px;
+}
