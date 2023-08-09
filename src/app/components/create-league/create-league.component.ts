@@ -49,7 +49,8 @@ export class CreateLeagueComponent implements AfterViewInit {
       id_owner: Number(this.userId),
       nb_players: Number(this.selected),
       code: undefined,
-      pseudo_owner: undefined
+      pseudo_owner: undefined,
+      nb_in_league: 0
     };
     console.log('Ligue : ', league);
     this.leagueService.createLeague(league).subscribe(

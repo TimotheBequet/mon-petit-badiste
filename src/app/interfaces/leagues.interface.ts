@@ -5,4 +5,5 @@ export interface LeaguesInterface {
     code?: string;
     pseudo_owner?: string;
     nb_players: number;
+    nb_in_league: number;
 }

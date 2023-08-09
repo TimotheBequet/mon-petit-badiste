@@ -9,26 +9,41 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 export class LeaguesService {
 
   baseUrl: string = 'http://mpb-api.timothe-bequet.fr';
-  public leagues$: BehaviorSubject<LeaguesInterface | null> = new BehaviorSubject<LeaguesInterface | null>(null);
+  public leagues$: BehaviorSubject<LeaguesInterface[] | null> = new BehaviorSubject<LeaguesInterface[] | null>(null);
 
   constructor(private http: HttpClient) { }
 
-  getMyLeagues(id: number): Observable<LeaguesInterface | undefined> {
+  getMyLeagues(id: number): Observable<LeaguesInterface[] | undefined> {
     let queryParams = new HttpParams().append('id', id);
-    return this.http.get<LeaguesInterface>(`${this.baseUrl}/myLeagues.php`, {params: queryParams}).pipe(
+    return this.http.get<LeaguesInterface[]>(`${this.baseUrl}/myLeagues.php`, {params: queryParams}).pipe(
       catchError(this.handleError),
       map((result: any) => {
+        console.log('mckqmkq', result['data']);
         if (result['data']
          && result['data'].length > 0
          && result['data'][0]['id']
          && result['data'][0]['id'] > 0
         ) {
-          return <LeaguesInterface>{id: result['data'][0]['id'], 
+          let leagues: LeaguesInterface[] = new Array<LeaguesInterface>;
+          for (let i = 0; i < result['data'].length; i++) {
+            leagues.push(
+              <LeaguesInterface>{id: result['data'][i]['id'], 
+                                    code: result['data'][i]['code'], 
+                                    id_owner: result['data'][i]['id_owner'],
+                                    name: result['data'][i]['name'],
+                                    pseudo_owner: result['data'][i]['pseudoOwner'],
+                                    nb_players: result['data'][i]['nb_players'],
+                                    nb_in_league: result['data'][i]['nb_in_league']}
+            );
+          }
+          /*return <LeaguesInterface>{id: result['data'][0]['id'], 
                                     code: result['data'][0]['code'], 
                                     id_owner: result['data'][0]['id_owner'],
                                     name: result['data'][0]['name'],
                                     pseudo_owner: result['data'][0]['pseudoOwner'],
-                                    nb_players: result['data'][0]['nb_players']};
+                                    nb_players: result['data'][0]['nb_players'],
+                                    nb_in_league: result['data'][0]['nb_in_league']};*/
+          return leagues;
         } else {
           return undefined;
         }

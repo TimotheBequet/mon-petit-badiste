@@ -18,7 +18,7 @@ export class MainPageComponent implements OnInit {
       leagues => {
         console.log('ligues : ', leagues);
         if (leagues) {
-          this.myLeagues.push(leagues!);
+          this.myLeagues = leagues;
         }
       }
     );
