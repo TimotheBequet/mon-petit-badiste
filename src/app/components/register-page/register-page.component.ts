@@ -21,6 +21,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss'],
+  host: {
+    class: 'div-all-screen'
+  }
 })
 
 export class RegisterPageComponent {

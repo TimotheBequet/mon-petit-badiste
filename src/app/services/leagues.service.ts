@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
 import { LeaguesInterface } from '../interfaces/leagues.interface';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
@@ -13,7 +13,7 @@ export class LeaguesService {
 
   constructor(private http: HttpClient) { }
 
-  getMyLeagues(id: number): Observable<LeaguesInterface[] | undefined> {
+  getMyLeagues(id: number): Observable<LeaguesInterface[] | undefined> {    
     let queryParams = new HttpParams().append('id', id);
     return this.http.get<LeaguesInterface[]>(`${this.baseUrl}/myLeagues.php`, {params: queryParams}).pipe(
       catchError(this.handleError),

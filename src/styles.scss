@@ -1,15 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-
-html, body, app-root {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-
 body {
   background-image: url("./assets/images/badminton-cover.jpg");
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .material-icons {
@@ -17,18 +10,45 @@ body {
   vertical-align: middle;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+  margin: 0;
+  height: 100%; 
+}
+body { 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  .root {
+    display: contents;
+
+    .header-container {
+      flex: 0 1 auto;
+    }
+  
+    .div-all-screen {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-container {
+      flex: 0 1 auto;
+      width: 100%;
+    }
+  }
+}
 
 .blur-background {
   background-color: rgba(255,255,255,0.4);
   backdrop-filter: blur(10px) sepia(10%);
 }
 
-.div-all-screen {
+/*.div-all-screen {
   height: 100%;
   width: 100%;
-}
+}*/
 
 .mat-mdc-snack-bar-container {
   --mdc-snackbar-container-color: none;

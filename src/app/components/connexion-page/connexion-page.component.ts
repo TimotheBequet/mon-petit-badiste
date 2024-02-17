@@ -18,7 +18,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-connexion-page',
   templateUrl: './connexion-page.component.html',
-  styleUrls: ['./connexion-page.component.scss']
+  styleUrls: ['./connexion-page.component.scss'],
+  host: {
+    class: 'div-all-screen'
+  }
 })
 export class ConnexionPageComponent implements AfterViewInit {
 

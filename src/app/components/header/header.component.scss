@@ -7,7 +7,7 @@
     align-items: center;
     width: 100%;
     background-color: #577e54;
-    height: 5rem;
+    height: 7rem;
 
     &-user {
       width: 50px;
@@ -21,13 +21,16 @@
       transition: all 0.1s linear;
       cursor: pointer;
 
+      @media (max-width: 425px) {
+        margin-left: 0.5rem;
+      }
+
       p {
         margin-bottom: 0;
       }
   
       &:hover {
         background-color: #3d6839;
-        box-shadow: 1px 1px 5px #182717;
       }
     }
 
@@ -35,6 +38,11 @@
       font-family: 'Pacifico', cursive;
       font-size: 3rem;
       margin: 10px 0;
+
+      @media (max-width: 425px) {
+        font-size: 2.3rem;
+        text-align: center;
+      }
 
       & a {
         text-decoration: none;
@@ -50,6 +58,10 @@
 
     &-container-btn {
       padding-right: 2rem;
+
+      @media (max-width: 425px) {
+        padding-right: 0.5rem;
+      }
     }
 
     &-btn-logout {
@@ -64,7 +76,6 @@
   
       &:hover {
         background-color: #3d6839;
-        box-shadow: 1px 1px 5px #182717;
       }
     }
   }
