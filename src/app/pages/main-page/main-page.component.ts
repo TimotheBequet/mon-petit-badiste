@@ -6,10 +6,14 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  styleUrls: ['./main-page.component.scss'],
+  host: {
+    class: 'div-all-screen'
+  }
 })
 export class MainPageComponent implements OnInit {
 
+  emojiSmirkingFace: string = '&#128527;';
   myLeagues: LeaguesInterface[] = new Array<LeaguesInterface>;
   constructor(private leagueService: LeaguesService, private userService: UserService) {}
 

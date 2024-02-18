@@ -1,0 +1,14 @@
+<div class="leagues">
+    <h1 class="leagues-title">Mes Ligues</h1>
+    <div class="leagues-unit-card-btn">
+        <button class="btn-league"><a routerLink="/create-league"><mat-icon class="btn-league-icon">create_new_folder</mat-icon>Créer une ligue</a></button>
+        <button class="btn-league"><a><mat-icon class="btn-league-icon">group_add</mat-icon>Rejoindre une ligue</a></button>
+    </div>
+    <div class="leagues-unit">
+        <div *ngIf="myLeagues.length === 0" class="leagues-unit-card blur-background">
+            <h2><strong>OH NON</strong> vous n'avez pas de ligue :-(</h2>
+            <p class="leagues-unit-card-join">Ne serait-ce pas le moment d'en <strong class="leagues-unit-card-join-link">rejoindre une</strong> ? <span [innerHTML]="emojiSmirkingFace"></span></p>
+        </div>
+        <app-league-card class="component-league-card blur-background" *ngFor="let league of myLeagues" [league]="league"></app-league-card>
+    </div>
+</div>

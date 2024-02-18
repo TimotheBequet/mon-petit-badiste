@@ -68,4 +68,13 @@ export class LeaguesService {
       })
     );
   }
+
+  joinLeague(code: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/joinLeague.php`, code).pipe(
+      catchError(this.handleError),
+      map((response: any) => {
+        return response['data'];
+      })
+    );
+  }
 }
