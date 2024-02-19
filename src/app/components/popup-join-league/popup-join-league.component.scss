@@ -1,0 +1,17 @@
+.dialog-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .modal-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0 5px 0;
+
+        &-unit {
+            margin-bottom: 10px;
+        }
+    }
+}

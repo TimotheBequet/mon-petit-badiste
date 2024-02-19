@@ -22,6 +22,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { LeagueCardComponent } from './components/league-card/league-card.component'
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { PopupJoinLeagueComponent } from './components/popup-join-league/popup-join-league.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { PopupJoinLeagueComponent } from './components/popup-join-league/popup-j
         MatSnackBarModule,
         MatIconModule,
         MatSelectModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatDialogModule,
+        FormsModule
     ],
   providers: [MatSnackBarModule],
   bootstrap: [AppComponent]

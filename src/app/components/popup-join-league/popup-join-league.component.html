@@ -1,1 +1,13 @@
-<p>popup-join-league works!</p>
+<div class="dialog-container">
+  <h1 mat-dialog-title>Rejoindre une ligue</h1>
+  <div mat-dialog-content>
+      <mat-form-field>
+          <mat-label>Code de la ligue</mat-label>
+          <input type="text" matInput placeholder="Code" [(ngModel)]="code" (keyup)="checkTailleCode($event)">
+      </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="modal-btn">
+    <app-button-move class="modal-btn-unit" [buttonCaption]="btnCaptionAnnuler" (click)="closeModal()"></app-button-move>
+    <app-button-move class="modal-btn-unit" [buttonCaption]="btnCaptionValider" [mat-dialog-close]="code" [disabled]="code.length != 6"></app-button-move>
+  </div>
+</div>

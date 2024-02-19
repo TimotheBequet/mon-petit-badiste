@@ -2,7 +2,7 @@
     <h1 class="leagues-title">Mes Ligues</h1>
     <div class="leagues-unit-card-btn">
         <button class="btn-league"><a routerLink="/create-league"><mat-icon class="btn-league-icon">create_new_folder</mat-icon>Créer une ligue</a></button>
-        <button class="btn-league"><a><mat-icon class="btn-league-icon">group_add</mat-icon>Rejoindre une ligue</a></button>
+        <button class="btn-league" (click)="openDialog()"><a><mat-icon class="btn-league-icon">group_add</mat-icon>Rejoindre une ligue</a></button>
     </div>
     <div class="leagues-unit">
         <div *ngIf="myLeagues.length === 0" class="leagues-unit-card blur-background">

@@ -90,3 +90,18 @@ button:not(.disabled):hover .button-text {
   opacity: 0.3;
   cursor: not-allowed;
 }
+
+@media (max-width: 768px) {
+  button .circle {
+    width: 100% !important;
+  }
+  
+  button .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+  }
+  
+  button .button-text {
+    color: #fff !important;
+  }
+}

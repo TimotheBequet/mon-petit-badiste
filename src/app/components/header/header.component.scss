@@ -23,10 +23,19 @@
 
       @media (max-width: 425px) {
         margin-left: 0.5rem;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       p {
         margin-bottom: 0;
+
+        @media (max-width: 425px) {
+          display: none;
+        }
       }
   
       &:hover {
