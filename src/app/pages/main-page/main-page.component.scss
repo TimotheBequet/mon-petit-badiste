@@ -52,24 +52,28 @@
                 &-link {
                     cursor: pointer;
                     text-decoration: underline;
+
+                    a {
+                        color: rgba(0,0,0,.87);
+                    }
                 }
             }
 
             &-btn {
                 text-align: center;
-                width: 40%;
                 display: flex;
-                justify-content: space-evenly;
+                justify-content: center;
                 margin: 0 auto 30px auto;
 
-                @media (max-width: 768px) {
+                @media (max-width: 943px) {
                     width: 80%;
                     flex-direction: column;
                     row-gap: 20px;
+                    align-items: center;
                 }
 
                 .btn-league {
-                    width: 180px;
+                    width: 184px;
                     padding: 0;
                     border: none;
                     height: 2.5rem;
@@ -82,7 +86,14 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    
+                    @media (min-width: 944px) {
+                        margin: 0 5px;
+                    }
 
+                    @media (max-width: 943px) {
+                        width: 45%;
+                    }
                     @media (max-width: 768px) {
                         width: 100%;
                     }
@@ -100,7 +111,7 @@
                         text-decoration: none;
                         color: white;
 
-                        @media (max-width: 768px) {
+                        @media (max-width: 943px) {
                             margin: 0 auto;
                         }
                     }

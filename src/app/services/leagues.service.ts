@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
 import { LeaguesInterface } from '../interfaces/leagues.interface';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { JoinLeagueInterface } from '../interfaces/joinLeague.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,6 @@ export class LeaguesService {
     return this.http.get<LeaguesInterface[]>(`${this.baseUrl}/myLeagues.php`, {params: queryParams}).pipe(
       catchError(this.handleError),
       map((result: any) => {
-        console.log('mckqmkq', result['data']);
         if (result['data']
          && result['data'].length > 0
          && result['data'][0]['id']
@@ -36,13 +36,6 @@ export class LeaguesService {
                                     nb_in_league: result['data'][i]['nb_in_league']}
             );
           }
-          /*return <LeaguesInterface>{id: result['data'][0]['id'], 
-                                    code: result['data'][0]['code'], 
-                                    id_owner: result['data'][0]['id_owner'],
-                                    name: result['data'][0]['name'],
-                                    pseudo_owner: result['data'][0]['pseudoOwner'],
-                                    nb_players: result['data'][0]['nb_players'],
-                                    nb_in_league: result['data'][0]['nb_in_league']};*/
           return leagues;
         } else {
           return undefined;
@@ -52,15 +45,16 @@ export class LeaguesService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      console.error('Une erreur est survenue : ', error.error);
+    if (error.error instanceof Error) {
+      console.error('Une erreur est survenue : ', error.error.message);
     } else {
-      console.error(`Le backend a retourné une erreur ${error.status} : `, error);
+      console.error(`Le backend a retourné une erreur ${error.status} : `, error.error);
     }
     return throwError(() => new Error('Quelque chose s\'est mal passé, essayez plus tard'));
   }
 
   createLeague(league: LeaguesInterface): Observable<any> {
+    console.log(league);
     return this.http.post<any>(`${this.baseUrl}/createLeague.php`, league).pipe(
       catchError(this.handleError),
       map((response: any) => {
@@ -69,10 +63,12 @@ export class LeaguesService {
     );
   }
 
-  joinLeague(code: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/joinLeague.php`, code).pipe(
+  joinLeague(joinLeague: JoinLeagueInterface): Observable<any> {
+    const test = JSON.stringify(joinLeague);
+    return this.http.post<any>(`${this.baseUrl}/joinLeague.php`, test).pipe(
       catchError(this.handleError),
       map((response: any) => {
+        console.log('RESPONSEEE : ', response);
         return response['data'];
       })
     );

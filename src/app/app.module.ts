@@ -24,6 +24,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { PopupJoinLeagueComponent } from './components/popup-join-league/popup-join-league.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { LeaguePageComponent } from './pages/league-page/league-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FormsModule } from '@angular/forms';
     ButtonRetourComponent,
     CreateLeagueComponent,
     LeagueCardComponent,
-    PopupJoinLeagueComponent
+    PopupJoinLeagueComponent,
+    LeaguePageComponent
   ],
     imports: [
         BrowserModule,

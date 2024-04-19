@@ -56,6 +56,20 @@ body {
 
 .success {
   background-color: rgb(62, 116, 62) !important;
-  color: white;
-  border-radius: 5px;
+  color: white !important;
+  border-radius: 5px !important;
+  
+  .mdc-button__label {
+    color: white !important;
+  }
+}
+
+.error {
+  background-color: rgb(184, 40, 0) !important;
+  color: white !important;
+  border-radius: 5px !important;
+
+  .mdc-button__label {
+    color: white !important;
+  }
 }
