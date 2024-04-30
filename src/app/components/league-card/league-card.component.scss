@@ -1,4 +1,4 @@
-.league-container {
+.league-card-container {
   font-family: 'Raleway', sans-serif;
   padding: 1.5rem;
   text-align: center;
@@ -7,16 +7,21 @@
   justify-content: center;
   border-radius: 10px;
 
+  a {
+    text-decoration: none;
+    color: #282936;
+  }
+
   @media (max-width: 425px) {
     border-radius: 0;
 }
 
-  .league-title {
+  .league-card-title {
     font-size: 2rem;
     font-weight: 700;
   }
 
-  .league-item {
+  .league-card-item {
     font-size: 1.1rem;
     text-align: start;
 
