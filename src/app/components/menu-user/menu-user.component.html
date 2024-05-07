@@ -1,4 +1,15 @@
-<div *ngIf="isUserLogged" class="user">
+<div class="user">
+  <div class="user-card">
     <mat-icon>person</mat-icon>
-    <p>{{user.pseudo}}</p>
+  </div>
+  <div class="user-container">
+    <p *ngIf="isUserLogged">{{user.pseudo}}</p>
+    <nav *ngIf="isUserLogged" class="user-container-nav">
+      <ul class="user-container-nav-list">
+        <li class="user-container-nav-list-item">Mes ligues</li>
+        <li class="user-container-nav-list-item">Paramètres</li>
+        <li class="user-container-nav-list-item">Déconnexion</li>
+      </ul>
+    </nav>
+  </div>
 </div>

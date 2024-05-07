@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { UserInterface } from 'src/app/interfaces/user.interface';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-menu-user',
