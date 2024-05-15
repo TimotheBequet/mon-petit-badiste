@@ -1,0 +1,15 @@
+<div class="user">
+  <div class="user-card">
+    <mat-icon>person</mat-icon>
+  </div>
+  <div class="user-container">
+    <p *ngIf="isUserLogged">{{user.pseudo}}</p>
+    <nav *ngIf="isUserLogged" class="user-container-nav">
+      <ul class="user-container-nav-list">
+        <li class="user-container-nav-list-item" (click)="goToLeagues()">Mes ligues</li>
+        <li class="user-container-nav-list-item">Paramètres</li>
+        <li class="user-container-nav-list-item" (click)="logout()">Déconnexion</li>
+      </ul>
+    </nav>
+  </div>
+</div>

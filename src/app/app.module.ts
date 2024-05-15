@@ -25,6 +25,7 @@ import { PopupJoinLeagueComponent } from './components/popup-join-league/popup-j
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { LeaguePageComponent } from './pages/league-page/league-page.component';
+import { MenuUserComponent } from './components/menu-user/menu-user.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LeaguePageComponent } from './pages/league-page/league-page.component';
     CreateLeagueComponent,
     LeagueCardComponent,
     PopupJoinLeagueComponent,
-    LeaguePageComponent
+    LeaguePageComponent,
+    MenuUserComponent
   ],
     imports: [
         BrowserModule,
