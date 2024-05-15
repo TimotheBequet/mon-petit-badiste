@@ -1,13 +1,6 @@
 <div class="header">
-  <nav [ngClass]="isUserLogged ? 'header-nav' : 'header-nav centered'">
-    <!-- <div *ngIf="isUserLogged" class="header-nav-user">
-      <mat-icon>person</mat-icon>
-      <p>{{userName}}</p>
-    </div> -->
-    <app-menu-user [isUserLogged]="isUserLogged" [user]="user"></app-menu-user>
+  <nav class="header-nav">
     <h1 class="header-title"><a routerLink="/home">Mon Petit Badiste</a></h1>
-    <div class="header-nav-container-btn">
-      <button *ngIf="isUserLogged" type="button" (click)="logout()" class="header-nav-btn-logout">Déconnexion</button>
-    </div>
   </nav>
+  <app-menu-user *ngIf="isUserLogged" [isUserLogged]="isUserLogged" [user]="user"></app-menu-user>
 </div>
