@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rx
 import { LeaguesInterface } from '../interfaces/leagues.interface';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { JoinLeagueInterface } from '../interfaces/joinLeague.interface';
+import { ClassementInterface } from '../interfaces/classement.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,33 @@ export class LeaguesService {
       map((response: any) => {
         console.log('RESPONSEEE : ', response);
         return response['data'];
+      })
+    );
+  }
+
+  getClassementLeague(idLeague: number): Observable<ClassementInterface[] | undefined> {
+    let queryParams = new HttpParams().append('id', idLeague);
+    return this.http.get<ClassementInterface[]>(`${this.baseUrl}/classement.php`, {params: queryParams}).pipe(
+      catchError(this.handleError),
+      map((result: any) => {
+        if (result['data']
+            && result['data'].length > 0
+            && result['data'][0]['pseudo']
+        ) {
+          let classement: ClassementInterface[] = new Array<ClassementInterface>;
+          for (let i = 0; i < result['data'].length; i++) {
+            classement.push(
+              <ClassementInterface>{
+                classement: i+1,
+                pseudo: result['data'][i]['pseudo'],
+                score: result['data'][i]['score']
+              }
+            );
+          } 
+          return classement;
+        } else {
+          return undefined;
+        }
       })
     );
   }

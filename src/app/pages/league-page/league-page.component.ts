@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import {LeaguesInterface} from "../../interfaces/leagues.interface";
 import {map} from "rxjs";
+import { ClassementInterface } from 'src/app/interfaces/classement.interface';
+import { LeaguesService } from 'src/app/services/leagues.service';
 
 @Component({
   selector: 'app-league-page',
@@ -14,12 +16,16 @@ import {map} from "rxjs";
 export class LeaguePageComponent implements OnInit {
   league: LeaguesInterface | null = null;
   link: string = "/home";
+  classementLeague: ClassementInterface[] | undefined = undefined;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private leagueService: LeaguesService) {}
 
   ngOnInit() {
     this.route.paramMap
       .pipe(map(() => window.history.state))
-      .subscribe(league => this.league = league);
+      .subscribe(league => {
+        this.league = league;
+        this.leagueService.getClassementLeague(league.id).subscribe((cl) => this.classementLeague = cl);
+      });
   }
 }

@@ -2,5 +2,26 @@
   <div class="full-screen blur-background">
     <app-button-retour [link]="link"></app-button-retour>
     <h2 class="league-title">{{league?.name}}</h2>
+    <div class="league-infos">
+      <div class="league-infos-recap">
+        <p>Ligue créée par {{league?.pseudo_owner}}</p>
+        <p>Nombre de joueurs : {{league?.nb_in_league}}/{{league?.nb_players}}</p>
+        <p>Code de la ligue : {{league?.code}}</p>
+      </div>
+      <div class="league-infos-classement">
+        <table class="league-infos-classement-table">
+          <tr class="league-infos-classement-table-header">
+            <th class="league-infos-classement-table-header-classement">Classement</th>
+            <th>Pseudo</th>
+            <th class="league-infos-classement-table-header-score">Score</th>
+          </tr>
+          <tr *ngFor="let row of classementLeague" class="league-infos-classement-table-rows">
+            <td class="league-infos-classement-table-rows-line">{{row.classement}}</td>
+            <td class="league-infos-classement-table-rows-line">{{row.pseudo}}</td>
+            <td class="league-infos-classement-table-rows-line">{{row.score}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
