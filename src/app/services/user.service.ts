@@ -3,48 +3,44 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { UserInterface } from '../interfaces/user.interface';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators'
+import { globalProperties } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  baseUrl: string = 'http://mpb-api.timothe-bequet.fr';
   public user$: BehaviorSubject<UserInterface | null> = new BehaviorSubject<UserInterface | null>(null);
 
   constructor(private http: HttpClient) { }
 
   register(user: UserInterface): Observable<any> {
     // on fait un post avec le User passé en paramètre, 
-    return this.http.post<any>(`${this.baseUrl}/register.php`, user).pipe(
+    return this.http.post<any>(`${globalProperties.baseUrl}/register`, user).pipe(
       // on tente de traiter les erreurs s'il y en a
       catchError(this.handleError),
       // si pas d'erreur, on traite le retour de la requête
       map((response: any) => {
-        return response['data'];
+        return response;
       })
     );
   }
 
-  login(pseudo: string, pwd: string): Observable<UserInterface | undefined> {
+  login(email: string, pwd: string): Observable<UserInterface | undefined> {
     // parametres du GET pour vérifier le couple pseudo/mot de passe
-    let queryParams = new HttpParams();
-    queryParams = queryParams.append('pseudo', pseudo);
-    queryParams = queryParams.append('pwd', pwd);
+    let queryBody = {"email":email, "password":pwd};
     // on fait la requête, qui devrait nous retourner un UserInterface si tout se passe bien
-    return this.http.get<UserInterface>(`${this.baseUrl}/login.php`, {params: queryParams}).pipe(
+    return this.http.post<UserInterface>(`${globalProperties.baseUrl}/login`, queryBody).pipe(
       // on tente d'abord d'attraper les éventuelles erreurs
       catchError(this.handleError),
       // si on arrive ici, pas d'erreur, on traite le retour de la requête
       map((result: any) => {
+        console.log("RESULT : ", result);
         // si on a bien récupéré un id, c'est que la requête est OK
         if (result 
-          && result['data'] 
-          && result['data'].length > 0
-          && result['data'][0]['id'] 
-          && result['data'][0]['id'] > 0) {
+          && result['id'] 
+          && result['id'] > 0) {
           // on retourne donc un UserInterface
-          const user: UserInterface = <UserInterface>{id: result['data'][0]['id'], pseudo: result['data'][0]['pseudo'], email: result['data'][0]['email']};
+          const user: UserInterface = <UserInterface>{id: result['id'], pseudo: result['pseudo'], email: result['email']};
           localStorage.setItem('user', JSON.stringify(user));
           return user;
         } else {

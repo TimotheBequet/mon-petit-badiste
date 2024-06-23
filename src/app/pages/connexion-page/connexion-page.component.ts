@@ -30,7 +30,7 @@ export class ConnexionPageComponent implements AfterViewInit {
   submit: string = 'submit';
   public frmSignup: FormGroup = this.createSignupForm();
   matcher = new MyErrorStateMatcher();
-  @ViewChild('pseudo') inputPseudo!: ElementRef;
+  @ViewChild('email') inputEmail!: ElementRef;
   link: string = "/home";
 
   constructor(private fb: FormBuilder, 
@@ -39,13 +39,14 @@ export class ConnexionPageComponent implements AfterViewInit {
     private _snackBar: MatSnackBar) {}
 
   ngAfterViewInit(): void {
-    setTimeout(() => {this.inputPseudo.nativeElement.focus();});
+    setTimeout(() => {this.inputEmail.nativeElement.focus();});
   }
 
   onSubmit(): void {
     // on appelle laméthode login() et on souscrit à son retour dès qu'elle nous renvoie quelque chose
-    this.userService.login(this.frmSignup.value.pseudo, this.frmSignup.value.password).subscribe(
+    this.userService.login(this.frmSignup.value.email.toLowerCase(), this.frmSignup.value.password).subscribe(
       user => {
+        console.log(user);
         // si on a bien récupéré un User et qu'on a bien son Id
         if ((user !== undefined) && (user.id !== undefined)) {
           // on renseigne le user
@@ -54,7 +55,7 @@ export class ConnexionPageComponent implements AfterViewInit {
           this.router.navigate(['/home']);
         } else {
           console.log('erreur');
-          this._snackBar.open('Pseudo ou mot de passe incorrect.', 'Fermer', {
+          this._snackBar.open('Email ou mot de passe incorrect.', 'Fermer', {
             duration: this.durationInSeconds*1000,
             verticalPosition: 'top'
           });
@@ -65,7 +66,7 @@ export class ConnexionPageComponent implements AfterViewInit {
 
   createSignupForm(): FormGroup {
     return this.fb.group({
-      pseudo: [null, Validators.compose([Validators.required])],
+      email: [null, Validators.compose([Validators.email, Validators.required])],
       password: [null, Validators.compose([Validators.required,])],
     });
   }

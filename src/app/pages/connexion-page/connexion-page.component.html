@@ -7,9 +7,9 @@
             <!-- pseudo -->
             <div class="connexion-page-form-input">
               <mat-form-field>
-                <mat-label>Pseudo</mat-label>
-                <input #pseudo type="text" matInput formControlName="pseudo" [errorStateMatcher]="matcher" placeholder="Ex : Jay Delachatt">
-                <mat-error *ngIf="frmSignup.hasError('required', 'pseudo')">La saisie du pseudo est <strong>obligatoire !</strong></mat-error>
+                <mat-label>Email</mat-label>
+                <input #email type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Ex : jay.delachatt@mpb.com">
+                <mat-error *ngIf="frmSignup.hasError('required', 'email')">La saisie de l'email est <strong>obligatoire !</strong></mat-error>
               </mat-form-field>
             </div>
   

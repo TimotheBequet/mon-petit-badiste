@@ -1,8 +1,8 @@
 <div class="league-card-container">
   <a routerLink="/league" [state]="league">
     <h2 class="league-card-title">{{league.name}}</h2>
-    <p class="league-card-item"><mat-icon>person_outline</mat-icon><strong><u>Propriétaire de la ligue</u> :</strong> {{league.pseudo_owner}}</p>
-    <p class="league-card-item"><mat-icon>group</mat-icon><strong><u>Nombre de joueurs</u> :</strong> {{league.nb_in_league}}/{{league.nb_players}}</p>
+    <p class="league-card-item"><mat-icon>person_outline</mat-icon><strong><u>Propriétaire de la ligue</u> :</strong> {{league.pseudoOwner}}</p>
+    <p class="league-card-item"><mat-icon>group</mat-icon><strong><u>Nombre de joueurs</u> :</strong> {{league.nbInLeague}}/{{league.nbPlayers}}</p>
     <p class="league-card-item"><mat-icon>send</mat-icon><strong><u>Code de la ligue</u> :</strong> {{league.code}}<span class="copy-icon" matTooltip="Copier le code" (click)="copyCode()"><mat-icon>file_copy</mat-icon></span></p>
   </a>
 </div>

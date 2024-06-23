@@ -6,6 +6,8 @@ import { UserService } from 'src/app/services/user.service';
 import { PopupJoinLeagueComponent } from 'src/app/components/popup-join-league/popup-join-league.component';
 import { JoinLeagueInterface } from 'src/app/interfaces/joinLeague.interface';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-main-page',
@@ -44,15 +46,13 @@ export class MainPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       const joinLeagueInterface: JoinLeagueInterface = {
          code: result,
-         id_user: this.userService.getUser().id!
+         userId: this.userService.getUser().id!
       };
       this.leagueService.joinLeague(joinLeagueInterface).subscribe(
         result => {
-          console.log('DATAAAA  : ', result);
-          if (result != undefined && result.id != undefined) {
+          if (result.message != undefined) {
             // tout est ok, on récupère les ligues
             this.leagueService.getMyLeagues(this.userService.getUser().id!).subscribe(
               leagues => {
