@@ -69,7 +69,7 @@ export class MainPageComponent implements OnInit {
             // gestion des cas d'erreur :
             if (result.idLeague !== undefined && result.idLeague === null) {
               // code invalide
-              this._snackBar.open('Code invalide !', 'Fermer', config);
+              this._snackBar.open(result.error, 'Fermer', config);
             }
           }
         }

@@ -5,7 +5,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import { UserInterface } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 /**
  * classe pour gérer les erreurs dans les inputs
@@ -53,17 +53,19 @@ export class RegisterPageComponent {
       // si le retour est un User, on affiche un message de succès
       if (retour) {
         this.router.navigate(['/connexion']);
-        this._snackBar.open('Inscription réussie ! Maintenant, connectes-toi.', 'Fermer', {
-          duration: this.durationInSeconds*1000,
-          verticalPosition: 'top'
-        });
+        const config = new MatSnackBarConfig();
+            config.panelClass = ['success'];
+            config.verticalPosition = 'bottom';
+            config.duration = this.durationInSeconds*1000;
+        this._snackBar.open('Inscription réussie ! Maintenant, connectes-toi.', 'Fermer', config);
       }
       // sinon, on affiche un message d'erreur
       else {
-        this._snackBar.open('Une erreur est survenue lors de l\'inscription.', 'Fermer', {
-          duration: this.durationInSeconds*1000,
-          verticalPosition: 'top'
-        });
+        const config = new MatSnackBarConfig();
+            config.panelClass = ['error'];
+            config.verticalPosition = 'top';
+            config.duration = this.durationInSeconds*1000;
+        this._snackBar.open('Une erreur est survenue lors de l\'inscription.', 'Fermer', config);
       }
     });
   }

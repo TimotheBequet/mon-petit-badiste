@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, Ng
 import { ErrorStateMatcher } from '@angular/material/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 /**
  * classe pour gérer les erreurs dans les inputs
@@ -55,10 +55,11 @@ export class ConnexionPageComponent implements AfterViewInit {
           this.router.navigate(['/home']);
         } else {
           console.log('erreur');
-          this._snackBar.open('Email ou mot de passe incorrect.', 'Fermer', {
-            duration: this.durationInSeconds*1000,
-            verticalPosition: 'top'
-          });
+          const config = new MatSnackBarConfig();
+            config.panelClass = ['error'];
+            config.verticalPosition = 'top';
+            config.duration = this.durationInSeconds*1000;
+          this._snackBar.open('Email ou mot de passe incorrect.', 'Fermer', config);
         }
       }
     );
