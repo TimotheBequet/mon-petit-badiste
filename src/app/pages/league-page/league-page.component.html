@@ -2,12 +2,12 @@
   <div class="full-screen blur-background">
     <app-button-retour [link]="link"></app-button-retour>
     <h2 class="league-title">{{league?.name}}</h2>
+    <div class="league-recap">
+      <p>Ligue créée par {{league?.pseudoOwner}}</p>
+      <p>Nombre de joueurs : {{league?.nbInLeague}}/{{league?.nbPlayers}}</p>
+      <p>Code de la ligue : {{league?.code}}</p>
+    </div>
     <div class="league-infos">
-      <div class="league-infos-recap">
-        <p>Ligue créée par {{league?.pseudoOwner}}</p>
-        <p>Nombre de joueurs : {{league?.nbInLeague}}/{{league?.nbPlayers}}</p>
-        <p>Code de la ligue : {{league?.code}}</p>
-      </div>
       <div class="league-infos-classement">
         <table class="league-infos-classement-table">
           <tr class="league-infos-classement-table-header">
@@ -21,6 +21,10 @@
             <td class="league-infos-classement-table-rows-line">{{row.score}}</td>
           </tr>
         </table>
+      </div>
+      <div class="league-infos-equipe">
+        <h3 class="league-infos-equipe-titre">Mon équipe</h3>
+        <app-my-team></app-my-team>
       </div>
     </div>
   </div>

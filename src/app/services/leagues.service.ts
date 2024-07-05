@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { LeaguesInterface } from '../interfaces/leagues.interface';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { JoinLeagueInterface } from '../interfaces/joinLeague.interface';
 import { ClassementInterface } from '../interfaces/classement.interface';
 import { globalProperties } from '../environments/environment';

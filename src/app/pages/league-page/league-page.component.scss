@@ -18,19 +18,22 @@
     }
   }
 
+  .league-recap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 2rem;
+  }
+
   .league-infos {
     padding: 2rem;
-
-    &-recap {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      margin-bottom: 2rem;
-    }
+    display: flex;
+    justify-content: space-between;
 
     &-classement {
+      width: 48%;
       &-table {
-        width: 45%;
+        width: 100%;
         border-collapse: collapse;
 
         &-header, &-rows {
@@ -76,6 +79,16 @@
             text-align: center;
           }
         }
+      }
+    }
+
+    &-equipe {
+      width: 48%;
+
+      &-titre {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-align: center;
       }
     }
   }
