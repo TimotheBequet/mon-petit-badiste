@@ -1,0 +1,25 @@
+.dialog-title {
+    text-align: center;
+}
+
+.list-players {
+    width: 100%;
+
+    .man {
+        color: blue;
+    }
+
+    .woman {
+        color: rgb(210, 30, 81);
+    }
+
+    &-name {
+        width: 30%;
+    }
+}
+
+.modal-btn {
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+}

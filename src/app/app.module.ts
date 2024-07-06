@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { LeaguePageComponent } from './pages/league-page/league-page.component';
 import { MenuUserComponent } from './components/menu-user/menu-user.component';
 import { MyTeamComponent } from './components/my-team/my-team.component';
+import { ListPlayersComponent } from './components/list-players/list-players.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MyTeamComponent } from './components/my-team/my-team.component';
     PopupJoinLeagueComponent,
     LeaguePageComponent,
     MenuUserComponent,
-    MyTeamComponent
+    MyTeamComponent,
+    ListPlayersComponent
   ],
     imports: [
         BrowserModule,

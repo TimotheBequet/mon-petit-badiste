@@ -1,1 +1,9 @@
-<p>my-team works!</p>
+<div class="my-team-container">
+    <div *ngIf="players != undefined" class="my-team-list">
+        <p>Liste des joueurs ici</p>
+    </div>
+    <div *ngIf="players == undefined" class="my-team-add">
+        <p>Tu n'as pas de joueurs, cliques sur le bouton ci-dessous pour en acheter !</p>
+        <button (click)="openListPlayers()">Lezgooo</button>
+    </div>
+</div>

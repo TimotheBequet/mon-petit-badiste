@@ -1,0 +1,17 @@
+<div class="dialog-container">
+    <h1 mat-dialog-title class="dialog-title">Joueurs disponibles</h1>
+    <div mat-dialog-content>
+        <table class="list-players">
+            <tr *ngFor="let player of data" [ngClass]="player.sexe == 'M' ? 'man' : 'woman'">
+              <td class="list-players-name">{{player.firstName}} {{player.lastName}} ({{player.pays}})</td>
+              <td>{{player.age}} ans</td>
+              <td>({{player.sigleClub}} {{player.deptClub}})</td>
+              <td>{{player.classementSimple}}/{{player.classementDouble}}/{{player.classementMixte}}</td>
+              <td>{{player.prix}} €</td>
+            </tr>
+          </table>
+    </div>
+    <div mat-dialog-actions class="modal-btn">
+        <app-button-move class="modal-btn-unit" [buttonCaption]="btnCaptionAnnuler" (click)="closeModal()"></app-button-move>
+    </div>
+</div>
