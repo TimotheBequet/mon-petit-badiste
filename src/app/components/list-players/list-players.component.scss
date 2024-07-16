@@ -1,25 +1,72 @@
-.dialog-title {
+.dialog-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  .dialog-title {
     text-align: center;
-}
+  }
 
-.list-players {
-    width: 100%;
+  .players-container {
+    margin: 0 10px;
+    border: 1px solid rgba(80, 109, 82, 0.437);
+    border-radius: 5px;
 
-    .man {
+    .list-players {
+      width: 100%;
+      border-collapse: collapse;
+
+      tr {
+        height: 2rem;
+
+        &:hover {
+          background-color: rgba(217, 236, 217, 0.397);
+        }
+      }
+
+      .man {
         color: blue;
-    }
+      }
 
-    .woman {
+      .woman {
         color: rgb(210, 30, 81);
-    }
+      }
 
-    &-name {
+      &-name {
         width: 30%;
-    }
-}
+        padding-left: 5px;
+      }
 
-.modal-btn {
+      &-add {
+        width: 4.5rem;
+              
+        button {
+          height: 1.8rem;
+          width: 4rem;
+          color: rgb(49, 110, 53);
+          background-color: white;
+          font-size: 1.5rem;
+          font-weight: bold;
+          border: 1px solid rgb(49, 110, 53);
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+
+          &:hover {
+            color: white;
+            background-color: rgb(49, 110, 53);
+          }
+        }
+      }
+    }
+  }
+
+  .modal-btn {
     display: flex;
     justify-content: center;
     padding-top: 2rem;
+  }
 }
