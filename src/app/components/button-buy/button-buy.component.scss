@@ -1,0 +1,34 @@
+.btn-buy {
+  height: 1.8rem;
+  width: 4rem;
+  background-color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.add {
+  color: rgb(49, 110, 53);
+  background-color: rgb(235, 244, 235);
+  border: 1px solid rgb(49, 110, 53);
+
+  &:hover {
+    background-color: rgb(49, 110, 53);
+    color: white;
+  }
+}
+
+.added {
+  background-color: rgb(78, 99, 219);
+  color: white;
+  border: 1px solid rgb(78, 99, 219);
+
+  &:hover {
+    background-color: rgb(41, 68, 219);
+    border: 1px solid rgb(41, 68, 219);
+  }
+}

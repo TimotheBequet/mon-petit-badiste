@@ -28,6 +28,7 @@ import { LeaguePageComponent } from './pages/league-page/league-page.component';
 import { MenuUserComponent } from './components/menu-user/menu-user.component';
 import { MyTeamComponent } from './components/my-team/my-team.component';
 import { ListPlayersComponent } from './components/list-players/list-players.component';
+import { ButtonBuyComponent } from './components/button-buy/button-buy.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ListPlayersComponent } from './components/list-players/list-players.com
     LeaguePageComponent,
     MenuUserComponent,
     MyTeamComponent,
-    ListPlayersComponent
+    ListPlayersComponent,
+    ButtonBuyComponent
   ],
     imports: [
         BrowserModule,
