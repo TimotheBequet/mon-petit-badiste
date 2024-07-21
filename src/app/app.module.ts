@@ -29,6 +29,7 @@ import { MenuUserComponent } from './components/menu-user/menu-user.component';
 import { MyTeamComponent } from './components/my-team/my-team.component';
 import { ListPlayersComponent } from './components/list-players/list-players.component';
 import { ButtonBuyComponent } from './components/button-buy/button-buy.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ButtonBuyComponent } from './components/button-buy/button-buy.component
     MenuUserComponent,
     MyTeamComponent,
     ListPlayersComponent,
-    ButtonBuyComponent
+    ButtonBuyComponent,
+    FilterComponent
   ],
     imports: [
         BrowserModule,

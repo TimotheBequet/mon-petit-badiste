@@ -1,17 +1,20 @@
 <div class="dialog-container">
   <h1 mat-dialog-title class="dialog-title">Joueurs disponibles</h1>
+  <p class="dialog-budget" [ngClass]="getBudgetClass()">Budget restant : {{budget}}€</p>
+  <div class="players-filters">
+    <app-filter [type]="'name'" (name)="updateListPlayersByName($event)"></app-filter>
+    <app-filter [type]="'clubs'" [listClubs]="clubs" (idClub)="updateListPlayersByClub($event)"></app-filter>
+    <app-filter [type]="'gender'" (gender)="updateListPlayersByGender($event)"></app-filter>
+  </div>
   <div mat-dialog-content class="players-container">
-    <div class="players-filters">
-      
-    </div>
     <table class="list-players">
-      <tr *ngFor="let player of data" [ngClass]="player.sexe == 'M' ? 'man' : 'woman'">
+      <tr *ngFor="let player of players" [ngClass]="player.sexe == 'M' ? 'man' : 'woman'">
         <td class="list-players-name">{{player.firstName}} {{player.lastName}} ({{player.pays}})</td>
         <td>{{player.age}} ans</td>
         <td>({{player.sigleClub}} {{player.deptClub}})</td>
         <td>{{player.classementSimple}}/{{player.classementDouble}}/{{player.classementMixte}}</td>
         <td>{{player.prix}} €</td>
-        <td class="list-players-add"><app-button-buy></app-button-buy></td>
+        <td class="list-players-add"><app-button-buy [prix]="player.prix" [budget]="budget" (montantAchat)="updateMontantAchat($event)"></app-button-buy></td>
       </tr>
     </table>
   </div>

@@ -8,6 +8,30 @@
     text-align: center;
   }
 
+  .dialog-budget {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .budget-ok {
+    color: rgb(24, 59, 24);
+  }
+  .budget-medium {
+    color: rgb(153, 108, 25);
+  }
+  .budget-ko {
+    color: rgb(142, 4, 4);
+  }
+
+  .players-filters {
+    margin: 0 10px;
+    display: flex;
+    justify-content: space-around;
+  }
+
   .players-container {
     margin: 0 10px;
     border: 1px solid rgba(80, 109, 82, 0.437);

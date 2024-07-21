@@ -6,4 +6,5 @@ export interface LeaguesInterface {
     pseudoOwner?: string;
     nbPlayers: number;
     nbInLeague: number;
+    budget: number;
 }

@@ -33,7 +33,8 @@ export class LeaguesService {
                                     name: result[i]['name'],
                                     pseudoOwner: result[i]['pseudoOwner'],
                                     nbPlayers: result[i]['nbPlayers'],
-                                    nbInLeague: result[i]['nbInLeague']}
+                                    nbInLeague: result[i]['nbInLeague'],
+                                    budget: result[i]['budget']}
             );
           }
           return leagues;

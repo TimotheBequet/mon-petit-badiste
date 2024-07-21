@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PlayerInterface } from 'src/app/interfaces/player.interface';
 import { PlayerService } from 'src/app/services/player.service';
 import { ListPlayersComponent } from '../list-players/list-players.component';
+import { LeaguesInterface } from 'src/app/interfaces/leagues.interface';
 
 @Component({
   selector: 'app-my-team',
@@ -10,6 +11,7 @@ import { ListPlayersComponent } from '../list-players/list-players.component';
   styleUrls: ['./my-team.component.scss']
 })
 export class MyTeamComponent implements OnInit {
+  @Input('league') league: LeaguesInterface | null = null;
   players: PlayerInterface[] | undefined = undefined;
   constructor(public playerService: PlayerService, public dialog: MatDialog) {}
 
@@ -21,13 +23,14 @@ export class MyTeamComponent implements OnInit {
   openListPlayers(): void {
     this.playerService.getAllPlayers().subscribe(players => {
       if (players != undefined) {
-        console.log('players : ', players);
-        
         const dialogRef = this.dialog.open(ListPlayersComponent, {
           width: '100%',
           height: '90%',
           maxWidth: '90vw',
-          data: players
+          data: {
+            players: players,
+            budget: this.league?.budget
+          }
         });
       }
     });
