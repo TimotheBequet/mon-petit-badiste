@@ -4,6 +4,7 @@ import { PlayerInterface } from 'src/app/interfaces/player.interface';
 import { PlayerService } from 'src/app/services/player.service';
 import { ListPlayersComponent } from '../list-players/list-players.component';
 import { LeaguesInterface } from 'src/app/interfaces/leagues.interface';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-my-team',
@@ -13,7 +14,7 @@ import { LeaguesInterface } from 'src/app/interfaces/leagues.interface';
 export class MyTeamComponent implements OnInit {
   @Input('league') league: LeaguesInterface | null = null;
   players: PlayerInterface[] | undefined = undefined;
-  constructor(public playerService: PlayerService, public dialog: MatDialog) {}
+  constructor(public playerService: PlayerService, public dialog: MatDialog, public userService: UserService) {}
 
   ngOnInit(): void {
     // TODO récupérer les bons params
@@ -29,7 +30,9 @@ export class MyTeamComponent implements OnInit {
           maxWidth: '90vw',
           data: {
             players: players,
-            budget: this.league?.budget
+            budget: this.league?.budget,
+            idLeague: this.league?.id,
+            idUser: this.userService.getUserId()
           }
         });
       }

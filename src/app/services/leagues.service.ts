@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { JoinLeagueInterface } from '../interfaces/joinLeague.interface';
 import { ClassementInterface } from '../interfaces/classement.interface';
 import { globalProperties } from '../environments/environment';
+import { CompoTempInterface } from '../interfaces/compo-temp.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +74,7 @@ export class LeaguesService {
   }
 
   getClassementLeague(idLeague: number): Observable<ClassementInterface[] | undefined> {
-    let queryBody= {'id':idLeague};
+    const queryBody= {'id':idLeague};
     return this.http.post<ClassementInterface[]>(`${globalProperties.baseUrl}/leagues/classement`, queryBody).pipe(
       catchError(this.handleError),
       map((result: any) => {
@@ -97,5 +98,32 @@ export class LeaguesService {
         }
       })
     );
+  }
+
+  setCompoTemp(compo: CompoTempInterface[]): Observable<CompoTempInterface[] | undefined> {
+    const body = {'playersTemp': compo};
+    return this.http.post<CompoTempInterface[]>(`${globalProperties.baseUrl}/leagues/setcompotemp`, body).pipe(
+      catchError(this.handleError),
+      map((result: any) => {
+        if (result && result.length > 0) {
+          // revoir ça : result contient le résultat de l'insertion
+          let compoTemp: CompoTempInterface[] = new Array<CompoTempInterface>;
+          for (let c of result) {
+            compoTemp.push(
+              <CompoTempInterface>{
+                idUser: c.idUser,
+                idLeague: c.idLeague,
+                idPlayer: c.idPlayer,
+                prixPlayer: c.prixPlayer,
+                datePurchase: c.datePurchase
+              }
+            );
+          }
+          return compoTemp;
+        } else {
+          return undefined;
+        }
+      })
+    )
   }
 }

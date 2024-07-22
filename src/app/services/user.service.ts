@@ -87,6 +87,15 @@ export class UserService {
     }
   }
 
+  getUserId(): number | undefined {
+    if (localStorage.getItem('user') === null) {
+      return undefined;
+    } else {
+      const user: UserInterface = JSON.parse(localStorage.getItem('user')!);
+      return user.id;
+    }
+  }
+
   getUser(): UserInterface {
     const user: UserInterface = JSON.parse(localStorage.getItem('user')!);
     return user;

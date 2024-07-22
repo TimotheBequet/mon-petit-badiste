@@ -17,3 +17,12 @@
     <mat-option value="M">Homme</mat-option>
   </mat-select>
 </mat-form-field>
+<mat-form-field *ngIf="type == 'spe'">
+  <mat-label>Spécialité</mat-label>
+  <mat-select [(value)]="selSpe" (valueChange)="setSpeciality()">
+    <mat-option>Tous</mat-option>
+    <mat-option value="S">Simple</mat-option>
+    <mat-option value="D">Double</mat-option>
+    <mat-option value="X">Mixte</mat-option>
+  </mat-select>
+</mat-form-field>

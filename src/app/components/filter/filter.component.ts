@@ -12,9 +12,11 @@ export class FilterComponent {
   @ViewChild('name') nameEl!: ElementRef; 
   selClub: number = 0;
   selGender: string = '';
+  selSpe: string = '';
   @Output() idClub = new EventEmitter<number>();
   @Output() gender = new EventEmitter<string>();
   @Output() name = new EventEmitter<string>();
+  @Output() spe = new EventEmitter<string>();
 
   setSelectionClub(): void {
     this.idClub.emit(this.selClub);
@@ -26,5 +28,9 @@ export class FilterComponent {
 
   setFilterName(): void {
     this.name.emit(this.nameEl.nativeElement.value);
+  }
+
+  setSpeciality(): void {
+    this.spe.emit(this.selSpe);
   }
 }

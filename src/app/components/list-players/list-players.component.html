@@ -5,6 +5,7 @@
     <app-filter [type]="'name'" (name)="updateListPlayersByName($event)"></app-filter>
     <app-filter [type]="'clubs'" [listClubs]="clubs" (idClub)="updateListPlayersByClub($event)"></app-filter>
     <app-filter [type]="'gender'" (gender)="updateListPlayersByGender($event)"></app-filter>
+    <app-filter [type]="'spe'" (spe)="updateListPlayersBySpeciality($event)"></app-filter>
   </div>
   <div mat-dialog-content class="players-container">
     <table class="list-players">
@@ -14,11 +15,19 @@
         <td>({{player.sigleClub}} {{player.deptClub}})</td>
         <td>{{player.classementSimple}}/{{player.classementDouble}}/{{player.classementMixte}}</td>
         <td>{{player.prix}} €</td>
-        <td class="list-players-add"><app-button-buy [prix]="player.prix" [budget]="budget" (montantAchat)="updateMontantAchat($event)"></app-button-buy></td>
+        <td class="list-players-add">
+          <app-button-buy [prix]="player.prix" 
+                          [budget]="budget" 
+                          [idPlayer]="player.id" 
+                          (montantAchat)="updateMontantAchat($event)"
+                          (playersSelected)="updatePlayersSelected($event)">
+          </app-button-buy>
+        </td>
       </tr>
     </table>
   </div>
   <div mat-dialog-actions class="modal-btn">
     <app-button-move class="modal-btn-unit" [buttonCaption]="btnCaptionAnnuler" (click)="closeModal()"></app-button-move>
+    <app-button-move class="modal-btn-unit" [buttonCaption]="btnCaptionValider" (click)="validerAchats()"></app-button-move>
   </div>
 </div>
