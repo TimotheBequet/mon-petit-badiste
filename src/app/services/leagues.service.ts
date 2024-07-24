@@ -124,6 +124,6 @@ export class LeaguesService {
           return undefined;
         }
       })
-    )
+    );
   }
 }

@@ -9,6 +9,7 @@ export class ButtonMoveComponent implements OnInit {
   @Input() buttonCaption: string = '';
   @Input() disabled: boolean = false;
   @Input() type: string = 'button';
+  @Input() class: string = '';
 
   constructor() {}
 

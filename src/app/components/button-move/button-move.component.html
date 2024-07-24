@@ -1,6 +1,9 @@
-<button class="learn-more" [disabled]="disabled" [ngClass]="disabled ? 'disabled' : ''" [type]="type">
+<!-- <button class="learn-more" [disabled]="disabled" [ngClass]="disabled ? 'disabled' : ''" [type]="type">
   <span class="circle" aria-hidden="true">
   <span class="icon arrow"></span>
   </span>
   <span class="button-text">{{buttonCaption}}</span>
+</button> -->
+<button [class]="class" [disabled]="disabled" [ngClass]="disabled ? 'disabled' : ''" [type]="type">
+  {{buttonCaption}}
 </button>

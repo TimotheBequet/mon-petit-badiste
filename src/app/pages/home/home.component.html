@@ -3,8 +3,8 @@
     <div class="home-card-content">
       <p class="home-card-content-title">Bienvenue sur Mon Petit Badiste, l'application qui te permet de composer ton équipe d'interclubs de Badminton.</p>
       <p class="home-card-content-text">Crées ou rejoins une compétition, achètes tes joueurs, fais ta compo d'équipe et affrontes tes potes !</p>
-      <a routerLink="/connexion" class="home-card-content-button"><app-button-move [buttonCaption]="connexion"></app-button-move></a>
-      <a routerLink="/register" class="home-card-content-button"><app-button-move [buttonCaption]="inscription"></app-button-move></a>
+      <a routerLink="/connexion" class="home-card-content-button"><app-button-move [buttonCaption]="connexion" [class]="'connexion'"></app-button-move></a>
+      <a routerLink="/register" class="home-card-content-button"><app-button-move [buttonCaption]="inscription" [class]="'inscription'"></app-button-move></a>
     </div>
   </div>
   <div *ngIf="userLogged" class="div-all-screen">

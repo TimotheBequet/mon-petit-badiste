@@ -27,7 +27,7 @@
     </table>
   </div>
   <div mat-dialog-actions class="modal-btn">
-    <app-button-move class="modal-btn-unit" [buttonCaption]="btnCaptionAnnuler" (click)="closeModal()"></app-button-move>
-    <app-button-move class="modal-btn-unit" [buttonCaption]="btnCaptionValider" (click)="validerAchats()"></app-button-move>
+    <app-button-move [class]="'valider'" class="modal-btn-unit btn-players" [buttonCaption]="btnCaptionValider" (click)="validerAchats()"></app-button-move>
+    <app-button-move [class]="'annuler'" class="modal-btn-unit btn-players" [buttonCaption]="btnCaptionAnnuler" (click)="closeModal()"></app-button-move>
   </div>
 </div>
