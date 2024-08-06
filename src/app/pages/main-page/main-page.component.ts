@@ -50,30 +50,32 @@ export class MainPageComponent implements OnInit {
          code: result,
          userId: this.userService.getUser().id!
       };
-      this.leagueService.joinLeague(joinLeagueInterface).subscribe(
-        result => {
-          if (result.message != undefined) {
-            // tout est ok, on récupère les ligues
-            this.leagueService.getMyLeagues(this.userService.getUser().id!).subscribe(
-              leagues => {
-                if (leagues) {
-                  this.myLeagues = leagues;
+      if (result != undefined) {
+        this.leagueService.joinLeague(joinLeagueInterface).subscribe(
+          result => {
+            if (result.message != undefined) {
+              // tout est ok, on récupère les ligues
+              this.leagueService.getMyLeagues(this.userService.getUser().id!).subscribe(
+                leagues => {
+                  if (leagues) {
+                    this.myLeagues = leagues;
+                  }
                 }
+              );
+            } else if (result !== undefined && result.error !== undefined) {
+              const config = new MatSnackBarConfig();
+              config.panelClass = ['error'];
+              config.verticalPosition = 'bottom';
+              config.duration = 5000;
+              // gestion des cas d'erreur :
+              if (result.idLeague !== undefined && result.idLeague === null) {
+                // code invalide
+                this._snackBar.open(result.error, 'Fermer', config);
               }
-            );
-          } else if (result !== undefined && result.error !== undefined) {
-            const config = new MatSnackBarConfig();
-            config.panelClass = ['error'];
-            config.verticalPosition = 'bottom';
-            config.duration = 5000;
-            // gestion des cas d'erreur :
-            if (result.idLeague !== undefined && result.idLeague === null) {
-              // code invalide
-              this._snackBar.open(result.error, 'Fermer', config);
             }
           }
-        }
-      )
+        )
+      }
     });
   }
 }
