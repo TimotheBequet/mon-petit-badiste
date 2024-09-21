@@ -34,7 +34,6 @@ export class UserService {
       catchError(this.handleError),
       // si on arrive ici, pas d'erreur, on traite le retour de la requête
       map((result: any) => {
-        console.log("RESULT : ", result);
         // si on a bien récupéré un id, c'est que la requête est OK
         if (result 
           && result['id'] 

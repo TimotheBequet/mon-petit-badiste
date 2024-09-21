@@ -126,8 +126,7 @@ export class ListPlayersComponent {
           }
         );
       }
-      this.leaguesService.setCompoTemp(playersToSend);
-      this.dialogRef.close();
+      this.leaguesService.setCompoTemp(playersToSend).subscribe(() => this.dialogRef.close());
     } else {
       const config = new MatSnackBarConfig();
             config.panelClass = ['error'];

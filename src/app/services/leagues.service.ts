@@ -100,29 +100,12 @@ export class LeaguesService {
     );
   }
 
-  setCompoTemp(compo: CompoTempInterface[]): Observable<CompoTempInterface[] | undefined> {
-    const body = {'playersTemp': compo};
-    return this.http.post<CompoTempInterface[]>(`${globalProperties.baseUrl}/leagues/setcompotemp`, body).pipe(
+  setCompoTemp(compo: CompoTempInterface[]): Observable<any> {
+    const body = {'playerstemp': compo};
+    return this.http.post<any>(`${globalProperties.baseUrl}/leagues/setcompotemp`, body).pipe(
       catchError(this.handleError),
       map((result: any) => {
-        if (result && result.length > 0) {
-          // revoir ça : result contient le résultat de l'insertion
-          let compoTemp: CompoTempInterface[] = new Array<CompoTempInterface>;
-          for (let c of result) {
-            compoTemp.push(
-              <CompoTempInterface>{
-                idUser: c.idUser,
-                idLeague: c.idLeague,
-                idPlayer: c.idPlayer,
-                prixPlayer: c.prixPlayer,
-                datePurchase: c.datePurchase
-              }
-            );
-          }
-          return compoTemp;
-        } else {
-          return undefined;
-        }
+        return result;
       })
     );
   }

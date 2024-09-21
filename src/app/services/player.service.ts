@@ -21,7 +21,6 @@ export class PlayerService {
     return this.http.get<PlayerInterface[]>(`${globalProperties.baseUrl}/data/getalljoueurs`).pipe(
       catchError(this.handleError),
       map((result: any) => {
-        //console.log("RESULT : ", result);
         return result;
       })
     );
