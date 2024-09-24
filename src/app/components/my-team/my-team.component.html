@@ -1,9 +1,16 @@
 <div class="my-team-container">
+    <div *ngIf="playersTemp != undefined" class="my-team-list">
+        <h3>En cours d'achat :</h3>
+        <div *ngFor="let player of playersTemp">
+            <div class="player">
+                <p>{{player.nomPlayer}} {{player.prenomPlayer}} - {{player.prixPlayer}} €</p>
+            </div>
+    </div>
     <div *ngIf="players != undefined" class="my-team-list">
         <p>Liste des joueurs ici</p>
     </div>
-    <div *ngIf="players == undefined" class="my-team-add">
+    <div *ngIf="players == undefined && playersTemp == undefined" class="my-team-add">
         <p>Tu n'as pas de joueurs, cliques sur le bouton ci-dessous pour en acheter !</p>
-        <button (click)="openListPlayers()">Lezgooo</button>
     </div>
+    <button (click)="openListPlayers()">Etoffer ma team</button>
 </div>

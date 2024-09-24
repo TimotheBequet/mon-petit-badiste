@@ -100,12 +100,44 @@ export class LeaguesService {
     );
   }
 
-  setCompoTemp(compo: CompoTempInterface[]): Observable<any> {
+  setCompoTemp(compo: CompoTempInterface[]): Observable<boolean> {
     const body = {'playerstemp': compo};
     return this.http.post<any>(`${globalProperties.baseUrl}/leagues/setcompotemp`, body).pipe(
       catchError(this.handleError),
       map((result: any) => {
-        return result;
+        return (result != undefined && result.length > 0);
+      })
+    );
+  }
+
+  getCompoTemp(idUser: number, idLeague: number): Observable<CompoTempInterface[] | undefined> {
+    const body = {'idUser': idUser, 'idLeague': idLeague};
+    return this.http.post<CompoTempInterface[]>(`${globalProperties.baseUrl}/leagues/getcompotemp`, body).pipe(
+      catchError(this.handleError),
+      map((result: any) => {
+        console.log("result", result);
+        if (result
+            && result.length > 0
+            && result[0]['playerId']
+        ) {
+          let compo: CompoTempInterface[] = new Array<CompoTempInterface>();
+          for (let i = 0; i < result.length; i++) {
+            compo.push(
+              <CompoTempInterface>{
+                idUser: idUser,
+                idLeague: idLeague,
+                idPlayer: result[i]['playerId'],
+                prenomPlayer: result[i]['firstName'],
+                nomPlayer: result[i]['lastName'],
+                prixPlayer: result[i]['prixPlayer'],
+                datePurchase: result[i]['datePurchase']
+              }
+            );
+          }
+          return compo;
+        } else {
+          return undefined;
+        }
       })
     );
   }

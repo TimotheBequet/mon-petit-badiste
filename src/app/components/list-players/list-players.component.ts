@@ -1,10 +1,10 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { isEmpty } from 'rxjs';
 import { CompoTempInterface } from 'src/app/interfaces/compo-temp.interface';
 import { PlayerInterface } from 'src/app/interfaces/player.interface';
 import { LeaguesService } from 'src/app/services/leagues.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-list-players',
@@ -122,11 +122,21 @@ export class ListPlayersComponent {
             idLeague: this.idLeague,
             idPlayer: item.id,
             prixPlayer: item.prix,
-            datePurchase: dateCourante
+            datePurchase: moment(dateCourante).format("YYYY-MM-DD HH:mm:ss")
           }
         );
       }
-      this.leaguesService.setCompoTemp(playersToSend).subscribe(() => this.dialogRef.close());
+      this.leaguesService.setCompoTemp(playersToSend).subscribe((retour) => {
+        if (retour) {
+        this.dialogRef.close();
+        } else {
+          const config = new MatSnackBarConfig();
+            config.panelClass = ['error'];
+            config.verticalPosition = 'top';
+            config.duration = 5000;
+          this._snackbar.open('Une erreur est survenue lors de l\'enregistrement des achats.', 'Fermer', config);
+        }
+      });
     } else {
       const config = new MatSnackBarConfig();
             config.panelClass = ['error'];

@@ -2,6 +2,8 @@ export interface CompoTempInterface {
     idUser: number;
     idLeague: number;
     idPlayer: number;
+    prenomPlayer: string;
+    nomPlayer: string;
     prixPlayer: number;
-    datePurchase: Date | null;
+    datePurchase: string | null;
 }
