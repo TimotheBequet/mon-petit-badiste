@@ -47,6 +47,7 @@ export class MyTeamComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
+          console.log('resuuuuult', result);
           if (result) {
             this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => this.playersTemp = compoTemp);
             this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => this.players = players);

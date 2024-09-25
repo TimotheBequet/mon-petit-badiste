@@ -6,10 +6,59 @@
     .my-team-list {
         display: flex;
         flex-direction: column;
-
-        .player {
-            display: flex;
-            flex-direction: row;
+        width: 100%;
+        margin-bottom: 1rem;
+        
+            .league-infos-classement {
+              width: 100%;
+              &-table {
+                width: 100%;
+                border-collapse: collapse;
+        
+                &-header, &-rows {
+                  height: 30px;
+                }
+        
+                &-header {
+                  background-color: rgba(135, 54, 54, 0.58);
+        
+                  th:first-child {
+                    border-top-left-radius: 7px;
+                  }
+                  th:last-child {
+                    border-top-right-radius: 7px;
+                  }
+        
+                  &-classement {
+                      width: 30%;
+                  }
+        
+                  &-score {
+                    width: 25%;
+                  }
+                }
+        
+                &-rows {
+                  &:nth-child(odd) {
+                    background-color: rgba(143, 112, 112, 0.555);
+                  }
+                  &:nth-child(even) {
+                    background-color: rgba(143, 112, 112, 0.38);
+                  }
+                  &:last-child {
+                    td:first-child {
+                      border-bottom-left-radius: 7px;
+                    }
+                    td:last-child {
+                      border-bottom-right-radius: 7px;
+                    }
+                  }
+                  
+                  &-line {
+                    text-align: center;
+                  }
+                }
+            }
         }
     }
 

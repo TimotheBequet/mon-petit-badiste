@@ -42,7 +42,7 @@ export class ListPlayersComponent {
   }
 
   closeModal(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   getBudgetClass(): string {
@@ -128,7 +128,7 @@ export class ListPlayersComponent {
       }
       this.leaguesService.setCompoTemp(playersToSend).subscribe((retour) => {
         if (retour) {
-        this.dialogRef.close();
+          this.dialogRef.close(true);
         } else {
           const config = new MatSnackBarConfig();
             config.panelClass = ['error'];
