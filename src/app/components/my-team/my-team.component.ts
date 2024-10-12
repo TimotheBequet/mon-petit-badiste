@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PlayerInterface } from 'src/app/interfaces/player.interface';
 import { PlayerService } from 'src/app/services/player.service';
@@ -15,6 +15,7 @@ import { LeaguesService } from 'src/app/services/leagues.service';
 })
 export class MyTeamComponent implements OnInit {
   @Input('league') league: LeaguesInterface | null = null;
+  @Output() newItemEvent = new EventEmitter<boolean>();
   players: PlayerInterface[] | undefined = undefined;
   playersTemp: CompoTempInterface[] | undefined = undefined;
   constructor(public playerService: PlayerService, 
@@ -23,12 +24,19 @@ export class MyTeamComponent implements OnInit {
     public leagueService: LeaguesService) {}
 
   ngOnInit(): void {
+    this.newItemEvent.emit(true);
     // TODO récupérer les bons params
     this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => {
-      console.log("compoTemp", compoTemp);
       this.playersTemp = compoTemp;
+      this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => {
+        this.players = players;
+        setTimeout(() => {
+          console.log('pouet');
+          // marche pas
+          this.newItemEvent.emit(false);
+        })
+      });
     });
-    this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => this.players = players);
   }
 
   openListPlayers(): void {
@@ -47,7 +55,6 @@ export class MyTeamComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-          console.log('resuuuuult', result);
           if (result) {
             this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => this.playersTemp = compoTemp);
             this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => this.players = players);
