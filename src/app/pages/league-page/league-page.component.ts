@@ -4,6 +4,7 @@ import {LeaguesInterface} from "../../interfaces/leagues.interface";
 import {map} from "rxjs";
 import { ClassementInterface } from 'src/app/interfaces/classement.interface';
 import { LeaguesService } from 'src/app/services/leagues.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-league-page',

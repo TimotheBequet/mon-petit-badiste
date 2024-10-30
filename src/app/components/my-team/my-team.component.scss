@@ -20,7 +20,8 @@
                 }
         
                 &-header {
-                  background-color: rgba(135, 54, 54, 0.58);
+                  background-color: rgba(201, 83, 83, 0.7);
+                  border-bottom: 1px solid rgb(190, 190, 190);
         
                   th:first-child {
                     border-top-left-radius: 7px;
@@ -40,10 +41,10 @@
         
                 &-rows {
                   &:nth-child(odd) {
-                    background-color: rgba(143, 112, 112, 0.555);
+                    background-color: rgba(192, 149, 149, 0.7);
                   }
                   &:nth-child(even) {
-                    background-color: rgba(143, 112, 112, 0.38);
+                    background-color: rgba(180, 119, 119, 0.7);
                   }
                   &:last-child {
                     td:first-child {

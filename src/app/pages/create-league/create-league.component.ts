@@ -56,7 +56,6 @@ export class CreateLeagueComponent implements AfterViewInit {
       nbInLeague: 0,
       budget: 6000
     };
-    console.log('Ligue : ', league);
     this.leagueService.createLeague(league).subscribe(
       league => {
         if ((league.id !== undefined)) {

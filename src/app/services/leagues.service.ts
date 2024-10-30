@@ -73,6 +73,30 @@ export class LeaguesService {
     );
   }
 
+  getLeagueInfos(idLeague: number, idUser: number): Observable<LeaguesInterface | null> {
+    const queryBody= {'id':idLeague, 'idUser': idUser};
+    return this.http.post<LeaguesInterface>(`${globalProperties.baseUrl}/leagues/infos`, queryBody).pipe(
+      catchError(this.handleError),
+      map((result: any) => {
+        if (result
+            && result.length > 0
+            && result[0]['id']
+        ) {
+          return <LeaguesInterface>{id: result[0]['id'], 
+                                    code: result[0]['code'], 
+                                    idOwner: result[0]['idOwner'],
+                                    name: result[0]['name'],
+                                    pseudoOwner: result[0]['pseudoOwner'],
+                                    nbPlayers: result[0]['nbPlayers'],
+                                    nbInLeague: result[0]['nbInLeague'],
+                                    budget: result[0]['budget']};
+        } else {
+          return null;
+        }
+      }
+    ));
+  }
+
   getClassementLeague(idLeague: number): Observable<ClassementInterface[] | undefined> {
     const queryBody= {'id':idLeague};
     return this.http.post<ClassementInterface[]>(`${globalProperties.baseUrl}/leagues/classement`, queryBody).pipe(
@@ -115,7 +139,6 @@ export class LeaguesService {
     return this.http.post<CompoTempInterface[]>(`${globalProperties.baseUrl}/leagues/getcompotemp`, body).pipe(
       catchError(this.handleError),
       map((result: any) => {
-        console.log("result", result);
         if (result
             && result.length > 0
             && result[0]['playerId']

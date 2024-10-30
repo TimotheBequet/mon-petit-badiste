@@ -46,7 +46,6 @@ export class ConnexionPageComponent implements AfterViewInit {
     // on appelle laméthode login() et on souscrit à son retour dès qu'elle nous renvoie quelque chose
     this.userService.login(this.frmSignup.value.email.toLowerCase(), this.frmSignup.value.password).subscribe(
       user => {
-        console.log(user);
         // si on a bien récupéré un User et qu'on a bien son Id
         if ((user !== undefined) && (user.id !== undefined)) {
           // on renseigne le user
@@ -54,7 +53,6 @@ export class ConnexionPageComponent implements AfterViewInit {
           // on est redirigés vers la page Home
           this.router.navigate(['/home']);
         } else {
-          console.log('erreur');
           const config = new MatSnackBarConfig();
             config.panelClass = ['error'];
             config.verticalPosition = 'top';
