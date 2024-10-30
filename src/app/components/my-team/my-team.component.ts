@@ -31,8 +31,6 @@ export class MyTeamComponent implements OnInit {
       this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => {
         this.players = players;
         setTimeout(() => {
-          console.log('pouet');
-          // marche pas
           this.newItemEvent.emit(false);
         })
       });
@@ -56,6 +54,7 @@ export class MyTeamComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
           if (result) {
+            this.leagueService.getLeagueInfos(this.league?.id!, this.userService.getUserId()!).subscribe(league => this.league = league);
             this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => this.playersTemp = compoTemp);
             this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => this.players = players);
           }
