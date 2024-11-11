@@ -30,6 +30,7 @@ import { MyTeamComponent } from './components/my-team/my-team.component';
 import { ListPlayersComponent } from './components/list-players/list-players.component';
 import { ButtonBuyComponent } from './components/button-buy/button-buy.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { FilterComponent } from './components/filter/filter.component';
     MyTeamComponent,
     ListPlayersComponent,
     ButtonBuyComponent,
-    FilterComponent
+    FilterComponent,
+    LoaderComponent
   ],
     imports: [
         BrowserModule,

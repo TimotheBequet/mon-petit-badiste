@@ -23,6 +23,7 @@ export class MainPageComponent implements OnInit {
   emojiEyesStars: string = '&#129321;';
   myLeagues: LeaguesInterface[] = new Array<LeaguesInterface>;
   codeLigue: string = '';
+  isLoading: boolean = false;
 
   constructor(public dialog: MatDialog, 
               private leagueService: LeaguesService, 
@@ -30,11 +31,13 @@ export class MainPageComponent implements OnInit {
               private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.leagueService.getMyLeagues(this.userService.getUser().id!).subscribe(
       leagues => {
         if (leagues) {
           this.myLeagues = leagues;
         }
+        this.isLoading = false;
       }
     );
   }
@@ -51,6 +54,7 @@ export class MainPageComponent implements OnInit {
          userId: this.userService.getUser().id!
       };
       if (result != undefined) {
+        this.isLoading = true;
         this.leagueService.joinLeague(joinLeagueInterface).subscribe(
           result => {
             if (result.message != undefined) {
@@ -73,6 +77,7 @@ export class MainPageComponent implements OnInit {
                 this._snackBar.open(result.error, 'Fermer', config);
               }
             }
+            this.isLoading = false;
           }
         )
       }

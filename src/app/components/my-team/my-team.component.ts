@@ -15,9 +15,10 @@ import { LeaguesService } from 'src/app/services/leagues.service';
 })
 export class MyTeamComponent implements OnInit {
   @Input('league') league: LeaguesInterface | null = null;
-  @Output() newItemEvent = new EventEmitter<boolean>();
+  @Output('newItemEvent') newItemEvent = new EventEmitter<boolean>();
   players: PlayerInterface[] | undefined = undefined;
   playersTemp: CompoTempInterface[] | undefined = undefined;
+
   constructor(public playerService: PlayerService, 
     public dialog: MatDialog, 
     public userService: UserService,
@@ -25,18 +26,17 @@ export class MyTeamComponent implements OnInit {
 
   ngOnInit(): void {
     this.newItemEvent.emit(true);
+    
     // TODO récupérer les bons params
     this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => {
       this.playersTemp = compoTemp;
       this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => {
         this.players = players;
-        setTimeout(() => {
-          console.log('pouet');
-          // marche pas
-          this.newItemEvent.emit(false);
-        })
+        console.log('POUEEEET');
+        this.newItemEvent.emit(false);
       });
     });
+
   }
 
   openListPlayers(): void {
