@@ -17,4 +17,5 @@ export interface PlayerInterface {
     sigleClub: string;
     villeClub: string;
     deptClub: string;
+    dejaAchete: boolean;
 }

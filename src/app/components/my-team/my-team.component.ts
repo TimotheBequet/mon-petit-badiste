@@ -15,7 +15,8 @@ import { LeaguesService } from 'src/app/services/leagues.service';
 })
 export class MyTeamComponent implements OnInit {
   @Input('league') league: LeaguesInterface | null = null;
-  @Output('newItemEvent') newItemEvent = new EventEmitter<boolean>();
+  @Input('myPlayersTemp') myPlayersTemp: CompoTempInterface[] | undefined = undefined;
+  @Input('myPlayers') myPlayers: PlayerInterface[] | undefined = undefined;
   players: PlayerInterface[] | undefined = undefined;
   playersTemp: CompoTempInterface[] | undefined = undefined;
 
@@ -25,19 +26,8 @@ export class MyTeamComponent implements OnInit {
     public leagueService: LeaguesService) {}
 
   ngOnInit(): void {
-    this.newItemEvent.emit(true);
-    
-    // TODO récupérer les bons params
-    this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => {
-      this.playersTemp = compoTemp;
-      this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => {
-        this.players = players;
-        setTimeout(() => {
-          this.newItemEvent.emit(false);
-        })
-      });
-    });
-
+    this.playersTemp = this.myPlayersTemp;
+    this.players = this.myPlayers;
   }
 
   openListPlayers(): void {
@@ -49,6 +39,7 @@ export class MyTeamComponent implements OnInit {
           maxWidth: '90vw',
           data: {
             players: players,
+            playersBought: this.playersTemp,
             budget: this.league?.budget,
             idLeague: this.league?.id,
             idUser: this.userService.getUserId()

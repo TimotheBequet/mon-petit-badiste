@@ -19,6 +19,7 @@
           <app-button-buy [prix]="player.prix" 
                           [budget]="budget" 
                           [idPlayer]="player.id" 
+                          [playerDejaAchete]="player.dejaAchete"
                           (montantAchat)="updateMontantAchat($event)"
                           (playersSelected)="updatePlayersSelected($event)">
           </app-button-buy>

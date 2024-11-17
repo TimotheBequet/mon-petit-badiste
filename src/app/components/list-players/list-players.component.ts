@@ -16,6 +16,7 @@ export class ListPlayersComponent {
   btnCaptionValider: string = 'Valider';
   players!: PlayerInterface[];
   savePlayers!: PlayerInterface[];
+  playersBought!: CompoTempInterface[];
   budget: number = 0;
   clubs: PlayerInterface[] = [];
   nameFilter: string | undefined = undefined;
@@ -34,11 +35,20 @@ export class ListPlayersComponent {
   ngOnInit() {
     this.players = this.data.players;
     this.savePlayers = this.players;
+    this.playersBought = this.data.playersBought;
     this.budget = this.data.budget;
     this.idLeague = this.data.idLeague;
     this.idUser = this.data.idUser;
 
     this.clubs = [...new Map(this.players.map(player => [player['sigleClub'], player])).values()];
+
+    for (let player of this.players) {
+      if (this.playersBought.find((p) => p.idPlayer == player.id) != undefined) {
+        player.dejaAchete = true;
+      } else {
+        player.dejaAchete = false;
+      }
+    }
   }
 
   closeModal(): void {

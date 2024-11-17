@@ -2,12 +2,12 @@
   <div class="full-screen blur-background">
     <app-button-retour [link]="link"></app-button-retour>
     <h2 class="league-title">{{league?.name}}</h2>
-    <div *ngIf="!isLoading && !isMyTeamLoading" class="league-recap">
+    <div *ngIf="isNotLoading()" class="league-recap">
       <p>Ligue créée par {{league?.pseudoOwner}}</p>
       <p>Nombre de joueurs : {{league?.nbInLeague}}/{{league?.nbPlayers}}</p>
       <p>Code de la ligue : {{league?.code}}</p>
     </div>
-    <div *ngIf="!isLoading && !isMyTeamLoading" class="league-infos">
+    <div *ngIf="isNotLoading()" class="league-infos">
       <div class="league-infos-classement">
         <table class="league-infos-classement-table">
           <tr class="league-infos-classement-table-header">
@@ -23,11 +23,11 @@
         </table>
       </div>
       <div class="league-infos-equipe">
-        <h3 *ngIf="!isLoading && !isMyTeamLoading" class="league-infos-equipe-titre">Mon équipe</h3>
-        <app-my-team [league]="league" (newItemEvent)="emitMyTeamLoading($event)"></app-my-team>
+        <h3 class="league-infos-equipe-titre">Mon équipe</h3>
+        <app-my-team [league]="league" [myPlayersTemp]="myPlayersTemp" [myPlayers]="myPlayers"></app-my-team>
       </div>
     </div>
-    <div *ngIf="isLoading || isMyTeamLoading">
+    <div *ngIf="!isNotLoading()">
       <app-loader></app-loader>
     </div>
   </div>
