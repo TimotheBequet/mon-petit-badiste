@@ -42,11 +42,13 @@ export class ListPlayersComponent {
 
     this.clubs = [...new Map(this.players.map(player => [player['sigleClub'], player])).values()];
 
-    for (let player of this.players) {
-      if (this.playersBought.find((p) => p.idPlayer == player.id) != undefined) {
-        player.dejaAchete = true;
-      } else {
-        player.dejaAchete = false;
+    if (this.playersBought != undefined) {
+      for (let player of this.players) {
+        if (this.playersBought.find((p) => p.idPlayer == player.id) != undefined) {
+          player.dejaAchete = true;
+        } else {
+          player.dejaAchete = false;
+        }
       }
     }
   }
@@ -157,10 +159,12 @@ export class ListPlayersComponent {
   }
 
   checkBeforeValidate(): string {
-    if (this.playersSelected.filter((p) => p.sexe == 'F').length < 3) {
-      return "Il faut au moins 3 filles.";
-    } else if (this.playersSelected.filter((p) => p.sexe == 'M').length < 3) {
-      return "Il faut au moins 3 garçons.";
+    if (this.playersBought == undefined || (this.playersBought != undefined && this.playersBought.length == 0)) {
+      if (this.playersSelected.filter((p) => p.sexe == 'F').length < 3) {
+        return "Il faut au moins 3 filles.";
+      } else if (this.playersSelected.filter((p) => p.sexe == 'M').length < 3) {
+        return "Il faut au moins 3 garçons.";
+      }
     }
     return '';
   }

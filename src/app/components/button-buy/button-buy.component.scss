@@ -15,6 +15,7 @@
   color: rgb(49, 110, 53);
   background-color: rgb(235, 244, 235);
   border: 1px solid rgb(49, 110, 53);
+  transition: 0.2s all linear;
 
   &:hover {
     background-color: rgb(49, 110, 53);
@@ -26,6 +27,7 @@
   background-color: rgb(78, 99, 219);
   color: white;
   border: 1px solid rgb(78, 99, 219);
+  transition: 0.2s all linear;
 
   &:hover {
     background-color: rgb(41, 68, 219);
