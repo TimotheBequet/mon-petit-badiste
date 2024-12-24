@@ -25,6 +25,7 @@ export class LeaguePageComponent implements OnInit {
   isMyTeamLoading: boolean;
   myPlayers: PlayerInterface[] | undefined = undefined;
   myPlayersTemp: CompoTempInterface[] | undefined = undefined;
+  activeTab: string = 'classement';
 
   constructor(private route: ActivatedRoute, private leagueService: LeaguesService, private userService: UserService, private playerService: PlayerService) {
     this.isLoading = false;
@@ -57,5 +58,9 @@ export class LeaguePageComponent implements OnInit {
 
   isNotLoading(): boolean {
     return !this.isMyTeamLoading && !this.isLoading;
+  }
+
+  setActiveTab(tab: string) {
+    this.activeTab = tab;
   }
 }
