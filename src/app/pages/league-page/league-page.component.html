@@ -7,24 +7,40 @@
       <p>Nombre de joueurs : {{league?.nbInLeague}}/{{league?.nbPlayers}}</p>
       <p>Code de la ligue : {{league?.code}}</p>
     </div>
-    <div *ngIf="isNotLoading()" class="league-infos">
-      <div class="league-infos-classement">
-        <table class="league-infos-classement-table">
-          <tr class="league-infos-classement-table-header">
-            <th class="league-infos-classement-table-header-classement">Classement</th>
-            <th>Pseudo</th>
-            <th class="league-infos-classement-table-header-score">Score</th>
-          </tr>
-          <tr *ngFor="let row of classementLeague" class="league-infos-classement-table-rows">
-            <td class="league-infos-classement-table-rows-line">{{row.classement}}</td>
-            <td class="league-infos-classement-table-rows-line">{{row.pseudo}}</td>
-            <td class="league-infos-classement-table-rows-line">{{row.score}}</td>
-          </tr>
-        </table>
+    <div class="tabs">
+      <button [class.active]="activeTab === 'classement'" (click)="setActiveTab('classement')">Classement</button>
+      <button [class.active]="activeTab === 'equipe'" (click)="setActiveTab('equipe')">Mon équipe</button>
+      <button [class.active]="activeTab === 'infos'" (click)="setActiveTab('infos')">Infos</button>
+    </div>
+    <div *ngIf="activeTab === 'classement'" class="tab-content">
+      <div *ngIf="isNotLoading()" class="league-infos">
+        <div class="league-infos-classement">
+          <table class="league-infos-classement-table">
+            <tr class="league-infos-classement-table-header">
+              <th class="league-infos-classement-table-header-classement">Classement</th>
+              <th>Pseudo</th>
+              <th class="league-infos-classement-table-header-score">Score</th>
+            </tr>
+            <tr *ngFor="let row of classementLeague" class="league-infos-classement-table-rows">
+              <td class="league-infos-classement-table-rows-line">{{row.classement}}</td>
+              <td class="league-infos-classement-table-rows-line">{{row.pseudo}}</td>
+              <td class="league-infos-classement-table-rows-line">{{row.score}}</td>
+            </tr>
+          </table>
+        </div>
       </div>
-      <div class="league-infos-equipe">
-        <h3 class="league-infos-equipe-titre">Mon équipe</h3>
-        <app-my-team [league]="league" [myPlayersTemp]="myPlayersTemp" [myPlayers]="myPlayers"></app-my-team>
+    </div>
+    <div *ngIf="activeTab === 'equipe'" class="tab-content">
+      <div *ngIf="isNotLoading()" class="league-infos">
+        <div class="league-infos-equipe">
+          <h3 class="league-infos-equipe-titre">Mon équipe</h3>
+          <app-my-team [league]="league" [myPlayersTemp]="myPlayersTemp" [myPlayers]="myPlayers"></app-my-team>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeTab === 'infos'" class="tab-content">
+      <div *ngIf="isNotLoading()" class="league-infos">
+        <!-- Ajoutez ici le contenu des infos supplémentaires -->
       </div>
     </div>
     <div *ngIf="!isNotLoading()">
