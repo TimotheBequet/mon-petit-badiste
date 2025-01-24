@@ -46,7 +46,7 @@ body {
 html {
   color-scheme: light dark;
   @include mat.theme((
-    color: mat.$green-palette,
+    color: mat.$m2-green-palette,
     typography: 'Roboto, sans-serif',
     density: 0
   ));
