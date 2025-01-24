@@ -6,7 +6,7 @@
         <div class="connexion-page-form-inputs">
             <!-- pseudo -->
             <div class="connexion-page-form-input">
-              <mat-form-field>
+              <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input #email type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Ex : jay.delachatt@mpb.com">
                 <mat-error *ngIf="frmSignup.hasError('required', 'email')">La saisie de l'email est <strong>obligatoire !</strong></mat-error>
@@ -15,7 +15,7 @@
   
             <!-- mot de passe -->
             <div class="connexion-page-form-input">
-              <mat-form-field>
+              <mat-form-field appearance="outline">
                 <mat-label>Mot de Passe</mat-label>
                 <input type="password" matInput formControlName="password" [errorStateMatcher]="matcher" placeholder="Ton mot de passe super sécure">
                 <mat-error *ngIf="frmSignup.hasError('required', 'password')">La saisie du mot de passe est <strong>obligatoire !</strong></mat-error>
