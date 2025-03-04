@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-@use '@angular/material' as mat;
-
 body {
   background-image: url("./assets/images/badminton-cover.jpg");
   background-size: cover;
@@ -41,15 +39,6 @@ body {
       width: 100%;
     }
   }
-}
-
-html {
-  color-scheme: light dark;
-  @include mat.theme((
-    color: mat.$m2-green-palette,
-    typography: 'Roboto, sans-serif',
-    density: 0
-  ));
 }
 
 .blur-background {
