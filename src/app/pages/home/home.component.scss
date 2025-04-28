@@ -37,8 +37,80 @@
         }
       }
 
-      &-button:first-of-type {
-          margin-bottom: 2rem;
+      &-button {
+        &:nth-child(0) {
+          margin-left: 1rem;
+        }
+        &:nth-child(1) {
+          margin-right: 1rem;
+        }
+      }
+    }
+
+    &-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    &-info {
+      width: 40%;
+      margin-bottom: 50px;
+      padding: 10px 50px;
+      display: flex;
+      justify-content: center;
+
+      &-container {
+        //border: 1px solid black;
+        width: 80%;
+        height: 200px;
+        border-radius: 20px;
+        display: flex;
+        overflow: hidden;
+
+        &-filter {
+          width: 130%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(0, 0, 0, 0.459);
+          padding: 0 50px;
+        }
+      }
+
+      &-title {
+        color: white;
+        font-size: 2rem;
+      }
+
+      &-text {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+
+      &:nth-child(1) .home-card-info-container {
+        background-image: url('../../../assets/images/computer.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+      &:nth-child(2) .home-card-info-container {
+        background-image: url('../../../assets/images/achat.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+      &:nth-child(3) .home-card-info-container {
+        background-image: url('../../../assets/images/compo.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+      &:nth-child(4) .home-card-info-container {
+        background-image: url('../../../assets/images/winner.jpg');
+        background-size: cover;
+        background-position: center;
       }
     }
   }

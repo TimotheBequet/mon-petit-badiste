@@ -2,9 +2,44 @@
   <div *ngIf="!userLogged" class="home-card blur-background">
     <div class="home-card-content">
       <p class="home-card-content-title">Bienvenue sur Mon Petit Badiste, l'application qui te permet de composer ton équipe d'interclubs de Badminton.</p>
-      <p class="home-card-content-text">Crées ou rejoins une compétition, achètes tes joueurs, fais ta compo d'équipe et affrontes tes potes !</p>
-      <a routerLink="/connexion" class="home-card-content-button"><app-button-move [buttonCaption]="connexion" [class]="'connexion'"></app-button-move></a>
-      <a routerLink="/register" class="home-card-content-button"><app-button-move [buttonCaption]="inscription" [class]="'inscription'"></app-button-move></a>
+      <div class="home-card-content-button-container">
+        <a routerLink="/connexion" class="home-card-content-button"><app-button-move [buttonCaption]="connexion" [class]="'connexion'"></app-button-move></a>
+        <a routerLink="/register" class="home-card-content-button"><app-button-move [buttonCaption]="inscription" [class]="'inscription'"></app-button-move></a>
+      </div>
+      <div class="home-card-container">
+        <div class="home-card-info">
+          <div class="home-card-info-container">
+            <div class="home-card-info-container-filter">
+              <h2 class="home-card-info-title">Crées ou rejoins une ligue</h2>
+              <p class="home-card-info-text">Crées ta propre ligue, ou rejoins-en une avec un code</p>
+            </div>
+          </div>
+        </div>
+        <div class="home-card-info">
+          <div class="home-card-info-container">
+            <div class="home-card-info-container-filter">
+              <h2 class="home-card-info-title">Achètes tes joueurs</h2>
+              <p class="home-card-info-text">Fais un mercato digne des plus grands dirigeants sportifs.</p>
+            </div>
+          </div>
+        </div>
+        <div class="home-card-info">
+          <div class="home-card-info-container">
+            <div class="home-card-info-container-filter">
+              <h2 class="home-card-info-title">Fais ta compo</h2>
+              <p class="home-card-info-text">Montres tous tes talents de stratège en alignant une équipe taillée pour gagner</p>
+            </div>
+          </div>
+        </div>
+        <div class="home-card-info">
+          <div class="home-card-info-container">
+            <div class="home-card-info-container-filter">
+              <h2 class="home-card-info-title">A toi la victoire !</h2>
+              <p class="home-card-info-text">Une fois la rencontre gagnée, n'oublies pas de chambrer tes potes... mais attention au retour de karma !</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div *ngIf="userLogged" class="div-all-screen">
