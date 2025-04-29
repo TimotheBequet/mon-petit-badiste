@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  background-color: rgba(87, 126, 84, 0.477);
 
   .dialog-title {
     text-align: center;
@@ -50,11 +51,11 @@
       }
 
       .man {
-        color: blue;
+        color: rgb(28, 28, 159);
       }
 
       .woman {
-        color: rgb(210, 30, 81);
+        color: rgb(126, 19, 50);
       }
 
       &-name {
