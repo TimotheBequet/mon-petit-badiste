@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -32,44 +32,37 @@ import { ButtonBuyComponent } from './components/button-buy/button-buy.component
 import { FilterComponent } from './components/filter/filter.component';
 import { LoaderComponent } from './components/loader/loader.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    ButtonMoveComponent,
-    RegisterPageComponent,
-    ConnexionPageComponent,
-    MainPageComponent,
-    ButtonRetourComponent,
-    CreateLeagueComponent,
-    LeagueCardComponent,
-    PopupJoinLeagueComponent,
-    LeaguePageComponent,
-    MenuUserComponent,
-    MyTeamComponent,
-    ListPlayersComponent,
-    ButtonBuyComponent,
-    FilterComponent,
-    LoaderComponent
-  ],
-    imports: [
-        BrowserModule,
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        HeaderComponent,
+        FooterComponent,
+        ButtonMoveComponent,
+        RegisterPageComponent,
+        ConnexionPageComponent,
+        MainPageComponent,
+        ButtonRetourComponent,
+        CreateLeagueComponent,
+        LeagueCardComponent,
+        PopupJoinLeagueComponent,
+        LeaguePageComponent,
+        MenuUserComponent,
+        MyTeamComponent,
+        ListPlayersComponent,
+        ButtonBuyComponent,
+        FilterComponent,
+        LoaderComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatFormFieldModule,
         MatInputModule,
-        HttpClientModule,
         MatSnackBarModule,
         MatIconModule,
         MatSelectModule,
         MatTooltipModule,
         MatDialogModule,
-        FormsModule
-    ],
-  providers: [MatSnackBarModule],
-  bootstrap: [AppComponent]
-})
+        FormsModule], providers: [MatSnackBarModule, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

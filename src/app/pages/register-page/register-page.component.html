@@ -7,7 +7,7 @@
         <section class="left register-page-form-section">
           <!-- pseudo -->
           <div class="register-page-form-input">
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <mat-label>Pseudo</mat-label>
               <input type="text" matInput formControlName="pseudo" [errorStateMatcher]="matcher" placeholder="Ex : Jay Delachatt">
               <mat-error *ngIf="frmSignup.hasError('minlength', 'pseudo') && !frmSignup.hasError('required', 'pseudo')">Ton pseudo doit contenir <strong>au moins 3 caractères</strong></mat-error>
@@ -16,7 +16,7 @@
           </div>
           <!-- email -->
           <div class="register-page-form-input">
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <mat-label>Email</mat-label>
               <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Ex : monemail@gmail.com">
               <mat-error *ngIf="frmSignup.hasError('email', 'email') && !frmSignup.hasError('required', 'email')">Entre une adresse email valide</mat-error>
@@ -28,7 +28,7 @@
         <section class="left register-page-form-section">
           <!-- mot de passe -->
           <div class="register-page-form-input">
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <mat-label>Mot de Passe</mat-label>
               <input type="password" matInput formControlName="password" [errorStateMatcher]="matcher" placeholder="Ton mot de passe super sécure">
               <mat-error *ngIf="frmSignup.hasError('hasNumber', 'password') && !frmSignup.hasError('required', 'password')">Ton mot de passe doit contenir au moins <strong>1 chiffre</strong></mat-error>
@@ -40,7 +40,7 @@
           </div>
           <!-- confirmation du mot de passe -->
           <div class="register-page-form-input">
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <mat-label>Confirmation du mot de passe</mat-label>
               <input type="password" matInput formControlName="confirmPassword" [errorStateMatcher]="matcher" placeholder="Allez, transformes l'essai champion">
               <mat-error *ngIf="frmSignup.hasError('NoPassswordMatch', 'confirmPassword') && !frmSignup.hasError('required', 'confirmPassword')">Les mots de passe doivent correspondre !</mat-error>
