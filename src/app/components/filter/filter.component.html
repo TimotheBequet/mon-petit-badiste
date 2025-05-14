@@ -1,15 +1,15 @@
-<mat-form-field *ngIf="type == 'name'">
+<mat-form-field *ngIf="type == 'name'" appearance="outline">
   <mat-label>Nom</mat-label>
   <input #name matInput type="text" (keyup)="setFilterName()">
 </mat-form-field>
-<mat-form-field *ngIf="type == 'clubs'">
+<mat-form-field *ngIf="type == 'clubs'" appearance="outline">
   <mat-label>Club</mat-label>
   <mat-select [(value)]="selClub" (valueChange)="setSelectionClub()">
     <mat-option>Tous</mat-option>
     <mat-option *ngFor="let item of listClubs" value="{{item.idClub}}">{{item.sigleClub}} ({{item.deptClub}})</mat-option>
   </mat-select>
 </mat-form-field>
-<mat-form-field *ngIf="type == 'gender'">
+<mat-form-field *ngIf="type == 'gender'" appearance="outline">
   <mat-label>Sexe</mat-label>
   <mat-select [(value)]="selGender" (valueChange)="setSelectionGender()">
     <mat-option>Tous</mat-option>
@@ -17,7 +17,7 @@
     <mat-option value="M">Homme</mat-option>
   </mat-select>
 </mat-form-field>
-<mat-form-field *ngIf="type == 'spe'">
+<mat-form-field *ngIf="type == 'spe'" appearance="outline">
   <mat-label>Spécialité</mat-label>
   <mat-select [(value)]="selSpe" (valueChange)="setSpeciality()">
     <mat-option>Tous</mat-option>
