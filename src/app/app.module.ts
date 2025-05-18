@@ -31,6 +31,8 @@ import { ListPlayersComponent } from './components/list-players/list-players.com
 import { ButtonBuyComponent } from './components/button-buy/button-buy.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -64,5 +66,7 @@ import { LoaderComponent } from './components/loader/loader.component';
         MatSelectModule,
         MatTooltipModule,
         MatDialogModule,
+        MatTableModule,
+        MatSortModule,
         FormsModule], providers: [MatSnackBarModule, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
