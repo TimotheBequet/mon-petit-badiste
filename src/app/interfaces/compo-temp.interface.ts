@@ -6,4 +6,8 @@ export interface CompoTempInterface {
     nomPlayer: string;
     prixPlayer: number;
     datePurchase: string | null;
+    classement: string;
+    club: string;
+    age: number;
+    sexe: string;
 }

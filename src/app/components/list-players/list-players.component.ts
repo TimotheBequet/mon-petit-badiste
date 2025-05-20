@@ -40,7 +40,7 @@ export class ListPlayersComponent {
     this.idLeague = this.data.idLeague;
     this.idUser = this.data.idUser;
 
-    this.clubs = [...new Map(this.players.map(player => [player['sigleClub'], player])).values()];
+    this.clubs = [...new Map(this.players.map(player => [player['sigle'], player])).values()];
 
     if (this.playersBought != undefined) {
       for (let player of this.players) {
@@ -159,13 +159,13 @@ export class ListPlayersComponent {
   }
 
   checkBeforeValidate(): string {
-    if (this.playersBought == undefined || (this.playersBought != undefined && this.playersBought.length == 0)) {
+    /*if (this.playersBought == undefined || (this.playersBought != undefined && this.playersBought.length == 0)) {
       if (this.playersSelected.filter((p) => p.sexe == 'F').length < 3) {
         return "Il faut au moins 3 filles.";
       } else if (this.playersSelected.filter((p) => p.sexe == 'M').length < 3) {
         return "Il faut au moins 3 garçons.";
       }
-    }
+    }*/
     return '';
   }
 }

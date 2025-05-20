@@ -12,7 +12,7 @@
       <tr *ngFor="let player of players" [ngClass]="player.sexe == 'M' ? 'man' : 'woman'">
         <td class="list-players-name">{{player.firstName}} {{player.lastName}} ({{player.pays}})</td>
         <td>{{player.age}} ans</td>
-        <td>({{player.sigleClub}} {{player.deptClub}})</td>
+        <td>{{player.sigle}} {{player.dept}}</td>
         <td>{{player.classementSimple}}/{{player.classementDouble}}/{{player.classementMixte}}</td>
         <td>{{player.prix}} €</td>
         <td class="list-players-add">

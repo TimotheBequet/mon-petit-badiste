@@ -6,7 +6,7 @@
   <mat-label>Club</mat-label>
   <mat-select [(value)]="selClub" (valueChange)="setSelectionClub()">
     <mat-option>Tous</mat-option>
-    <mat-option *ngFor="let item of listClubs" value="{{item.idClub}}">{{item.sigleClub}} ({{item.deptClub}})</mat-option>
+    <mat-option *ngFor="let item of listClubs" value="{{item.idClub}}">{{item.sigle}} ({{item.dept}})</mat-option>
   </mat-select>
 </mat-form-field>
 <mat-form-field *ngIf="type == 'gender'" appearance="outline">

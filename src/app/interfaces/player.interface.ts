@@ -8,14 +8,15 @@ export interface PlayerInterface {
     classementSimple: string
     classementDouble: string;
     classementMixte: string;
+    tousClassements: string;
     isSpecialisteSimple: string;
     isSpecialisteDouble: string;
     isSpecialisteMixte: string;
     prix: number;
     isBlesse: string;
     idClub: number;
-    sigleClub: string;
-    villeClub: string;
-    deptClub: string;
+    sigle: string;
+    ville: string;
+    dept: string;
     dejaAchete: boolean;
 }
