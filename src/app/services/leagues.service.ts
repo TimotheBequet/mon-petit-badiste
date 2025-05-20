@@ -153,7 +153,11 @@ export class LeaguesService {
                 prenomPlayer: result[i]['firstName'],
                 nomPlayer: result[i]['lastName'],
                 prixPlayer: result[i]['prixPlayer'],
-                datePurchase: result[i]['datePurchase']
+                datePurchase: result[i]['datePurchase'],
+                classement: result[i]['classementSimple'] + '/' + result[i]['classementDouble'] + '/' + result[i]['classementMixte'],
+                club: result[i]['sigle'] + ' ' + result[i]['dept'],
+                age: result[i]['age'],
+                sexe: result[i]['sexe']
               }
             );
           }

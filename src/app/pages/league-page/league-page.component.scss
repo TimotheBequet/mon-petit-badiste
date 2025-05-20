@@ -26,65 +26,16 @@
   }
 
   .league-infos {
-    padding: 2rem;
     display: flex;
     justify-content: center;
     width: 100%;
 
     &-classement {
-      width: 80%;
-      &-table {
-        width: 100%;
-        border-collapse: collapse;
-
-        &-header, &-rows {
-          height: 35px;
-        }
-
-        &-header {
-          background-color: #6b9a68;
-
-          th:first-child {
-            border-top-left-radius: 7px;
-          }
-          th:last-child {
-            border-top-right-radius: 7px;
-          }
-
-          &-classement {
-              width: 30%;
-          }
-
-          &-score {
-            width: 25%;
-          }
-        }
-
-        &-rows {
-          &:nth-child(odd) {
-            background-color: rgba(122, 143, 112, 0.555);
-          }
-          &:nth-child(even) {
-            background-color: rgba(122, 143, 112, 0.38);
-          }
-          &:last-child {
-            td:first-child {
-              border-bottom-left-radius: 7px;
-            }
-            td:last-child {
-              border-bottom-right-radius: 7px;
-            }
-          }
-          
-          &-line {
-            text-align: center;
-          }
-        }
-      }
+      width: 90%;
     }
 
     &-equipe {
-      width: 80%;
+      width: 90%;
 
       &-titre {
         font-size: 1.5rem;
@@ -102,7 +53,7 @@
 
   button {
     font-family: 'Raleway', sans-serif;
-    font-size: 1rem;
+    font-size: 1.3rem;
     flex-grow: 1;
     padding: 10px 20px;
     border: none;
@@ -129,5 +80,5 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: auto;
 }

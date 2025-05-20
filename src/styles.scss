@@ -103,3 +103,58 @@ body {
 .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
   border-bottom-color: #3c583a !important;
 }
+
+.mat-mdc-header-row {
+  background-color: #6b9a68 !important;
+  height: 40px !important;
+
+  th:first-child {
+    border-top-left-radius: 7px;
+  }
+  th:last-child {
+    border-top-right-radius: 7px;
+  }
+}
+
+.mat-mdc-row {
+  height: 35px !important;
+
+  &:last-child {
+    td:first-child {
+      border-bottom-left-radius: 7px;
+    }
+    td:last-child {
+      border-bottom-right-radius: 7px;
+    }
+  }
+}
+
+.mat-mdc-row:nth-child(even) {
+  background-color: rgba(122, 143, 112, 0.38) !important;
+}
+
+.mat-mdc-row:nth-child(odd) {
+  background-color: rgba(122, 143, 112, 0.555) !important;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: rgb(137, 137, 137);
+}
+
+.mat-mdc-table {
+  background-color: transparent !important;
+}
+
+.mat-mdc-header-cell, .mat-mdc-cell {
+  font-family: "Raleway", sans-serif !important;
+}
+
+.mat-mdc-header-cell {
+  font-weight: bold !important;
+}

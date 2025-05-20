@@ -1,33 +1,28 @@
 <div class="my-team-container">
-    <div *ngIf="playersTemp != undefined" class="my-team-list">
-        <h3>En cours d'achat :</h3>
-        <div class="league-infos-classement">
-            <table class="league-infos-classement-table">
-              <tr class="league-infos-classement-table-header">
-                <th class="league-infos-classement-table-header-classement">Joueur/Joueuse</th>
-                <th class="league-infos-classement-table-header-score">Prix</th>
-              </tr>
-              <tr *ngFor="let player of playersTemp" class="league-infos-classement-table-rows">
-                <td class="league-infos-classement-table-rows-line">{{player.nomPlayer}} {{player.prenomPlayer}}</td>
-                <td class="league-infos-classement-table-rows-line">{{player.prixPlayer}} €</td>
-              </tr>
-            </table>
-          </div>
-    </div>
-    <div *ngIf="players != undefined" class="my-team-list">
-        <table mat-table [dataSource]="dataSource!" matSort class="mat-elevation-z8">
-          @for (column of columns; track column) {
-            <ng-container [matColumnDef]="column.columnDef">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column.header}}</th>
-              <td mat-cell *matCellDef="let row">{{column.cell(row)}}</td>
-            </ng-container>
-          }
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </div>
-    <div *ngIf="players == undefined && playersTemp == undefined" class="my-team-add">
-        <p>Tu n'as pas de joueurs, cliques sur le bouton ci-dessous pour en acheter !</p>
-    </div>
-    <button (click)="openListPlayers()">Etoffer ma team</button>
+  <div *ngIf="playersTemp != undefined" class="my-team-list">
+    <h3>Enchères placées</h3>
+    <table mat-table [dataSource]="dataSourceTemp!" #sortTemp="matSort" matSort matSortActive="prixPlayer" matSortDisableClear matSortDirection="desc">
+      <ng-container [matColumnDef]="col.columnDef" *ngFor="let col of columnsTemp">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{col.header}}</th>
+        <td mat-cell *matCellDef="let row">{{col.cell(row)}}</td>
+      </ng-container>
+      <tr mat-header-row class="header-purchase" *matHeaderRowDef="displayedColumnsTemp;"></tr>
+      <tr mat-row class="row-purchase" *matRowDef="let row; columns: displayedColumnsTemp;"></tr>
+    </table>
+  </div>
+  <div *ngIf="players != undefined" class="my-team-list">
+    <h3>Effectif</h3>
+    <table mat-table [dataSource]="dataSourceTeam!" #sortTeam="matSort" matSort matSortActive="sexe" matSortDisableClear matSortDirection="asc">
+      <ng-container [matColumnDef]="column.columnDef" *ngFor="let column of columnsTeam">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column.header}}</th>
+        <td mat-cell *matCellDef="let row">{{column.cell(row)}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsTeam; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsTeam;"></tr>
+    </table>
+  </div>
+  <div *ngIf="players == undefined && playersTemp == undefined" class="my-team-add">
+    <p>Tu n'as pas de joueurs, cliques sur le bouton ci-dessous pour en acheter !</p>
+  </div>
+  <button (click)="openListPlayers()">Etoffer ma team</button>
 </div>

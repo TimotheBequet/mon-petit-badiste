@@ -7,7 +7,7 @@ import { LeaguesInterface } from 'src/app/interfaces/leagues.interface';
 import { UserService } from 'src/app/services/user.service';
 import { CompoTempInterface } from 'src/app/interfaces/compo-temp.interface';
 import { LeaguesService } from 'src/app/services/leagues.service';
-import {MatSort, Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
@@ -17,14 +17,18 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class MyTeamComponent implements OnInit, AfterViewInit {
   @Input('league') league: LeaguesInterface | null = null;
-  @Input('myPlayersTemp') myPlayersTemp: CompoTempInterface[] | undefined = undefined;
+  @Input('myPlayersTemp') myPlayersTemp: CompoTempInterface[] = [];
   @Input('myPlayers') myPlayers: PlayerInterface[] = [];
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('sortTemp') sortTemp!: MatSort;
+  @ViewChild('sortTeam') sortTeam!: MatSort;
   players: PlayerInterface[] = [];
-  playersTemp: CompoTempInterface[] | undefined = undefined;
-  columns: Array<any> = [];
-  dataSource!: MatTableDataSource<PlayerInterface>;
-  displayedColumns!: Array<string>;
+  playersTemp: CompoTempInterface[] = [];
+  columnsTeam: Array<any> = [];
+  dataSourceTeam!: MatTableDataSource<PlayerInterface>;
+  displayedColumnsTeam!: Array<string>;
+  columnsTemp: Array<any> = [];
+  dataSourceTemp!: MatTableDataSource<CompoTempInterface>;
+  displayedColumnsTemp!: Array<string>;
 
   constructor(public playerService: PlayerService, 
     public dialog: MatDialog, 
@@ -33,14 +37,20 @@ export class MyTeamComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.playersTemp = this.myPlayersTemp;
+    if (this.playersTemp.length) {
+      console.log("playersTemp : ", this.playersTemp);
+      this.buildColumnsCompoTemp();
+    }
+
     this.players = this.myPlayers;
     if (this.players.length) {
-      this.buildColumsPlayers();
+      this.buildColumnsPlayers();
     }
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
+    this.dataSourceTeam.sort = this.sortTeam;
+    this.dataSourceTemp.sort = this.sortTemp;
   }
 
   openListPlayers(): void {
@@ -62,11 +72,16 @@ export class MyTeamComponent implements OnInit, AfterViewInit {
         dialogRef.afterClosed().subscribe(result => {
           if (result) {
             this.leagueService.getLeagueInfos(this.league?.id!, this.userService.getUserId()!).subscribe(league => this.league = league);
-            this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => this.playersTemp = compoTemp);
+            this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => {
+              this.playersTemp = compoTemp!;
+              if (this.playersTemp != null && this.playersTemp.length) {
+                this.buildColumnsCompoTemp();
+              }
+            });
             this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => {
               this.players = players!;
               if (this.players != null && this.players.length) {
-                this.buildColumsPlayers();
+                this.buildColumnsPlayers();
               }
             });
           }
@@ -75,8 +90,8 @@ export class MyTeamComponent implements OnInit, AfterViewInit {
     });
   }
 
-  buildColumsPlayers(): void {
-    this.columns = [
+  buildColumnsPlayers(): void {
+    this.columnsTeam = [
       {
         columnDef: 'lastName',
         header: 'Nom',
@@ -96,10 +111,63 @@ export class MyTeamComponent implements OnInit, AfterViewInit {
         columnDef: 'age',
         header: 'Âge',
         cell: (player: PlayerInterface) => `${player.age}`
+      },
+      {
+        columnDef: 'sigle',
+        header: 'Club',
+        cell: (player: PlayerInterface) => `${player.sigle} ${player.dept}`
+      },
+      {
+        columnDef: 'tousClassements',
+        header: 'Classement',
+        cell: (player: PlayerInterface) => `${player.tousClassements}`
       }
     ];
 
-    this.dataSource = new MatTableDataSource(this.players);
-    this.displayedColumns = this.columns.map(c => c.columnDef);
+    this.dataSourceTeam = new MatTableDataSource(this.players);
+    this.displayedColumnsTeam = this.columnsTeam.map(c => c.columnDef);
+  }
+
+  buildColumnsCompoTemp(): void {
+    this.columnsTemp = [
+      {
+        columnDef: 'nomPlayer',
+        header: 'Nom',
+        cell: (temp: CompoTempInterface) => `${temp.nomPlayer}`
+      },
+      {
+        columnDef: 'prenomPlayer',
+        header: 'Prénom',
+        cell: (temp: CompoTempInterface) => `${temp.prenomPlayer}`
+      },
+      {
+        columnDef: 'sexe',
+        header: 'H/F',
+        cell: (temp: CompoTempInterface) => `${temp.sexe}`
+      },
+      {
+        columnDef: 'age',
+        header: 'Âge',
+        cell: (temp: CompoTempInterface) => `${temp.age}`
+      },
+      {
+        columnDef: 'club',
+        header: 'Club',
+        cell: (temp: CompoTempInterface) => `${temp.club}`
+      },
+      {
+        columnDef: 'classement',
+        header: 'Classement',
+        cell: (temp: CompoTempInterface) => `${temp.classement}`
+      },
+      {
+        columnDef: 'prixPlayer',
+        header: 'Prix',
+        cell: (temp: CompoTempInterface) => `${temp.prixPlayer}`
+      }
+    ];
+
+    this.dataSourceTemp = new MatTableDataSource(this.playersTemp);
+    this.displayedColumnsTemp = this.columnsTemp.map(c => c.columnDef);
   }
 }

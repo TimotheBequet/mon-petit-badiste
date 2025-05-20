@@ -9,23 +9,21 @@
     </div>
     <div class="tabs">
       <button [class.active]="activeTab === 'classement'" (click)="setActiveTab('classement')">Classement</button>
-      <button [class.active]="activeTab === 'equipe'" (click)="setActiveTab('equipe')">Mon équipe</button>
+      <button [class.active]="activeTab === 'equipe'" (click)="setActiveTab('equipe')">Mon effectif</button>
       <button [class.active]="activeTab === 'infos'" (click)="setActiveTab('infos')">Infos</button>
     </div>
     <div *ngIf="activeTab === 'classement'" class="tab-content">
       <div *ngIf="isNotLoading()" class="league-infos">
         <div class="league-infos-classement">
-          <table class="league-infos-classement-table">
-            <tr class="league-infos-classement-table-header">
-              <th class="league-infos-classement-table-header-classement">Classement</th>
-              <th>Pseudo</th>
-              <th class="league-infos-classement-table-header-score">Score</th>
-            </tr>
-            <tr *ngFor="let row of classementLeague" class="league-infos-classement-table-rows">
-              <td class="league-infos-classement-table-rows-line">{{row.classement}}</td>
-              <td class="league-infos-classement-table-rows-line">{{row.pseudo}}</td>
-              <td class="league-infos-classement-table-rows-line">{{row.score}}</td>
-            </tr>
+          <table mat-table [dataSource]="dataSource">
+            @for (column of columns; track column) {
+              <ng-container [matColumnDef]="column.columnDef">
+                <th mat-header-cell *matHeaderCellDef>{{column.header}}</th>
+                <td mat-cell *matCellDef="let row">{{column.cell(row)}}</td>
+              </ng-container>
+            }
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </div>
       </div>
@@ -33,8 +31,7 @@
     <div *ngIf="activeTab === 'equipe'" class="tab-content">
       <div *ngIf="isNotLoading()" class="league-infos">
         <div class="league-infos-equipe">
-          <h3 class="league-infos-equipe-titre">Mon effectif</h3>
-          <app-my-team [league]="league" [myPlayersTemp]="myPlayersTemp" [myPlayers]="myPlayers!"></app-my-team>
+          <app-my-team [league]="league" [myPlayersTemp]="myPlayersTemp!" [myPlayers]="myPlayers!"></app-my-team>
         </div>
       </div>
     </div>
