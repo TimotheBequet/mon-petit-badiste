@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { UserInterface } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
@@ -9,13 +9,19 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  isUserLogged = false;
-  userName = '';
+  isUserLogged: boolean = false;
+  userName: string = '';
   user: UserInterface | null = null;
-
   private readonly destroy$ = new Subject<void>();
-
-  constructor(private readonly userService: UserService) {}
+  maxNavHeight: number = 112;
+  minNavHeight: number = 50;
+  navHeight: number = this.maxNavHeight;
+  scrollStart: number = 0;
+  scrollEnd: number = 200;
+  maxFontSize: number = 48;
+  minFontSize: number = 21;
+  fontSize: number = this.maxFontSize;
+  constructor(private userService: UserService){}
 
   ngOnInit(): void {
     this.userService.user$
@@ -30,5 +36,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const scrollY: number = window.scrollY || document.documentElement.scrollTop;
+    if (scrollY <= this.scrollStart) {
+      this.navHeight = this.maxNavHeight;
+      this.fontSize = this.maxFontSize;
+    } else if (scrollY >= this.scrollEnd) {
+      this.navHeight = this.minNavHeight;
+      this.fontSize = this.minFontSize;
+    } else {
+      const progress: number = (scrollY - this.scrollStart) / (this.scrollEnd - this.scrollStart);
+      this.navHeight = this.maxNavHeight - progress * (this.maxNavHeight - this.minNavHeight);
+      this.fontSize = this.navHeight * 0.428;
+    }
   }
 }
