@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, filter } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 import { UserInterface } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -21,9 +22,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
   maxFontSize: number = 48;
   minFontSize: number = 21;
   fontSize: number = this.maxFontSize;
-  constructor(private userService: UserService){}
+  innerWidth: number = 0;
+  animateHeader: boolean = false;
+
+  constructor(private userService: UserService, public router: Router) {
+    router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((e) => {
+      this.animateHeader = (e.url == '/home' && !this.userService.isUserLogged());  
+    });
+  }
 
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth <= 500) {
+      this.maxFontSize = 35;
+      this.minFontSize = 15;
+      this.fontSize = this.maxFontSize;
+    }
     this.userService.user$
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
@@ -38,19 +52,38 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  @HostListener('window:resize', [])
+  onResize(): void {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth <= 500) {
+      this.maxFontSize = 35;
+      this.minFontSize = 15;
+      this.fontSize = this.maxFontSize;
+    } else {
+      this.maxFontSize = 48;
+      this.minFontSize = 21;
+      this.fontSize = this.maxFontSize;
+    }
+  }
+
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
-    const scrollY: number = window.scrollY || document.documentElement.scrollTop;
-    if (scrollY <= this.scrollStart) {
-      this.navHeight = this.maxNavHeight;
-      this.fontSize = this.maxFontSize;
-    } else if (scrollY >= this.scrollEnd) {
-      this.navHeight = this.minNavHeight;
-      this.fontSize = this.minFontSize;
-    } else {
-      const progress: number = (scrollY - this.scrollStart) / (this.scrollEnd - this.scrollStart);
-      this.navHeight = this.maxNavHeight - progress * (this.maxNavHeight - this.minNavHeight);
-      this.fontSize = this.navHeight * 0.428;
+    if (this.animateHeader) {
+      const scrollY: number = window.scrollY || document.documentElement.scrollTop;
+      if (scrollY <= this.scrollStart) {
+        this.navHeight = this.maxNavHeight;
+        this.fontSize = this.maxFontSize;
+      } else if (scrollY >= this.scrollEnd) {
+        this.navHeight = this.minNavHeight;
+        this.fontSize = this.minFontSize;
+      } else {
+        const progress: number = (scrollY - this.scrollStart) / (this.scrollEnd - this.scrollStart);
+        this.navHeight = this.maxNavHeight - progress * (this.maxNavHeight - this.minNavHeight);
+        this.fontSize = this.navHeight * 0.428;
+        if (this.innerWidth <= 500) {
+          this.fontSize = this.fontSize * 0.73;
+        }
+      }
     }
   }
 }

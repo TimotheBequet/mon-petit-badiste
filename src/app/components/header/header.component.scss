@@ -16,7 +16,7 @@
       margin: 10px 0;
 
       @media (max-width: 500px) {
-        font-size: 2.3rem;
+        font-size: 2rem;
         text-align: center;
         width: 75%;
       }
@@ -25,7 +25,7 @@
         text-decoration: none;
         color: #282936;
         text-shadow: 1px 1px 5px white;
-        transition: all 0.1s linear;
+        transition: text-shadow 0.1s linear;
 
         &:hover {
           text-shadow: 1px 1px 10px white;
