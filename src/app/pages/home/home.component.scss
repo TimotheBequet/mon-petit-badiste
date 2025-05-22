@@ -8,7 +8,6 @@
     &-content {
       display: flex;
       flex-direction: column;
-      padding: 5rem;
       text-align: center;
       align-items: center;
 
@@ -20,7 +19,7 @@
         font-size: 2.5rem;
         font-weight: bold;
         line-height: 2.2rem;
-        margin-bottom: 1.5rem;
+        margin: 1.5rem 3rem;
 
         @media (max-width: 768px) {
           font-size: 1.5rem;
@@ -40,6 +39,8 @@
       &-button-container {
         display: flex;
         flex-direction: column;
+        position: sticky;
+        top: 70px;
         @media (min-width: 464px) {
           flex-direction: row;
         }
@@ -74,11 +75,10 @@
     }
 
     &-info {
-      width: 45%;
-      margin-bottom: 50px;
-      padding: 10px;
+      width: 100%;
       display: flex;
       justify-content: center;
+      align-items: center;
 
       @media (max-width: 670px) {
         width: 95%;
@@ -86,9 +86,8 @@
       }
 
       &-container {
-        width: 90%;
-        height: 400px;
-        border-radius: 20px;
+        width: 100%;
+        height: 100vh;
         display: flex;
         overflow: hidden;
 
@@ -106,33 +105,38 @@
 
       &-title {
         color: white;
-        font-size: 2rem;
+        font-weight: bold;
+        font-size: 4rem;
       }
 
       &-text {
         color: white;
-        font-size: 1.2rem;
+        font-size: 2rem;
         font-weight: 400;
       }
 
       &:nth-child(1) .home-card-info-container {
         background-image: url('../../../assets/images/computer.jpg');
         background-size: cover;
+        background-attachment: fixed;
         background-position: center;
       }
       &:nth-child(2) .home-card-info-container {
         background-image: url('../../../assets/images/achat.jpg');
         background-size: cover;
+        background-attachment: fixed;
         background-position: center;
       }
       &:nth-child(3) .home-card-info-container {
         background-image: url('../../../assets/images/compo.jpg');
         background-size: cover;
+        background-attachment: fixed;
         background-position: center;
       }
       &:nth-child(4) .home-card-info-container {
         background-image: url('../../../assets/images/winner.jpg');
         background-size: cover;
+        background-attachment: fixed;
         background-position: center;
       }
     }

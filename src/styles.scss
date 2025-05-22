@@ -1,11 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
-  background-image: url("./assets/images/badminton-cover.jpg");
-  background-size: cover;
-  background-attachment: fixed;
-}
-
 .material-icons {
   display: inline-flex;
   vertical-align: middle;
@@ -14,18 +8,27 @@ body {
 html, body {
   margin: 0;
   height: 100%;
+  width: 100dvw;
 }
+
 body {
+  background-image: url("./assets/images/badminton-cover.jpg");
+  background-size: cover;
+  background-attachment: fixed;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   display: flex;
   flex-flow: column;
-  height: 100%;
+  height: fit-content;
+  min-height: 100%;
 
   .root {
     display: contents;
 
     .header-container {
       flex: 0 1 auto;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .div-all-screen {
