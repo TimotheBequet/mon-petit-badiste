@@ -1,41 +1,59 @@
 .league-card-container {
   font-family: 'Raleway', sans-serif;
   padding: 1.5rem;
-  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 10px;
+  backdrop-filter: brightness(0.4);
+  position: relative;
+  transition: backdrop-filter 0.1s ease;
+
+  &:hover {
+    backdrop-filter: brightness(0.3);
+  }
 
   a {
     text-decoration: none;
     color: #282936;
   }
 
-  @media (max-width: 425px) {
-    border-radius: 0;
-}
-
   .league-card-title {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 700;
+    color: rgb(202, 202, 202);
+    letter-spacing: 2px;
   }
 
   .league-card-item {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     text-align: start;
+    color: white;
+  }
 
-    strong {
-      margin-left: 0.5rem;
+  .top-right {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+
+    @media (max-width: 768px) {
+      position: unset;
     }
+  }
 
-    .copy-icon {
-      margin-left: 0.5rem;
+  .bottom-right {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #578a50;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 0 0.5rem;
+    width: fit-content;
 
-      mat-icon {
-        font-size: 1.2rem;
-        padding-top: 0.1rem;
-      }
+    @media (max-width: 768px) {
+      position: unset;
+      margin: 0;
     }
   }
 }
