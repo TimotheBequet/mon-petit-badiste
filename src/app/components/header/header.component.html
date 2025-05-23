@@ -1,6 +1,14 @@
 <div class="header">
-  <nav class="header-nav" [ngStyle]="{height: navHeight + 'px'}">
-    <h1 class="header-title" [ngStyle]="{fontSize: fontSize + 'px'}"><a routerLink="/home">RACKET'UP</a></h1>
+  <nav class="header-nav">
+    <h1 class="header-title"><a routerLink="/home">RACKET'UP</a></h1>
+    <div *ngIf="!isUserLogged" class="header-nav-button-container">
+      <a routerLink="/connexion" class="header-nav-button-container-btn"><app-button-move [buttonCaption]="connexion" [class]="'header-btn'"></app-button-move></a>
+      <a routerLink="/register" class="header-nav-button-container-btn"><app-button-move [buttonCaption]="inscription" [class]="'header-btn'"></app-button-move></a>
+    </div>
+    <div *ngIf="isUserLogged" class="header-nav-button-container">
+      <a routerLink="/create-league" class="header-nav-button-container-btn"><app-button-move [buttonCaption]="creation" [class]="'header-btn large'"></app-button-move></a>
+      <a (click)="openDialog()" class="header-nav-button-container-btn"><app-button-move [buttonCaption]="rejoindre" [class]="'header-btn large'"></app-button-move></a>
+    </div>
   </nav>
   <app-menu-user *ngIf="isUserLogged && user" [isUserLogged]="isUserLogged" [user]="user!"></app-menu-user>
 </div>

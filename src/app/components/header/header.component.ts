@@ -3,6 +3,12 @@ import { Subject, takeUntil, filter } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserInterface } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { LeaguesService } from 'src/app/services/leagues.service';
+import { JoinLeagueInterface } from 'src/app/interfaces/joinLeague.interface';
+import { PopupJoinLeagueComponent } from 'src/app/components/popup-join-league/popup-join-league.component';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-header',
@@ -14,30 +20,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userName: string = '';
   user: UserInterface | null = null;
   private readonly destroy$ = new Subject<void>();
-  maxNavHeight: number = 112;
-  minNavHeight: number = 50;
-  navHeight: number = this.maxNavHeight;
-  scrollStart: number = 0;
-  scrollEnd: number = 200;
-  maxFontSize: number = 55;
-  minFontSize: number = 30;
-  fontSize: number = this.maxFontSize;
-  innerWidth: number = 0;
-  animateHeader: boolean = false;
+  connexion: string = 'Connexion';
+  inscription: string = 'Inscription';
+  creation: string = 'Créer une ligue';
+  rejoindre: string = 'Rejoindre une ligue';
+  codeLigue: string = '';
+  isLoading: boolean = false;
 
-  constructor(private userService: UserService, public router: Router) {
-    router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((e) => {
-      this.animateHeader = (e.url == '/home' && !this.userService.isUserLogged());  
-    });
+  constructor(public dialog: MatDialog, 
+    private userService: UserService, 
+    private _snackBar: MatSnackBar,
+    private leagueService: LeaguesService,
+    private commonService: CommonService) {
   }
 
   ngOnInit(): void {
-    this.innerWidth = window.innerWidth;
-    if (this.innerWidth <= 500) {
-      this.maxFontSize = 40;
-      this.minFontSize = 20;
-      this.fontSize = this.maxFontSize;
-    }
     this.userService.user$
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
@@ -52,38 +49,49 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  @HostListener('window:resize', [])
-  onResize(): void {
-    this.innerWidth = window.innerWidth;
-    if (this.innerWidth <= 500) {
-      this.maxFontSize = 35;
-      this.minFontSize = 15;
-      this.fontSize = this.maxFontSize;
-    } else {
-      this.maxFontSize = 48;
-      this.minFontSize = 21;
-      this.fontSize = this.maxFontSize;
-    }
-  }
-
-  @HostListener('window:scroll', [])
-  onWindowScroll(): void {
-    if (this.animateHeader) {
-      const scrollY: number = window.scrollY || document.documentElement.scrollTop;
-      if (scrollY <= this.scrollStart) {
-        this.navHeight = this.maxNavHeight;
-        this.fontSize = this.maxFontSize;
-      } else if (scrollY >= this.scrollEnd) {
-        this.navHeight = this.minNavHeight;
-        this.fontSize = this.minFontSize;
-      } else {
-        const progress: number = (scrollY - this.scrollStart) / (this.scrollEnd - this.scrollStart);
-        this.navHeight = this.maxNavHeight - progress * (this.maxNavHeight - this.minNavHeight);
-        this.fontSize = this.navHeight * 0.428;
-        if (this.innerWidth <= 500) {
-          this.fontSize = this.fontSize * 0.73;
+    openDialog(): void {
+      const dialogRef = this.dialog.open(PopupJoinLeagueComponent, {
+        width: '350px',
+        data: {code: this.codeLigue}
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        const user = this.userService.getUser();
+        if (!user) return;
+        
+        const joinLeagueInterface: JoinLeagueInterface = {
+           code: result,
+           userId: user.id!
+        };
+        if (result != undefined) {
+          this.isLoading = true;
+          this.leagueService.joinLeague(joinLeagueInterface).subscribe(
+            result => {
+              if (result.message != undefined) {
+                // tout est ok, on récupère les ligues
+                this.leagueService.getMyLeagues(user.id!).subscribe(
+                  leagues => {
+                    if (leagues) {
+                      this.commonService.sendUpdate(leagues);
+                    }
+                  }
+                );
+              } else if (result !== undefined && result.error !== undefined) {
+                const config = new MatSnackBarConfig();
+                config.panelClass = ['error'];
+                config.verticalPosition = 'bottom';
+                config.duration = 5000;
+                // gestion des cas d'erreur :
+                if (result.idLeague !== undefined && result.idLeague === null) {
+                  // code invalide
+                  this._snackBar.open(result.error, 'Fermer', config);
+                }
+              }
+              this.isLoading = false;
+            }
+          )
         }
-      }
+      });
     }
-  }
+
 }

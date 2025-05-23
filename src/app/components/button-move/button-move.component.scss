@@ -16,17 +16,22 @@ button {
   border-radius: 5px;
   width: 12rem;
   height: auto;
-  //opacity: 0.8;
 
-  &.connexion {
-    background-color: #559761;
+  &.header-btn {
+    background-color: transparent;
     font-weight: bold;
     letter-spacing: 1px;
-  }
-  &.inscription {
-    background-color: #497652;
-    font-weight: bold;
-    letter-spacing: 1px;
+    padding: 10px !important;
+    width: 8rem !important;
+    color: rgb(48, 48, 48) !important;
+    font-size: 17px;
+    &.large {
+      width: 12rem !important;
+    }
+    &:hover {
+      box-shadow: none !important;
+      color: black !important;
+    }
   }
   &.valider {
     background-color: #3b8443;
