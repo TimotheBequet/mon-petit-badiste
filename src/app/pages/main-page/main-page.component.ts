@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LeaguesInterface } from 'src/app/interfaces/leagues.interface';
 import { LeaguesService } from 'src/app/services/leagues.service';
@@ -6,8 +6,8 @@ import { UserService } from 'src/app/services/user.service';
 import { PopupJoinLeagueComponent } from 'src/app/components/popup-join-league/popup-join-league.component';
 import { JoinLeagueInterface } from 'src/app/interfaces/joinLeague.interface';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { catchError, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { CommonService } from 'src/app/services/common.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
@@ -17,18 +17,24 @@ import { HttpErrorResponse } from '@angular/common/http';
     class: 'div-all-screen'
   }
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit, OnDestroy {
 
   emojiSmirkingFace: string = '&#128527;';
   emojiEyesStars: string = '&#129321;';
   myLeagues: LeaguesInterface[] = new Array<LeaguesInterface>;
   codeLigue: string = '';
   isLoading: boolean = false;
+  private subscriptionName: Subscription;
 
   constructor(public dialog: MatDialog, 
-              private leagueService: LeaguesService, 
-              private userService: UserService,
-              private _snackBar: MatSnackBar) {}
+    private leagueService: LeaguesService, 
+    private userService: UserService,
+    private _snackBar: MatSnackBar,
+    private commonService: CommonService) {
+      this.subscriptionName = this.commonService.getUpdate().subscribe(data => {
+        this.myLeagues = data.data;
+      })
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -40,6 +46,10 @@ export class MainPageComponent implements OnInit {
         this.isLoading = false;
       }
     );
+  }
+
+  ngOnDestroy(): void {
+      this.subscriptionName.unsubscribe();
   }
 
   openDialog(): void {
