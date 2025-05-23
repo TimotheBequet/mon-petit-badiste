@@ -18,8 +18,8 @@ export class HeaderComponent implements OnInit {
   navHeight: number = this.maxNavHeight;
   scrollStart: number = 0;
   scrollEnd: number = 200;
-  maxFontSize: number = 48;
-  minFontSize: number = 21;
+  maxFontSize: number = 55;
+  minFontSize: number = 30;
   fontSize: number = this.maxFontSize;
   innerWidth: number = 0;
   animateHeader: boolean = false;
@@ -33,8 +33,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
     if (this.innerWidth <= 500) {
-      this.maxFontSize = 35;
-      this.minFontSize = 15;
+      this.maxFontSize = 40;
+      this.minFontSize = 20;
       this.fontSize = this.maxFontSize;
     }
     this.userService.user$.subscribe(user => {
