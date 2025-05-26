@@ -37,20 +37,24 @@ export class MyTeamComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.playersTemp = this.myPlayersTemp;
-    if (this.playersTemp.length) {
+    if (this.playersTemp != null && this.playersTemp.length) {
       console.log("playersTemp : ", this.playersTemp);
       this.buildColumnsCompoTemp();
     }
 
     this.players = this.myPlayers;
-    if (this.players.length) {
+    if (this.players != null && this.players.length) {
       this.buildColumnsPlayers();
     }
   }
 
   ngAfterViewInit(): void {
-    this.dataSourceTeam.sort = this.sortTeam;
-    this.dataSourceTemp.sort = this.sortTemp;
+    if (this.dataSourceTeam != null) {
+      this.dataSourceTeam.sort = this.sortTeam;
+    }
+    if (this.dataSourceTemp != null) {
+      this.dataSourceTemp.sort = this.sortTemp;
+    }
   }
 
   openListPlayers(): void {

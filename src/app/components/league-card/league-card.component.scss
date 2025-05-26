@@ -8,6 +8,8 @@
   backdrop-filter: brightness(0.4);
   position: relative;
   transition: backdrop-filter 0.1s ease;
+  height: 100%;
+  width: 100%;
 
   &:hover {
     backdrop-filter: brightness(0.3);
@@ -34,7 +36,7 @@
   .top-right {
     position: absolute;
     top: 10px;
-    right: 20px;
+    right: 60px;
 
     @media (max-width: 768px) {
       position: unset;
@@ -43,8 +45,8 @@
 
   .bottom-right {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 60px;
+    right: 50px;
     background-color: #578a50;
     padding: 5px 10px;
     border-radius: 20px;
@@ -53,7 +55,7 @@
 
     @media (max-width: 768px) {
       position: unset;
-      margin: 0;
+      margin: 0 0 10px 0;
     }
   }
 }
