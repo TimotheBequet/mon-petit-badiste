@@ -10,6 +10,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 })
 export class LeagueCardComponent {
   @Input('league') league: LeaguesInterface = {} as LeaguesInterface;
+  @Input('index') index: number = 0;
 
   constructor(private clipboard: Clipboard, private snackBar: MatSnackBar) {}
 

@@ -1,16 +1,12 @@
 <div class="leagues">
     <h1 class="leagues-title">Mes Ligues</h1>
-    <div *ngIf="!isLoading" class="leagues-unit-card-btn">
-        <button class="btn-league"><a routerLink="/create-league"><mat-icon class="btn-league-icon">create_new_folder</mat-icon>Créer une ligue</a></button>
-        <button class="btn-league" (click)="openDialog()"><a><mat-icon class="btn-league-icon">group_add</mat-icon>Rejoindre une ligue</a></button>
-    </div>
     <div *ngIf="!isLoading" class="leagues-unit">
         <div *ngIf="myLeagues.length === 0" class="leagues-unit-card blur-background">
             <h2><strong>OH NON</strong> tu n'as pas de ligue :-(</h2>
             <p class="leagues-unit-card-join">Ne serait-ce pas le moment d'en <strong class="leagues-unit-card-join-link" (click)="openDialog()">rejoindre une</strong> ? <span [innerHTML]="emojiSmirkingFace"></span></p>
             <p class="leagues-unit-card-join">Ou encore mieux, tu peux <strong class="leagues-unit-card-join-link"><a routerLink="/create-league">créer la tienne</a></strong> ! <span [innerHTML]="emojiEyesStars"></span></p>
         </div>
-        <app-league-card class="component-league-card blur-background" *ngFor="let league of myLeagues" [league]="league"></app-league-card>
+        <app-league-card class="component-league-card" *ngFor="let league of myLeagues; index as i" [league]="league" [ngStyle]="{'background-image': 'url(../../../assets/images/bg-leagues/league' + (i+1) + '.jpg)'}"></app-league-card>
     </div>
     <div *ngIf="isLoading">
         <app-loader></app-loader>

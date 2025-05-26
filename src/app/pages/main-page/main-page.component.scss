@@ -8,9 +8,12 @@
     }
 
     &-title {
+        font-family: 'Raleway', sans-serif;
+        font-weight: bold;
         text-align: center;
         font-size: 4rem;
         margin-bottom: 2rem;
+        color: rgb(202, 202, 202);
 
         @media (max-width: 425px) {
             font-size: 3rem;
@@ -120,22 +123,23 @@
         }
 
         .component-league-card {
-            width: 45%;
+            width: 90%;
             border-radius: 10px;
-            transition: all 0.2s linear;
+            transition: all 0.1s ease;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
 
             @media (max-width: 425px) {
-                width: 100%;
-                border-radius: 0;
+                width: 95%;
             }
 
-            @media (min-width: 426px) and (max-width: 768px) {
+            /*@media (min-width: 426px) and (max-width: 768px) {
                 width: 80%;
-            }
+            }*/
         }
 
         .component-league-card:hover {
-            transform: scale(1.02);
             cursor: pointer;
             backdrop-filter: blur(10px) sepia(100%);
         }
