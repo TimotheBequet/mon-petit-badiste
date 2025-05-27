@@ -1,0 +1,30 @@
+@if (player != null) {
+    <div class="player-container">
+        <div class="player-img">
+            <p>{{player.firstName}} {{player.lastName.toUpperCase()}}</p>
+        </div>
+        <div class="player-infos">
+            <div class="player-infos-sub">
+                <p>{{player.age}} ans</p><p>{{player.sigle}} {{player.dept}}</p>
+            </div>
+            <p>{{player.tousClassements}}</p>
+        </div>
+    </div>
+} @else if (playerTemp != null) {
+    <div class="player-container">
+        <div class="player-img">
+            <p>{{playerTemp.prenomPlayer}} {{playerTemp.nomPlayer.toUpperCase()}}</p>
+            @if (playerTemp.sexe == 'M') {
+                <img src="./../../../assets/images/homme.png">
+            } @else {
+                <img src="./../../../assets/images/femme.png">
+            }
+        </div>
+        <div class="player-infos">
+            <div class="player-infos-sub">
+                <p>{{playerTemp.age}} ans</p><p>{{playerTemp.club}}</p>
+            </div>
+            <p>{{playerTemp.classement}}</p>
+        </div>
+    </div>
+}

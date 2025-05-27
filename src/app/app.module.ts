@@ -33,6 +33,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import { PlayerCardComponent } from "./components/player-card/player-card.component";
 
 @NgModule({ declarations: [
         AppComponent,
@@ -53,20 +54,21 @@ import {MatSortModule} from '@angular/material/sort';
         ListPlayersComponent,
         ButtonBuyComponent,
         FilterComponent,
-        LoaderComponent
+        LoaderComponent,
+        PlayerCardComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSnackBarModule,
-        MatIconModule,
-        MatSelectModule,
-        MatTooltipModule,
-        MatDialogModule,
-        MatTableModule,
-        MatSortModule,
-        FormsModule], providers: [MatSnackBarModule, provideHttpClient(withInterceptorsFromDi())] })
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatTableModule,
+    MatSortModule,
+    FormsModule], providers: [MatSnackBarModule, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

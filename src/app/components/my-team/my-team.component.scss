@@ -16,9 +16,22 @@
           margin-bottom: 0 !important;
         }
 
-        .header-purchase {
+        &-player-card {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 30px;
+
+          &-unit {
+            width: 300px;
+            display: flex;
+            justify-content: center;
+          }
+        }
+
+        /*.header-purchase {
           background-color: rgba(190, 186, 130, 0.7) !important;
-          //border-bottom: 1px solid rgb(190, 190, 190) !important;
         }
 
         .row-purchase {
@@ -28,42 +41,7 @@
           &:nth-child(even) {
             background-color: rgba(192, 189, 149, 0.7) !important;
           }
-        }
-        
-            .league-infos-classement {
-              width: 100%;
-              &-table {
-                width: 100%;
-                border-collapse: collapse;
-        
-                &-header, &-rows {
-                  height: 30px;
-                }
-        
-
-        
-                &-rows {
-                  &:nth-child(odd) {
-                    background-color: rgba(192, 149, 149, 0.7);
-                  }
-                  &:nth-child(even) {
-                    background-color: rgba(180, 119, 119, 0.7);
-                  }
-                  &:last-child {
-                    td:first-child {
-                      border-bottom-left-radius: 7px;
-                    }
-                    td:last-child {
-                      border-bottom-right-radius: 7px;
-                    }
-                  }
-                  
-                  &-line {
-                    text-align: center;
-                  }
-                }
-            }
-        }
+        }*/
     }
 
     .my-team-add {

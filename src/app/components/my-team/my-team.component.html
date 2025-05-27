@@ -1,14 +1,18 @@
 <div class="my-team-container">
+  <button (click)="openListPlayers()">Etoffer ma team</button>
   <div *ngIf="playersTemp != undefined" class="my-team-list">
     <h3>Enchères placées</h3>
-    <table mat-table [dataSource]="dataSourceTemp!" #sortTemp="matSort" matSort matSortActive="prixPlayer" matSortDisableClear matSortDirection="desc">
+<!--     <table mat-table [dataSource]="dataSourceTemp!" #sortTemp="matSort" matSort matSortActive="prixPlayer" matSortDisableClear matSortDirection="desc">
       <ng-container [matColumnDef]="col.columnDef" *ngFor="let col of columnsTemp">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{col.header}}</th>
         <td mat-cell *matCellDef="let row">{{col.cell(row)}}</td>
       </ng-container>
       <tr mat-header-row class="header-purchase" *matHeaderRowDef="displayedColumnsTemp;"></tr>
       <tr mat-row class="row-purchase" *matRowDef="let row; columns: displayedColumnsTemp;"></tr>
-    </table>
+    </table> -->
+    <div class="my-team-list-player-card">
+      <app-player-card class="my-team-list-player-card-unit" *ngFor="let player of playersTemp" [playerTemp]="player"></app-player-card>
+    </div>
   </div>
   <div *ngIf="players != undefined" class="my-team-list">
     <h3>Effectif</h3>
@@ -24,5 +28,4 @@
   <div *ngIf="players == undefined && playersTemp == undefined" class="my-team-add">
     <p>Tu n'as pas de joueurs, cliques sur le bouton ci-dessous pour en acheter !</p>
   </div>
-  <button (click)="openListPlayers()">Etoffer ma team</button>
 </div>

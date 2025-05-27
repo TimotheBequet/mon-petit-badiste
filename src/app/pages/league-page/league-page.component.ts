@@ -26,7 +26,7 @@ export class LeaguePageComponent implements OnInit {
   isMyTeamLoading: boolean;
   myPlayers: PlayerInterface[] | undefined = undefined;
   myPlayersTemp: CompoTempInterface[] | undefined = undefined;
-  activeTab: string = 'classement';
+  activeTab: string = 'equipe';
   columns: Array<any> = [];
   dataSource!: MatTableDataSource<ClassementInterface>;
   displayedColumns!: Array<string>;
