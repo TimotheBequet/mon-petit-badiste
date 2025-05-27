@@ -9,6 +9,7 @@ import { CompoTempInterface } from 'src/app/interfaces/compo-temp.interface';
 import { LeaguesService } from 'src/app/services/leagues.service';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-my-team',
@@ -36,9 +37,10 @@ export class MyTeamComponent implements OnInit, AfterViewInit {
     public leagueService: LeaguesService) {}
 
   ngOnInit(): void {
+    this.leagueService.getLeagueInfos(this.league?.id!, this.userService.getUserId()!).subscribe(l => this.league = l);
+
     this.playersTemp = this.myPlayersTemp;
     if (this.playersTemp != null && this.playersTemp.length) {
-      console.log("playersTemp : ", this.playersTemp);
       this.buildColumnsCompoTemp();
     }
 
@@ -58,7 +60,7 @@ export class MyTeamComponent implements OnInit, AfterViewInit {
   }
 
   openListPlayers(): void {
-    this.playerService.getAllPlayers().subscribe(players => {
+    this.playerService.getAllPlayers().pipe(take(1)).subscribe(players => {
       if (players != undefined) {
         const dialogRef = this.dialog.open(ListPlayersComponent, {
           width: '100%',
@@ -66,23 +68,25 @@ export class MyTeamComponent implements OnInit, AfterViewInit {
           maxWidth: '90vw',
           data: {
             players: players,
-            playersBought: this.playersTemp,
+            playersTemp: this.playersTemp,
+            playersBought: this.players,
             budget: this.league?.budget,
             idLeague: this.league?.id,
             idUser: this.userService.getUserId()
           }
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(result => {         
           if (result) {
-            this.leagueService.getLeagueInfos(this.league?.id!, this.userService.getUserId()!).subscribe(league => this.league = league);
-            this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => {
+            this.leagueService.getLeagueInfos(this.league?.id!, this.userService.getUserId()!).pipe(take(1)).subscribe(l => this.league = l);
+            
+            this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).pipe(take(1)).subscribe(compoTemp => {
               this.playersTemp = compoTemp!;
               if (this.playersTemp != null && this.playersTemp.length) {
                 this.buildColumnsCompoTemp();
               }
             });
-            this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => {
+            this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).pipe(take(1)).subscribe(players => {
               this.players = players!;
               if (this.players != null && this.players.length) {
                 this.buildColumnsPlayers();

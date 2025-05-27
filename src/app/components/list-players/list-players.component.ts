@@ -16,7 +16,8 @@ export class ListPlayersComponent {
   btnCaptionValider: string = 'Valider';
   players!: PlayerInterface[];
   savePlayers!: PlayerInterface[];
-  playersBought!: CompoTempInterface[];
+  playersTemp!: CompoTempInterface[];
+  playersBought!: PlayerInterface[];
   budget: number = 0;
   clubs: PlayerInterface[] = [];
   nameFilter: string | undefined = undefined;
@@ -24,6 +25,7 @@ export class ListPlayersComponent {
   genderFilter: string | undefined = undefined;
   specialityFilter: string | undefined = undefined;
   playersSelected: PlayerInterface[] = [];
+  playersDeleted: PlayerInterface[] = [];
   idLeague: number = 0;
   idUser: number = 0;
   
@@ -35,16 +37,22 @@ export class ListPlayersComponent {
   ngOnInit() {
     this.players = this.data.players;
     this.savePlayers = this.players;
+    this.playersTemp = this.data.playersTemp;
     this.playersBought = this.data.playersBought;
     this.budget = this.data.budget;
     this.idLeague = this.data.idLeague;
     this.idUser = this.data.idUser;
 
     this.clubs = [...new Map(this.players.map(player => [player['sigle'], player])).values()];
-
+    
     if (this.playersBought != undefined) {
+      this.players = this.players.filter((p1) => !this.playersBought.find((p2) => p2.id === p1.id));
+      this.savePlayers = this.players;
+    }
+
+    if (this.playersTemp != undefined) {
       for (let player of this.players) {
-        if (this.playersBought.find((p) => p.idPlayer == player.id) != undefined) {
+        if (this.playersTemp.find((p) => p.idPlayer == player.id) != undefined) {
           player.dejaAchete = true;
         } else {
           player.dejaAchete = false;
@@ -122,6 +130,15 @@ export class ListPlayersComponent {
     }
   }
 
+  updatePlayersDeleted(idPlayer: number): void {
+    const player = this.playersDeleted.find((player) => player.id == idPlayer);
+    if (player != undefined) {
+      this.playersDeleted.splice(this.playersDeleted.findIndex((p) => p.id == idPlayer), 1);
+    } else {
+      this.playersDeleted.push(this.players.find((p) => p.id == idPlayer)!);
+    }
+  }
+
   validerAchats(): void {
     const messageRetour: string = this.checkBeforeValidate();
     if (!messageRetour) {
@@ -138,7 +155,19 @@ export class ListPlayersComponent {
           }
         );
       }
-      this.leaguesService.setCompoTemp(playersToSend).subscribe((retour) => {
+      let playersToDelete: CompoTempInterface[] = new Array<CompoTempInterface>;
+      for (let item of this.playersDeleted) {
+        playersToDelete.push(
+          <CompoTempInterface>{
+            idUser: this.idUser,
+            idLeague: this.idLeague,
+            idPlayer: item.id,
+            prixPlayer: item.prix,
+            datePurchase: moment(dateCourante).format("YYYY-MM-DD HH:mm:ss")
+          }
+        );
+      }
+      this.leaguesService.setCompoTemp(playersToSend, playersToDelete).subscribe((retour) => {
         if (retour) {
           this.dialogRef.close(true);
         } else {

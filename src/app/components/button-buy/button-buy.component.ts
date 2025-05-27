@@ -13,6 +13,7 @@ export class ButtonBuyComponent {
   @Input('playerDejaAchete') playerDejaAchete: boolean = false;
   @Output() montantAchat = new EventEmitter<number>();
   @Output() playersSelected = new EventEmitter<number>();
+  @Output() playersDeleted = new EventEmitter<number>();
 
   onClick(): void {
     if (!this.playerDejaAchete) {          
@@ -24,6 +25,11 @@ export class ButtonBuyComponent {
         this.montantAchat.emit(this.prix * -1);
       }
       this.playersSelected.emit(this.idPlayer);
+    } else {
+      this.state = 0;
+      this.playerDejaAchete = false;
+      this.montantAchat.emit(this.prix * -1);
+      this.playersDeleted.emit(this.idPlayer);
     }
   }
 
