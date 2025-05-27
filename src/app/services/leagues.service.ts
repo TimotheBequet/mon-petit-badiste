@@ -6,6 +6,7 @@ import { JoinLeagueInterface } from '../interfaces/joinLeague.interface';
 import { ClassementInterface } from '../interfaces/classement.interface';
 import { globalProperties } from '../environments/environment';
 import { CompoTempInterface } from '../interfaces/compo-temp.interface';
+import { PlayerInterface } from '../interfaces/player.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -124,12 +125,13 @@ export class LeaguesService {
     );
   }
 
-  setCompoTemp(compo: CompoTempInterface[]): Observable<boolean> {
-    const body = {'playerstemp': compo};
+  setCompoTemp(compo: CompoTempInterface[], toDelete: CompoTempInterface[]): Observable<boolean> {
+    const body = {'playerstemp': compo, 'playerstodelete': toDelete};
     return this.http.post<any>(`${globalProperties.baseUrl}/leagues/setcompotemp`, body).pipe(
       catchError(this.handleError),
       map((result: any) => {
-        return (result != undefined && result.length > 0);
+        return (result != undefined && (result.playerstemp != undefined && result.playerstemp != null && result.playerstemp.length > 0)
+                                    || (result.playerstodelete != undefined && result.playerstodelete != null && result.playerstodelete.length > 0));
       })
     );
   }
@@ -141,7 +143,7 @@ export class LeaguesService {
       map((result: any) => {
         if (result
             && result.length > 0
-            && result[0]['playerId']
+            && result[0]['id']
         ) {
           let compo: CompoTempInterface[] = new Array<CompoTempInterface>();
           for (let i = 0; i < result.length; i++) {
@@ -149,7 +151,7 @@ export class LeaguesService {
               <CompoTempInterface>{
                 idUser: idUser,
                 idLeague: idLeague,
-                idPlayer: result[i]['playerId'],
+                idPlayer: result[i]['id'],
                 prenomPlayer: result[i]['firstName'],
                 nomPlayer: result[i]['lastName'],
                 prixPlayer: result[i]['prixPlayer'],

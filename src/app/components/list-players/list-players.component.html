@@ -21,7 +21,8 @@
                           [idPlayer]="player.id" 
                           [playerDejaAchete]="player.dejaAchete"
                           (montantAchat)="updateMontantAchat($event)"
-                          (playersSelected)="updatePlayersSelected($event)">
+                          (playersSelected)="updatePlayersSelected($event)"
+                          (playersDeleted)="updatePlayersDeleted($event)">
           </app-button-buy>
         </td>
       </tr>

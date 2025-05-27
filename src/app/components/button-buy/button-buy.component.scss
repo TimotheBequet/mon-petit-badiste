@@ -35,6 +35,18 @@
   }
 }
 
+.bought {
+  color: white;
+  background-color: rgb(49, 110, 53);
+  border: 1px solid rgb(49, 110, 53);
+  transition: 0.2s all linear;
+
+  &:hover {
+    background-color: rgb(171, 57, 57);
+    border: 1px solid rgb(171, 57, 57);
+  }
+}
+
 .btn-buy:disabled {
   background-color: gray;
   border: 1px solid gray;

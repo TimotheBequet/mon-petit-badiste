@@ -14,11 +14,13 @@ export class PlayerService {
   constructor(private http: HttpClient) { }
 
   getMyPlayers(idUser: number, idLeague: number): Observable<PlayerInterface[] | undefined> {
-    //return of(undefined);
     const queryBody= {'idUser': idUser, 'idLeague':idLeague};
     return this.http.post<PlayerInterface[]>(`${globalProperties.baseUrl}/leagues/team`, queryBody).pipe(
       catchError(this.handleError),
       map((result: any) => {
+        if (result != null) {
+          result.map((r: PlayerInterface) => r.dejaAchete = false);
+        }
         return result;
       })
     );
