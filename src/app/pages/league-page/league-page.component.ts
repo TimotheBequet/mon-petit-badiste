@@ -52,7 +52,7 @@ export class LeaguePageComponent implements OnInit {
         this.isLoading = false;
 
         this.leagueService.getCompoTemp(this.userService.getUserId()!, this.league?.id!).subscribe(compoTemp => {
-          this.myPlayersTemp = compoTemp;
+          this.myPlayersTemp = compoTemp;         
 
           this.playerService.getMyPlayers(this.userService.getUserId()!, this.league?.id!).subscribe(players => {
             this.myPlayers = players;

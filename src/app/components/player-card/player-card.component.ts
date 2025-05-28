@@ -10,4 +10,28 @@ import { PlayerInterface } from 'src/app/interfaces/player.interface';
 export class PlayerCardComponent {
   @Input('player') player!: PlayerInterface;
   @Input('playerTemp') playerTemp!: CompoTempInterface;
+
+  getSpecialite(p: PlayerInterface | CompoTempInterface): string {
+    let retour: string = '';
+    if (p.isSpecialisteSimple === 'O') {
+      retour += ' Simple';
+    }
+    if (p.isSpecialisteDouble === 'O') {
+      if (retour != '') {
+        retour += ',';
+      }
+      retour += ' Double';
+    }
+    if (p.isSpecialisteMixte === 'O') {
+      if (retour != '') {
+        retour += ',';
+      }
+      retour += ' Mixte'; 
+    }
+    return 'Spécialité :' + retour;
+  }
+
+  getCountryUrl(p: PlayerInterface | CompoTempInterface): string {
+    return "http://purecatamphetamine.github.io/country-flag-icons/3x2/" + p.pays + ".svg";
+  }
 }

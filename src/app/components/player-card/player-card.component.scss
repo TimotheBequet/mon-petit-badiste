@@ -34,13 +34,26 @@
             justify-content: space-between;
             align-items: center;
             padding: 5px 0;
-            margin-bottom: 5px;
-            border-top: 1px solid rgb(66, 66, 66);
-            border-bottom: 1px solid rgb(66, 66, 66);
+            border-top: 1px solid rgb(81, 81, 81);
 
             p {
                 margin: 0;
             }
+
+            img {
+                width: auto;
+                height: 16px;
+            }
+        }
+
+        &-classement {
+            margin: 0;
+        }
+
+        &-specialite {
+            font-size: 12px;
+            border-top: 1px solid rgb(81, 81, 81);
+            margin: 0;
         }
     }
 

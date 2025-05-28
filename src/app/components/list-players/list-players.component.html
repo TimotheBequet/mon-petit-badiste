@@ -10,7 +10,8 @@
   <div mat-dialog-content class="players-container">
     <table class="list-players">
       <tr *ngFor="let player of players" [ngClass]="player.sexe == 'M' ? 'man' : 'woman'">
-        <td class="list-players-name">{{player.firstName}} {{player.lastName}} ({{player.pays}})</td>
+        <td class="list-players-name">{{player.firstName}} {{player.lastName}}</td>
+        <td><img alt="" src={{getCountryUrl(player)}}/></td>
         <td>{{player.age}} ans</td>
         <td>{{player.sigle}} {{player.dept}}</td>
         <td>{{player.classementSimple}}/{{player.classementDouble}}/{{player.classementMixte}}</td>

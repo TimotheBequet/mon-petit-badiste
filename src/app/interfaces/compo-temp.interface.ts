@@ -10,4 +10,8 @@ export interface CompoTempInterface {
     club: string;
     age: number;
     sexe: string;
+    isSpecialisteSimple: string;
+    isSpecialisteDouble: string;
+    isSpecialisteMixte: string;
+    pays: string;
 }

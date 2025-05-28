@@ -159,7 +159,11 @@ export class LeaguesService {
                 classement: result[i]['classementSimple'] + '/' + result[i]['classementDouble'] + '/' + result[i]['classementMixte'],
                 club: result[i]['sigle'] + ' ' + result[i]['dept'],
                 age: result[i]['age'],
-                sexe: result[i]['sexe']
+                sexe: result[i]['sexe'],
+                isSpecialisteSimple: result[i]['isSpecialisteSimple'],
+                isSpecialisteDouble: result[i]['isSpecialisteDouble'],
+                isSpecialisteMixte: result[i]['isSpecialisteMixte'],
+                pays: result[i]['pays']
               }
             );
           }

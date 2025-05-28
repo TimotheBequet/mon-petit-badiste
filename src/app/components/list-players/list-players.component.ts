@@ -197,4 +197,8 @@ export class ListPlayersComponent {
     }*/
     return '';
   }
+
+  getCountryUrl(p: PlayerInterface): string {
+    return "http://purecatamphetamine.github.io/country-flag-icons/3x2/" + p.pays + ".svg";
+  }
 }
