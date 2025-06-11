@@ -124,12 +124,12 @@ export class LeaguesService {
     );
   }
 
-  setCompoTemp(compo: CompoTempInterface[]): Observable<boolean> {
-    const body = {'playerstemp': compo};
+  setCompoTemp(compo: CompoTempInterface[], toDelete: CompoTempInterface[]): Observable<boolean> {
+    const body = {'playerstemp': compo, 'playerstodelete': toDelete};
     return this.http.post<any>(`${globalProperties.baseUrl}/leagues/setcompotemp`, body).pipe(
       catchError(this.handleError),
       map((result: any) => {
-        return (result != undefined && result.length > 0);
+        return (result != undefined && (result.playerstemp.length > 0 || result.playerstodelete.length > 0));
       })
     );
   }

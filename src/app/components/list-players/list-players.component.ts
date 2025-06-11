@@ -41,13 +41,20 @@ export class ListPlayersComponent {
     this.idUser = this.data.idUser;
 
     this.clubs = [...new Map(this.players.map(player => [player['sigle'], player])).values()];
-
+    
+    
     if (this.playersBought != undefined) {
       for (let player of this.players) {
         if (this.playersBought.find((p) => p.idPlayer == player.id) != undefined) {
           player.dejaAchete = true;
         } else {
           player.dejaAchete = false;
+        }
+      }
+      if (this.playersBought.length) {
+        for (let playerBought of this.playersBought) {
+          const pb: PlayerInterface = this.players.find((p) => p.id == playerBought.idPlayer)!;
+          this.playersSelected.push(pb);
         }
       }
     }
@@ -127,18 +134,26 @@ export class ListPlayersComponent {
     if (!messageRetour) {
       const dateCourante: Date = new Date();
       let playersToSend: CompoTempInterface[] = new Array<CompoTempInterface>;
+      let playersToDelete: CompoTempInterface[] = new Array<CompoTempInterface>;
+      this.playersBought.map(p => {
+        if (!this.playersSelected.find(f => f.id == p.idPlayer)) {
+          playersToDelete.push(p);
+        }
+      });
       for (let item of this.playersSelected) {
-        playersToSend.push(
-          <CompoTempInterface>{
-            idUser: this.idUser,
-            idLeague: this.idLeague,
-            idPlayer: item.id,
-            prixPlayer: item.prix,
-            datePurchase: moment(dateCourante).format("YYYY-MM-DD HH:mm:ss")
-          }
-        );
+        if (!this.playersBought.find(f => f.idPlayer == item.id)) {
+          playersToSend.push(
+            <CompoTempInterface>{
+              idUser: this.idUser,
+              idLeague: this.idLeague,
+              idPlayer: item.id,
+              prixPlayer: item.prix,
+              datePurchase: moment(dateCourante).format("YYYY-MM-DD HH:mm:ss")
+            }
+          );
+        }
       }
-      this.leaguesService.setCompoTemp(playersToSend).subscribe((retour) => {
+      this.leaguesService.setCompoTemp(playersToSend, playersToDelete).subscribe((retour) => {
         if (retour) {
           this.dialogRef.close(true);
         } else {

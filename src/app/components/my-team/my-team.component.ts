@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PlayerInterface } from 'src/app/interfaces/player.interface';
 import { PlayerService } from 'src/app/services/player.service';
@@ -15,7 +15,7 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './my-team.component.html',
   styleUrls: ['./my-team.component.scss']
 })
-export class MyTeamComponent implements OnInit, AfterViewInit {
+export class MyTeamComponent implements OnInit, AfterViewChecked {
   @Input('league') league: LeaguesInterface | null = null;
   @Input('myPlayersTemp') myPlayersTemp: CompoTempInterface[] = [];
   @Input('myPlayers') myPlayers: PlayerInterface[] = [];
@@ -37,20 +37,23 @@ export class MyTeamComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.playersTemp = this.myPlayersTemp;
-    if (this.playersTemp.length) {
-      console.log("playersTemp : ", this.playersTemp);
+    if (this.playersTemp != undefined && this.playersTemp.length) {
       this.buildColumnsCompoTemp();
     }
 
     this.players = this.myPlayers;
-    if (this.players.length) {
+    if (this.players != undefined && this.players.length) {
       this.buildColumnsPlayers();
     }
   }
 
-  ngAfterViewInit(): void {
-    this.dataSourceTeam.sort = this.sortTeam;
-    this.dataSourceTemp.sort = this.sortTemp;
+  ngAfterViewChecked(): void {
+    if (this.dataSourceTeam != undefined && this.dataSourceTeam.sort == undefined && this.sortTeam != undefined) {
+      this.dataSourceTeam.sort = this.sortTeam;
+    }
+    if (this.dataSourceTemp != undefined && this.dataSourceTemp.sort == undefined && this.sortTemp != undefined) {
+      this.dataSourceTemp.sort = this.sortTemp;
+    }
   }
 
   openListPlayers(): void {

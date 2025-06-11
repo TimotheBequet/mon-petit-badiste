@@ -17,16 +17,15 @@
         }
 
         .header-purchase {
-          background-color: rgba(190, 186, 130, 0.7) !important;
-          //border-bottom: 1px solid rgb(190, 190, 190) !important;
+          background-color: rgba(130, 135, 190, 0.6) !important;
         }
 
         .row-purchase {
           &:nth-child(odd) {
-            background-color: rgba(167, 164, 129, 0.7) !important;
+            background-color: rgba(129, 132, 167, 0.6) !important;
           }
           &:nth-child(even) {
-            background-color: rgba(192, 189, 149, 0.7) !important;
+            background-color: rgba(144, 146, 187, 0.6) !important;
           }
         }
         

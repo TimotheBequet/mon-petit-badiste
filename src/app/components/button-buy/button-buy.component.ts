@@ -13,6 +13,7 @@ export class ButtonBuyComponent {
   @Input('playerDejaAchete') playerDejaAchete: boolean = false;
   @Output() montantAchat = new EventEmitter<number>();
   @Output() playersSelected = new EventEmitter<number>();
+  // voir pour récupérer la liste des joueurs qu'on a supprimé, et faire un update pour les virer
 
   onClick(): void {
     if (!this.playerDejaAchete) {          
@@ -24,6 +25,11 @@ export class ButtonBuyComponent {
         this.montantAchat.emit(this.prix * -1);
       }
       this.playersSelected.emit(this.idPlayer);
+    } else {
+      this.state = 0;
+      this.montantAchat.emit(this.prix * -1);
+      this.playersSelected.emit(this.idPlayer);
+      this.playerDejaAchete = false;
     }
   }
 
