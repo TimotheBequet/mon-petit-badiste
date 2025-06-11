@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { UserInterface } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -7,17 +8,27 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  isUserLogged: boolean = false;
-  userName: string = '';
-  user!: UserInterface;
-  constructor(private userService: UserService){}
+export class HeaderComponent implements OnInit, OnDestroy {
+  isUserLogged = false;
+  userName = '';
+  user: UserInterface | null = null;
+
+  private readonly destroy$ = new Subject<void>();
+
+  constructor(private readonly userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.user$.subscribe(user => {
-      this.user = this.userService.getUser();
-      this.isUserLogged = this.userService.isUserLogged();
-      this.userName = this.userService.getUserName();
-    });
+    this.userService.user$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.user = user;
+        this.isUserLogged = this.userService.isUserLogged();
+        this.userName = this.userService.getUserName();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

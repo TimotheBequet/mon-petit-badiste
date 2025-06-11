@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PlayerInterface } from '../interfaces/player.interface';
-import { BehaviorSubject, catchError, map, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { globalProperties } from '../environments/environment';
 

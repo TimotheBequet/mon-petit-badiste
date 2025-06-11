@@ -25,48 +25,71 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 })
 export class CreateLeagueComponent implements AfterViewInit {
-  link: string = "/home";
-  public frmCreateLeague: FormGroup = this.createLeagueForm();
+  link = '/home';
+  frmCreateLeague!: FormGroup;
   matcher = new MyErrorStateMatcher();
-  selected = "4";
-  caption: string = 'Créer la ligue';
-  submit: string = 'submit';
-  userId?: number = 0;
+  selected = '4';
+  caption = 'Créer la ligue';
+  submit = 'submit';
+  userId!: number;
   @ViewChild('name') inputName!: ElementRef;
 
-  constructor(private leagueService: LeaguesService, 
-    private fb: FormBuilder, 
-    private userService: UserService,
-    private router: Router) {
-    this.userId = this.userService.getUser().id;
+  constructor(
+    private readonly leagueService: LeaguesService, 
+    private readonly fb: FormBuilder, 
+    private readonly userService: UserService,
+    private readonly router: Router
+  ) {
+    const currentUser = this.userService.getUser();
+    if (!currentUser?.id) {
+      this.router.navigate(['/connexion']);
+      return;
+    }
+    this.userId = currentUser.id;
+    this.frmCreateLeague = this.createLeagueForm();
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {this.inputName.nativeElement.focus();});
-  }
-
-  onSubmit(): void {
-    const league: LeaguesInterface = {
-      id: undefined,
-      name: this.frmCreateLeague.value.name,
-      idOwner: Number(this.userId),
-      nbPlayers: Number(this.selected),
-      code: undefined,
-      pseudoOwner: undefined,
-      nbInLeague: 0,
-      budget: 6000
-    };
-    this.leagueService.createLeague(league).subscribe(
-      league => {
-        if ((league.id !== undefined)) {
-          this.router.navigate(['/home']);
-        }
+    setTimeout(() => {
+      this.inputName.nativeElement.focus();
     });
   }
 
-  createLeagueForm(): FormGroup {
+  onSubmit(): void {
+    if (this.frmCreateLeague.invalid) {
+      this.frmCreateLeague.markAllAsTouched();
+      return;
+    }
+
+    const league: Partial<LeaguesInterface> = {
+      name: this.frmCreateLeague.value.name,
+      idOwner: this.userId,
+      nbPlayers: Number(this.selected),
+      nbInLeague: 0,
+      budget: 6000
+    };
+
+    this.leagueService.createLeague(league as LeaguesInterface).subscribe({
+      next: (createdLeague) => {
+        if (createdLeague?.id) {
+          this.router.navigate(['/dashboard']);
+        }
+      },
+      error: (error) => {
+        console.error('Erreur lors de la création de la ligue:', error);
+      }
+    });
+  }
+
+  private createLeagueForm(): FormGroup {
     return this.fb.group({
-      name: [null, Validators.compose([Validators.minLength(4), Validators.required])],
+      name: [
+        null, 
+        [
+          Validators.required,
+          Validators.minLength(4)
+        ]
+      ]
     });
   }
 }

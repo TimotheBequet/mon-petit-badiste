@@ -49,7 +49,7 @@ export class ConnexionPageComponent implements AfterViewInit {
         // si on a bien récupéré un User et qu'on a bien son Id
         if ((user !== undefined) && (user.id !== undefined)) {
           // on renseigne le user
-          this.userService.user$.next(user);
+          this.userService.setUser(user);
           // on est redirigés vers la page Home
           this.router.navigate(['/home']);
         } else {

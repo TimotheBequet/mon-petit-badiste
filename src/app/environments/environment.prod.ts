@@ -1,13 +1,8 @@
-export interface Environment {
-  production: boolean;
-  baseUrl: string;
-  apiVersion: string;
-  appName: string;
-}
+import { Environment } from './environment';
 
 export const environment: Environment = {
-  production: false,
-  baseUrl: 'http://mpb-api.timothe-bequet.fr:3001',
+  production: true,
+  baseUrl: 'https://mpb-api.timothe-bequet.fr',
   apiVersion: 'v1',
   appName: 'Mon Petit Badiste'
 };
@@ -15,4 +10,4 @@ export const environment: Environment = {
 // Compatibilité avec l'ancien format
 export const globalProperties = {
   baseUrl: environment.baseUrl
-};
+}; 

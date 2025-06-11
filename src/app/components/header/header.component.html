@@ -2,5 +2,5 @@
   <nav class="header-nav">
     <h1 class="header-title"><a routerLink="/home">Mon Petit Badiste</a></h1>
   </nav>
-  <app-menu-user *ngIf="isUserLogged" [isUserLogged]="isUserLogged" [user]="user"></app-menu-user>
+  <app-menu-user *ngIf="isUserLogged && user" [isUserLogged]="isUserLogged" [user]="user!"></app-menu-user>
 </div>
