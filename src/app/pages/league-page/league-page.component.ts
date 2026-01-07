@@ -11,12 +11,13 @@ import { PlayerService } from 'src/app/services/player.service';
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
-  selector: 'app-league-page',
-  templateUrl: './league-page.component.html',
-  styleUrls: ['./league-page.component.scss'],
-  host: {
-    class: 'div-all-screen'
-  }
+    selector: 'app-league-page',
+    templateUrl: './league-page.component.html',
+    styleUrls: ['./league-page.component.scss'],
+    host: {
+        class: 'div-all-screen'
+    },
+    standalone: false
 })
 export class LeaguePageComponent implements OnInit {
   league: LeaguesInterface | null = null;

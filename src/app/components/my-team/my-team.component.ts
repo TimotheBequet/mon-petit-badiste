@@ -12,9 +12,10 @@ import {MatTableDataSource} from '@angular/material/table';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-my-team',
-  templateUrl: './my-team.component.html',
-  styleUrls: ['./my-team.component.scss']
+    selector: 'app-my-team',
+    templateUrl: './my-team.component.html',
+    styleUrls: ['./my-team.component.scss'],
+    standalone: false
 })
 export class MyTeamComponent implements OnInit, AfterContentChecked {
   @Input('league') league: LeaguesInterface | null = null;

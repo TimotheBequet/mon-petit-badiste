@@ -10,12 +10,13 @@ import { CommonService } from 'src/app/services/common.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss'],
-  host: {
-    class: 'div-all-screen'
-  }
+    selector: 'app-main-page',
+    templateUrl: './main-page.component.html',
+    styleUrls: ['./main-page.component.scss'],
+    host: {
+        class: 'div-all-screen'
+    },
+    standalone: false
 })
 export class MainPageComponent implements OnInit, OnDestroy {
 

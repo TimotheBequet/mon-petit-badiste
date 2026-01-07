@@ -7,9 +7,10 @@ import { LeaguesService } from 'src/app/services/leagues.service';
 import moment from 'moment';
 
 @Component({
-  selector: 'app-list-players',
-  templateUrl: './list-players.component.html',
-  styleUrls: ['./list-players.component.scss']
+    selector: 'app-list-players',
+    templateUrl: './list-players.component.html',
+    styleUrls: ['./list-players.component.scss'],
+    standalone: false
 })
 export class ListPlayersComponent {
   btnCaptionAnnuler: string = 'Annuler';

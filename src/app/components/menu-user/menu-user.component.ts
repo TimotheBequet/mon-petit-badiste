@@ -4,9 +4,10 @@ import { UserInterface } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-menu-user',
-  templateUrl: './menu-user.component.html',
-  styleUrls: ['./menu-user.component.scss']
+    selector: 'app-menu-user',
+    templateUrl: './menu-user.component.html',
+    styleUrls: ['./menu-user.component.scss'],
+    standalone: false
 })
 export class MenuUserComponent {
   @Input('user') user: UserInterface = {} as UserInterface;
