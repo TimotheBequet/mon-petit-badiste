@@ -6,7 +6,6 @@ import { JoinLeagueInterface } from '../interfaces/joinLeague.interface';
 import { ClassementInterface } from '../interfaces/classement.interface';
 import { globalProperties } from '../environments/environment';
 import { CompoTempInterface } from '../interfaces/compo-temp.interface';
-import { PlayerInterface } from '../interfaces/player.interface';
 
 @Injectable({
   providedIn: 'root'

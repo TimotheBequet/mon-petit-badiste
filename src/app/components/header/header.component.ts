@@ -1,6 +1,5 @@
-import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
-import { Subject, takeUntil, filter } from 'rxjs';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { UserInterface } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
