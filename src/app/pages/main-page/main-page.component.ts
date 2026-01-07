@@ -9,12 +9,13 @@ import { PopupJoinLeagueComponent } from 'src/app/components/popup-join-league/p
 import { JoinLeagueInterface } from 'src/app/interfaces/joinLeague.interface';
 
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss'],
-  host: {
-    class: 'div-all-screen'
-  }
+    selector: 'app-main-page',
+    templateUrl: './main-page.component.html',
+    styleUrls: ['./main-page.component.scss'],
+    host: {
+        class: 'div-all-screen'
+    },
+    standalone: false
 })
 export class MainPageComponent implements OnInit, OnDestroy {
   // Constantes

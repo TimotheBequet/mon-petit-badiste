@@ -19,12 +19,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss'],
-  host: {
-    class: 'div-all-screen'
-  }
+    selector: 'app-register-page',
+    templateUrl: './register-page.component.html',
+    styleUrls: ['./register-page.component.scss'],
+    host: {
+        class: 'div-all-screen'
+    },
+    standalone: false
 })
 export class RegisterPageComponent implements OnDestroy {
   // Constantes

@@ -2,9 +2,10 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { PlayerInterface } from 'src/app/interfaces/player.interface';
 
 @Component({
-  selector: 'app-filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+    selector: 'app-filter',
+    templateUrl: './filter.component.html',
+    styleUrls: ['./filter.component.scss'],
+    standalone: false
 })
 export class FilterComponent {
   @Input('type') type: string = '';

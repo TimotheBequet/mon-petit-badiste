@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-button-buy',
-  templateUrl: './button-buy.component.html',
-  styleUrls: ['./button-buy.component.scss']
+    selector: 'app-button-buy',
+    templateUrl: './button-buy.component.html',
+    styleUrls: ['./button-buy.component.scss'],
+    standalone: false
 })
 export class ButtonBuyComponent {
   state: number = 0;

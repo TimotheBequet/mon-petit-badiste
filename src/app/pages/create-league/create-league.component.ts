@@ -17,12 +17,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-create-league',
-  templateUrl: './create-league.component.html',
-  styleUrls: ['./create-league.component.scss'],
-  host: {
-    class: 'div-all-screen'
-  }
+    selector: 'app-create-league',
+    templateUrl: './create-league.component.html',
+    styleUrls: ['./create-league.component.scss'],
+    host: {
+        class: 'div-all-screen'
+    },
+    standalone: false
 })
 export class CreateLeagueComponent implements AfterViewInit {
   link = '/home';

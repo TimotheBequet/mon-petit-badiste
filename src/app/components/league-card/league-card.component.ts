@@ -4,9 +4,10 @@ import {Clipboard} from '@angular/cdk/clipboard';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-league-card',
-  templateUrl: './league-card.component.html',
-  styleUrls: ['./league-card.component.scss']
+    selector: 'app-league-card',
+    templateUrl: './league-card.component.html',
+    styleUrls: ['./league-card.component.scss'],
+    standalone: false
 })
 export class LeagueCardComponent {
   @Input('league') league: LeaguesInterface = {} as LeaguesInterface;
